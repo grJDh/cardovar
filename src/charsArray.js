@@ -92,7 +92,7 @@ export const chars = [
   {
     name: "Рессиса д'Медани (Ressysa d'Medani)",
     desc: "Представительница дома Медани и текущая глава совета Двенадцати",
-    age: "36",
+    age: "~35",
     gender: "Женский",
     race: "Полуэльф (Коравар)",
     home: "Korth, Karrnath",
@@ -107,6 +107,46 @@ export const chars = [
     race: "Человек",
     home: "Alstein, Karrnath",
     img: "https://i.imgur.com/UriHTGo.jpg",
+    addDesc: ""
+  },
+  {
+    name: "Шасса Тарр (Shassa Tarr)",
+    desc: "Член Совета Шарна (Lower Northedge)",
+    age: "~35",
+    gender: "Женский",
+    race: "Шифтер",
+    home: "Sharn, Breland",
+    img: "https://i.imgur.com/tU3P2lv.jpg",
+    addDesc: "Член Совета Шарна (Lower Northedge), Глава и представитель шифтерского сообщества в Шарне (и в Совете), Член Аурума"
+  },
+  {
+    name: "Тиотас д'Денейт (Tiotas d'Deneith)",
+    desc: "Представитель дома Денейт",
+    age: "~45",
+    gender: "Мужской",
+    race: "Человек",
+    home: "Korth, Karrnath",
+    img: "https://i.imgur.com/GGWWXkW.jpg",
+    addDesc: ""
+  },
+  {
+    name: "Вум Менкрад д'Ориен (Vum Menkrad d'Orien)",
+    desc: "Представительница дома Ориен",
+    age: "~40",
+    gender: "Женский",
+    race: "Человек",
+    home: "Korth, Karrnath",
+    img: "https://i.imgur.com/mgsDxHb.jpg",
+    addDesc: ""
+  },
+  {
+    name: "Занрил д'Лирандар (Zanril d'Lyrandar)",
+    desc: "Представитель дома Лирандар",
+    age: "~50",
+    gender: "Мужской",
+    race: "Полуэльф (Коравар)",
+    home: "Korth, Karrnath",
+    img: "https://i.imgur.com/MmZK9ZG.png",
     addDesc: ""
   },
 ];
