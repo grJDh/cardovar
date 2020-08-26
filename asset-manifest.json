@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/campaign-characters/static/css/main.addcd11a.chunk.css",
-    "main.js": "/campaign-characters/static/js/main.0ebb7d93.chunk.js",
-    "main.js.map": "/campaign-characters/static/js/main.0ebb7d93.chunk.js.map",
+    "main.js": "/campaign-characters/static/js/main.d154bdf7.chunk.js",
+    "main.js.map": "/campaign-characters/static/js/main.d154bdf7.chunk.js.map",
     "runtime-main.js": "/campaign-characters/static/js/runtime-main.1f9460c2.js",
     "runtime-main.js.map": "/campaign-characters/static/js/runtime-main.1f9460c2.js.map",
     "static/js/2.6076b98f.chunk.js": "/campaign-characters/static/js/2.6076b98f.chunk.js",
     "static/js/2.6076b98f.chunk.js.map": "/campaign-characters/static/js/2.6076b98f.chunk.js.map",
     "index.html": "/campaign-characters/index.html",
-    "precache-manifest.26429016d8204e93b8347c0231c97772.js": "/campaign-characters/precache-manifest.26429016d8204e93b8347c0231c97772.js",
+    "precache-manifest.1783a067f08909bb4525450ae8bdfc48.js": "/campaign-characters/precache-manifest.1783a067f08909bb4525450ae8bdfc48.js",
     "service-worker.js": "/campaign-characters/service-worker.js",
     "static/css/main.addcd11a.chunk.css.map": "/campaign-characters/static/css/main.addcd11a.chunk.css.map",
     "static/js/2.6076b98f.chunk.js.LICENSE.txt": "/campaign-characters/static/js/2.6076b98f.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1f9460c2.js",
     "static/js/2.6076b98f.chunk.js",
     "static/css/main.addcd11a.chunk.css",
-    "static/js/main.0ebb7d93.chunk.js"
+    "static/js/main.d154bdf7.chunk.js"
   ]
 }
