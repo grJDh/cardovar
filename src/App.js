@@ -8,11 +8,13 @@ import { chars } from './charsArray';
 
 const App = () => {
 
+  const filteredChars = chars.filter(char => !char.hidden)
+
   return (
     <div className="App">
-      <SideBar/>
+      {/* <SideBar/> */}
 
-      <CharsList chars={chars}/>
+      <CharsList chars={filteredChars}/>
     </div>
   );
 }

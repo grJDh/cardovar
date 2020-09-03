@@ -1,0 +1,23 @@
+$sidebar-transition: width 0.5s ease-in-out;
+
+.sidebar {
+  width: 220px;
+  transition: $sidebar-transition;
+
+  background-color: #f0f0f0;
+
+  position: fixed;
+  left: 0;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-hidden {
+  transition: $sidebar-transition;
+  width: 60px;
+}

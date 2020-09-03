@@ -1,8 +1,10 @@
-.charcard {
+$spells-transition: margin-left 0.5s ease-in-out;
+
+.char-card {
   width: 420px;
   height: 550px;
   margin: 1rem;
-  padding: 0.1rem;
+  padding: 0.5rem;
   background-color: #f0f0f0;
   border-radius: 6px;
   box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, 0.2);
@@ -10,11 +12,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 
   text-align: center;
-  
-  img {
-    max-height: 420px;
-  }
+}
+
+.char-img {
+  height: 420px;
+}
+
+.char-name {
+  height: 65px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-desc {
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1rem;
 }

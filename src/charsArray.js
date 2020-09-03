@@ -5,9 +5,12 @@ export const chars = [
     age: "37",
     gender: "Женский",
     race: "Человек",
-    home: "Fairhaven, Aundair",
-    img: "https://i.imgur.com/BXDK7G3.jpg",
-    addDesc: ""
+    home: "Fairhaven, Аундаир",
+    img: "https://i.ibb.co/rcRnC30/BXDK7-G3-Imgur.jpg",
+    addDesc: "",
+    organisation: "Аундаир",
+    hidden: false,
+    major: true
   },
   {
     name: "Боранел ир'Винарн (Boranel ir'Wynarn)",
@@ -15,9 +18,12 @@ export const chars = [
     age: "71",
     gender: "m",
     race: "Мужской",
-    home: "Wroat, Breland",
-    img: "https://i.imgur.com/k2QT99H.jpg",
-    addDesc: ""
+    home: "Wroat, Бреландия",
+    img: "https://i.ibb.co/jLGL8Q9/Boranel.jpg",
+    addDesc: "",
+    organisation: "Бреландия",
+    hidden: false,
+    major: true
   },
   {
     name: "Арриас (Arrias)",
@@ -26,8 +32,11 @@ export const chars = [
     gender: "Мужской?",
     race: "Тифлинг",
     home: "?",
-    img: "https://i.imgur.com/YO5J8fJ.png",
-    addDesc: ""
+    img: "https://i.ibb.co/X763XYy/pathfinder-roleplaying-game-d20-system-dungeons-dragons-tiefling-warlock-gnome-png-clip-art.png",
+    addDesc: "",
+    organisation: "?",
+    hidden: false,
+    major: true
   },
   {
     name: "Целирия ир'Тэйн (Celyria ir'Tain)",
@@ -35,9 +44,12 @@ export const chars = [
     age: "37",
     gender: "Женский",
     race: "Человек",
-    home: "Skyway, Sharn, Breland",
-    img: "https://i.imgur.com/rf4q6jN.jpg",
-    addDesc: ""
+    home: "Скайвэй, Шарн",
+    img: "https://i.ibb.co/x2D5K7h/aizel-kon.jpg",
+    addDesc: "",
+    organisation: "Шарн, Тэйны",
+    hidden: false,
+    major: true
   },
   {
     name: "Фарвен (Farven)",
@@ -45,9 +57,12 @@ export const chars = [
     age: ">100",
     gender: "Мужской",
     race: "Эльф",
-    home: "Sharn, Breland",
-    img: "https://i.imgur.com/ToZXRzu.jpg",
-    addDesc: ""
+    home: "Шарн, Бреландия",
+    img: "https://i.ibb.co/8BKYh5J/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: false
   },
   {
     name: "Гримунд Солдорак (Grymund Soldorak)",
@@ -55,9 +70,12 @@ export const chars = [
     age: ">150",
     gender: "Мужской",
     race: "Дварф",
-    home: "Krona Peak, Mror Holds",
-    img: "https://i.imgur.com/KiFH2aa.png",
-    addDesc: ""
+    home: "Krona Peak, Чертоги Мрора",
+    img: "https://i.ibb.co/Nj26hht/5efde0fdc378c-91c90871bc233165e716181e7a6233cb.png",
+    addDesc: "",
+    organisation: "Чертоги Мрора, Клан Солдорак",
+    hidden: false,
+    major: false
   },
   {
     name: "Кайус III ир'Винарн (Kaius III ir'Wynarn)",
@@ -65,9 +83,12 @@ export const chars = [
     age: "53 (178?)",
     gender: "Мужской",
     race: "Человек",
-    home: "Korth, Karrnath",
-    img: "https://i.imgur.com/GDt1Lt1.jpg",
-    addDesc: ""
+    home: "Корт, Каррнат",
+    img: "https://i.ibb.co/y44cSDh/juyoung-ha-untitle-3.jpg",
+    addDesc: "",
+    organisation: "Каррнат",
+    hidden: false,
+    major: true
   },
   {
     name: "Кванти д'Ориен (Kwanti d'Orien)",
@@ -75,19 +96,25 @@ export const chars = [
     age: "48",
     gender: "Женский",
     race: "Человек",
-    home: "Passage, Aundair",
-    img: "https://i.imgur.com/ctgavvV.png",
-    addDesc: ""
+    home: "Passage, Аундаир",
+    img: "https://i.ibb.co/LJ4kpv2/041-1-27.png",
+    addDesc: "",
+    organisation: "Дом Ориен",
+    hidden: false,
+    major: true
   },
   {
     name: "Меррикс д'Каннит (Merrix d'Cannith)",
-    desc: "Барон Дома Каннит",
+    desc: "Барон Южного Анклава Дома Каннит",
     age: "27",
     gender: "Мужской",
     race: "Человек",
-    home: "Sharn, Breland",
-    img: "https://i.imgur.com/nrohEb7.jpg",
-    addDesc: ""
+    home: "Башня Каннит, Шарн",
+    img: "https://i.ibb.co/8rcSLHW/e20ca86f7a72f736079ac1eed1d51b25.jpg",
+    addDesc: "",
+    organisation: "Дом Каннит (Южный Анклав)",
+    hidden: false,
+    major: true
   },
   {
     name: "Рессиса д'Медани (Ressysa d'Medani)",
@@ -95,9 +122,12 @@ export const chars = [
     age: "~35",
     gender: "Женский",
     race: "Полуэльф (Коравар)",
-    home: "Korth, Karrnath",
-    img: "https://i.imgur.com/qDMvXrw.png",
-    addDesc: ""
+    home: "Корт, Каррнат",
+    img: "https://i.ibb.co/6BPW6hk/5efb35bf5e9d6-z-Fw-Bby1.png",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: true
   },
   {
     name: "Рирдар Риста (Rirdar Rista)",
@@ -105,9 +135,12 @@ export const chars = [
     age: "~70",
     gender: "Мужской",
     race: "Человек",
-    home: "Alstein, Karrnath",
-    img: "https://i.imgur.com/UriHTGo.jpg",
-    addDesc: ""
+    home: "Alstein, Каррнат",
+    img: "https://i.ibb.co/N2D1Zs9/jr-Sux3xj-AKapm5iv-OH5-DAil-TUs-ACCJ9-BCIWqq-Oh-D.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: false
   },
   {
     name: "Шасса Тарр (Shassa Tarr)",
@@ -115,9 +148,12 @@ export const chars = [
     age: "~35",
     gender: "Женский",
     race: "Шифтер",
-    home: "Sharn, Breland",
-    img: "https://i.imgur.com/tU3P2lv.jpg",
-    addDesc: "Член Совета Шарна (Lower Northedge), Глава и представитель шифтерского сообщества в Шарне (и в Совете), Член Аурума"
+    home: "Нижний Northegde, Шарн",
+    img: "https://i.ibb.co/fqT8rY8/205a865f61ffcb84b3336164340a2330.jpg",
+    addDesc: "Член Совета Шарна (Lower Northedge), Глава и представитель шифтерского сообщества в Шарне (и в Совете), Член Аурума",
+    organisation: "Шарн, Аурум",
+    hidden: false,
+    major: true
   },
   {
     name: "Тиотас д'Денейт (Tiotas d'Deneith)",
@@ -125,9 +161,12 @@ export const chars = [
     age: "~45",
     gender: "Мужской",
     race: "Человек",
-    home: "Korth, Karrnath",
-    img: "https://i.imgur.com/GGWWXkW.jpg",
-    addDesc: ""
+    home: "Корт, Каррнат",
+    img: "https://i.ibb.co/34L2msH/7ef6df2a0c052cccf8ac61f78f9b4f8e.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: false
   },
   {
     name: "Вум Менкрад д'Ориен (Vum Menkrad d'Orien)",
@@ -135,9 +174,12 @@ export const chars = [
     age: "~40",
     gender: "Женский",
     race: "Человек",
-    home: "Korth, Karrnath",
-    img: "https://i.imgur.com/mgsDxHb.jpg",
-    addDesc: ""
+    home: "Корт, Каррнат",
+    img: "https://i.ibb.co/12tFwPS/4fb0c6d9c1245358ab1af226df8dbad4.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: false
   },
   {
     name: "Занрил д'Лирандар (Zanril d'Lyrandar)",
@@ -145,8 +187,245 @@ export const chars = [
     age: "~50",
     gender: "Мужской",
     race: "Полуэльф (Коравар)",
-    home: "Korth, Karrnath",
-    img: "https://i.imgur.com/MmZK9ZG.png",
-    addDesc: ""
+    home: "Корт, Каррнат",
+    img: "https://i.ibb.co/7SFsCWZ/9f193fb4082da3c8db4d32cb55f93493.png",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Зорлан д'Каннит (Zorlan d'Cannith)",
+    desc: "Барон Восточного Анклава Дома Каннит",
+    age: "52",
+    gender: "Мужской",
+    race: "Человек",
+    home: "Корт, Каррнат",
+    img: "https://i.ibb.co/qjv5pfT/younghun-byun-f-1-v.jpg",
+    addDesc: "",
+    organisation: "Дом Каннит",
+    hidden: false,
+    major: true
+  },
+  {
+    name: "Явик Лапвункрект",
+    desc: "Исследователь Драконьих Предсказаний",
+    age: "~27",
+    gender: "Мужской",
+    race: "Человек",
+    home: "Планарная обсерватория, Чертоги Мрора",
+    img: "https://i.ibb.co/Q6KF7RF/b986ba5d74325ab7c785b4858004b846.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: true
+  },
+  {
+    name: "Мирол д'Ориен (Mirol d'Orien)",
+    desc: "Дочь Кванти",
+    age: "~20",
+    gender: "Женский",
+    race: "Человек",
+    home: "?",
+    img: "https://i.ibb.co/Lk7Q1Rs/46f95a48b15e709e28f9ae36c74eb0b7.jpg",
+    addDesc: "",
+    organisation: "",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Ол ир'Грик (Ol ir'Grik)",
+    desc: "Аристократ, спасённый в Скорби",
+    age: "~50",
+    gender: "Мужской",
+    race: "Человек",
+    home: "Flamekeep, Трейн",
+    img: "https://i.ibb.co/7rP2qY4/image0.jpg",
+    addDesc: "",
+    organisation: "",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Веро (Vero)",
+    desc: "Артифишер-электрик",
+    age: "~25",
+    gender: "Женский",
+    race: "Человек",
+    home: "Университет Моргрейв, Шарн",
+    img: "https://i.ibb.co/kSD6Pn8/096-416.png",
+    addDesc: "",
+    organisation: "",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Бехмед д'Вадалис (Behmed d'Vadalis)",
+    desc: "Глава Экспериментальных Разработок Дома Вадалис в Шарне",
+    age: "~45",
+    gender: "Мужской",
+    race: "Человек",
+    home: "Башня Вадалис, Шарн",
+    img: "https://i.ibb.co/tpZQNXq/157ea79d7c1307a50fcc389a794b3e8c.png",
+    addDesc: "",
+    organisation: "Дом Вадалис",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Эйрнан Ки (Eirnan Ki)",
+    desc: "Варлок из Круга Ауреона",
+    age: "~25",
+    gender: "Мужской",
+    race: "Полуэльф (Коравар)",
+    home: "Flamekeep, Thrane",
+    img: "https://i.ibb.co/g9dchp2/d787d349553213e7016dfafd6d532453.png",
+    addDesc: "",
+    organisation: "Круг Ауреона",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Гли Зетиш (Glee Zetish)",
+    desc: 'Дипломат из города тифлингов "Ядовитые Владения" в Дроааме',
+    age: "~30",
+    gender: "Женский",
+    race: "Тифлинг",
+    home: "Дроаам, Ядовитые Владения",
+    img: "https://i.ibb.co/sJpX5xt/image.png",
+    addDesc: "",
+    organisation: "Ядовитые Владения",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Эльвинора Элорренти д'Фиарлан (Elvinora Elorrenthi d'Phiarlan)",
+    desc: "Матриарх Дома Фиарлан",
+    age: ">600",
+    gender: "Женский",
+    race: "Эльф",
+    home: "Башня Фиарлан, Шарн",
+    img: "https://i.ibb.co/kKJj8V5/unknown.png",
+    addDesc: "",
+    organisation: "Дом Фиарлан",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Трелиб д'Медани (Trelib d'Medani)",
+    desc: "Патриарх Дома Медани",
+    age: "123",
+    gender: "Мужской",
+    race: "Полуэльф (Коравар)",
+    home: "Wroat, Бреландия",
+    img: "https://i.ibb.co/pjSLcsb/Trelib.png",
+    addDesc: "",
+    organisation: "Дом Медани",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Чайли",
+    desc: "Друид из Элдинских Пределов",
+    age: "?",
+    gender: "Женский",
+    race: "Фирболг",
+    home: "?",
+    img: "https://i.ibb.co/Jdgxz1m/af90507a4349f0947b72e9f36647f483.png",
+    addDesc: "",
+    organisation: "Элдинские Пределы",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Мала Боромар д’Джораско (Mala Boromar d'Jorasco)",
+    desc: "Матриарх клана Боромар",
+    age: "61",
+    gender: "Женский",
+    race: "Полурослик",
+    home: "Callestan, Шарн",
+    img: "https://i.ibb.co/GRWVWxR/image0.jpg",
+    addDesc: "",
+    organisation: "Боромары",
+    hidden: false,
+    major: false
+  },
+  {
+    name: "Илира Боромар (Ilyra Boromar)",
+    desc: "Член Совета Шарна (Нижняя Dura), старшая наследница клана Боромар",
+    age: "37",
+    gender: "Женский",
+    race: "Полурослик",
+    home: "Callestan, Шарн",
+    img: "https://i.ibb.co/thKnjKT/123123.jpg",
+    addDesc: "",
+    organisation: "Шарн, Боромары",
+    hidden: false,
+    major: true
+  },
+  {
+    name: "Сэйдан Боромар (Saidan Boromar)",
+    desc: "Патриарх клана Боромар",
+    age: "83",
+    gender: "Мужской",
+    race: "Полурослик",
+    home: "Callestan, Шарн",
+    img: "https://i.ibb.co/pbMNCgf/cfc82d32a348f1d7e82c287e6a671deb.jpg",
+    addDesc: "",
+    organisation: "Боромары",
+    hidden: false,
+    major: true
+  },
+  {
+    name: "Джорланна д'Каннит (Jorlanna d'Cannith)",
+    desc: "Баронесса Западного Анклава Дома Каннит",
+    age: "57",
+    gender: "Женский",
+    race: "Человек",
+    home: "Fairhaven, Аундаир",
+    img: "https://i.ibb.co/mDVwSqJ/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
+    addDesc: "",
+    organisation: "Дом Каннит",
+    hidden: false,
+    major: true
+  },
+  {
+    name: "Оринан д'Лирандар",
+    desc: "Ученик Сигил",
+    age: "23",
+    gender: "Мужской",
+    race: "Полуэльф (Коровар)",
+    home: "Шарн, Бреландия",
+    img: "https://i.ibb.co/GJwWByz/f459d03e2fd65cd1a8cb9e365b8b9e27.png",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: true
+  },
+  {
+    name: "Сарлена Долдарун",
+    desc: "Ученица Кремня",
+    age: "33",
+    gender: "Женский",
+    race: "Дварфийка",
+    home: "Шарн, Бреландия",
+    img: "https://i.ibb.co/2dtbQYW/IMG-4809.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: true
+  },
+  {
+    name: "Орхани Элайра ир'Корран",
+    desc: "Ученица Могрейн",
+    age: "29",
+    gender: "Женский",
+    race: "Гном",
+    home: "Шарн, Бреландия",
+    img: "https://i.ibb.co/jHZV3Yt/IMG-4810-PNG.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: true
   },
 ];
