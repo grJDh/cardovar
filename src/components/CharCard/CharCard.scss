@@ -5,6 +5,31 @@ $spells-transition: margin-left 0.5s ease-in-out;
   height: 550px;
   margin: 1rem;
   padding: 0.5rem;
+  background-color: transparent;
+
+  text-align: center;
+  perspective: 1000px;
+}
+
+.char-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+
+}
+
+.char-card.flipped .char-card-inner {
+  transform: rotateY(180deg);
+}
+
+.char-card-front, .char-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+
   background-color: #f0f0f0;
   border-radius: 6px;
   box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, 0.2);
@@ -13,12 +38,15 @@ $spells-transition: margin-left 0.5s ease-in-out;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+}
 
-  text-align: center;
+.char-card-back {
+  transform: rotateY(180deg);
 }
 
 .char-img {
-  height: 420px;
+  max-height: 420px;
+  max-width: 350px;
 }
 
 .char-name {

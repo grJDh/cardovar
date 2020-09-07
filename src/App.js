@@ -2,19 +2,17 @@ import React from 'react';
 import './App.scss';
 
 import CharsList from './containers/CharsList/CharsList';
-import SideBar from './containers/SideBar/SideBar';
+import Header from './containers/Header/Header';
 
 import { chars } from './charsArray';
 
 const App = () => {
 
-  const filteredChars = chars.filter(char => !char.hidden)
-
   return (
-    <div className="App">
-      {/* <SideBar/> */}
+    <div className="app">
+      <Header/>
 
-      <CharsList chars={filteredChars}/>
+      <CharsList chars={chars}/>
     </div>
   );
 }

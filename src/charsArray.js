@@ -10,7 +10,7 @@ export const chars = [
     addDesc: "",
     organisation: "Аундаир",
     hidden: false,
-    major: true
+    major: false
   },
   {
     name: "Боранел ир'Винарн (Boranel ir'Wynarn)",
@@ -23,20 +23,20 @@ export const chars = [
     addDesc: "",
     organisation: "Бреландия",
     hidden: false,
-    major: true
+    major: false
   },
   {
     name: "Арриас (Arrias)",
     desc: "Странствующий(-ие?) торговец(-цы?)?",
     age: "?",
     gender: "Мужской?",
-    race: "Тифлинг",
+    race: "Тифлинг?",
     home: "?",
-    img: "https://i.ibb.co/X763XYy/pathfinder-roleplaying-game-d20-system-dungeons-dragons-tiefling-warlock-gnome-png-clip-art.png",
+    img: "https://i.ibb.co/m6MsSNk/pathfinder-nirukni-alchemist-of-shax-by-willobrien-da2rz1b-fullview.jpg",
     addDesc: "",
     organisation: "?",
     hidden: false,
-    major: true
+    major: false
   },
   {
     name: "Целирия ир'Тэйн (Celyria ir'Tain)",
@@ -49,7 +49,7 @@ export const chars = [
     addDesc: "",
     organisation: "Шарн, Тэйны",
     hidden: false,
-    major: true
+    major: false
   },
   {
     name: "Фарвен (Farven)",
@@ -88,7 +88,7 @@ export const chars = [
     addDesc: "",
     organisation: "Каррнат",
     hidden: false,
-    major: true
+    major: false
   },
   {
     name: "Кванти д'Ориен (Kwanti d'Orien)",
@@ -119,7 +119,7 @@ export const chars = [
   {
     name: "Рессиса д'Медани (Ressysa d'Medani)",
     desc: "Представительница дома Медани и текущая глава совета Двенадцати",
-    age: "~35",
+    age: "~45",
     gender: "Женский",
     race: "Полуэльф (Коравар)",
     home: "Корт, Каррнат",
@@ -145,7 +145,7 @@ export const chars = [
   {
     name: "Шасса Тарр (Shassa Tarr)",
     desc: "Член Совета Шарна (Lower Northedge)",
-    age: "~35",
+    age: "~40",
     gender: "Женский",
     race: "Шифтер",
     home: "Нижний Northegde, Шарн",
@@ -158,7 +158,7 @@ export const chars = [
   {
     name: "Тиотас д'Денейт (Tiotas d'Deneith)",
     desc: "Представитель дома Денейт",
-    age: "~45",
+    age: "~40",
     gender: "Мужской",
     race: "Человек",
     home: "Корт, Каррнат",
@@ -278,7 +278,7 @@ export const chars = [
     age: "~25",
     gender: "Мужской",
     race: "Полуэльф (Коравар)",
-    home: "Flamekeep, Thrane",
+    home: "Круг Ауреона, Шарн",
     img: "https://i.ibb.co/g9dchp2/d787d349553213e7016dfafd6d532453.png",
     addDesc: "",
     organisation: "Круг Ауреона",
@@ -359,7 +359,7 @@ export const chars = [
     home: "Callestan, Шарн",
     img: "https://i.ibb.co/thKnjKT/123123.jpg",
     addDesc: "",
-    organisation: "Шарн, Боромары",
+    organisation: "Боромары",
     hidden: false,
     major: true
   },
@@ -374,7 +374,7 @@ export const chars = [
     addDesc: "",
     organisation: "Боромары",
     hidden: false,
-    major: true
+    major: false
   },
   {
     name: "Джорланна д'Каннит (Jorlanna d'Cannith)",
