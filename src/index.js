@@ -9,9 +9,11 @@ import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
 import filtersReducer from './slices/filters';
+import mainReducer from './slices/main';
 
 const rootReducer = combineReducers({
   filters: filtersReducer,
+  main: mainReducer,
 });
 
 const store = configureStore({ reducer: rootReducer });

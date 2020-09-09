@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import ModalImage from "react-modal-image";
+import { openModalImage } from '../../slices/main';
+
+import fullscreenIcon from '../../fullscreen.svg';
 
 import './CharCard.scss';
 
@@ -8,21 +11,31 @@ const CharCard = ({char}) => {
 
   const {name, desc, img, age, organisation, gender, race, home, addDesc } = char;
 
+  const dispatch = useDispatch();
+
+  const onOpenModalImage = () => dispatch(openModalImage({alt:name, src:img}));
+
   const [isFlipped, toggleFlipped] = useState(false);
-  const onToggleFlipped = () => {
-    toggleFlipped(!isFlipped);
+  const onToggleFlipped = (event) => {
+    if (event.target.className !== 'char-img-icon' && window.getSelection().toString().length === 0) toggleFlipped(!isFlipped);
   }
 
   return (
-    <div className={`char-card ${!isFlipped ? "" : "flipped"}`} onClick={onToggleFlipped}>
+    <div className={`char-card ${!isFlipped ? "" : "flipped"}`} onClick={(event) => onToggleFlipped(event)}>
       <div className='char-card-inner'>
         <div className='char-card-front'>
           <div className="char-name">
-            <h2 className='char-text'>{name}</h2>
+            <h2>{name}</h2>
           </div>
 
           {/* <div className="char-img" style={{ backgroundImage: `url(${img})`}} /> */}
-          <img className='char-img' src={img} alt={name}/>
+
+          <div className='char-img-container'>
+            <img className='char-img' src={img} alt={name}/>
+            <img className='char-img-icon' src={fullscreenIcon} alt="Fulscreen Icon" onClick={onOpenModalImage} />
+          </div>
+          
+          
           {/* <ModalImage
             small={img}
             medium={img}
@@ -31,16 +44,35 @@ const CharCard = ({char}) => {
           /> */}
         
           <div className="char-desc">
-            <h3 className='char-text'>{desc}</h3>
+            <h3>{desc}</h3>
           </div>
         </div>
 
         <div className='char-card-back'>
-          <p>Пол: {gender}</p>
-          <p>Раса: {race}</p>
-          <p>Возраст: {age}</p>
-          <p>Местонахождение: {home}</p>
-          <p>Фракция: {organisation}</p>
+          <div>
+            <h2>Пол:</h2>
+            <p>{gender}</p>
+          </div>
+
+          <div>
+            <h2>Раса:</h2>
+            <p>{race}</p>
+          </div>
+
+          <div>
+            <h2>Возраст:</h2>
+            <p>{age}</p>
+          </div>
+
+          <div>
+            <h2>Местонахождение:</h2>
+            <p>{home}</p>
+          </div>
+
+          <div>
+            <h2>Фракция:</h2>
+            <p>{organisation}</p>
+          </div>
         </div>
       </div>
     </div>

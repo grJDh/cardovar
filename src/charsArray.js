@@ -428,4 +428,30 @@ export const chars = [
     hidden: false,
     major: true
   },
+  {
+    name: "Зани д'Каннит (Zani d'Cannith)",
+    desc: "Сестра Меррикса; Глава Академии Мира им. Аарена",
+    age: "29",
+    gender: "Женский",
+    race: "Человек",
+    home: "Башня Каннит, Шарн",
+    img: "https://i.ibb.co/B6r5Djg/9HXF0Yg.png",
+    addDesc: "",
+    organisation: "Дом Каннит (Южный Анклав)",
+    hidden: true,
+    major: false
+  },
+  {
+    name: "Моррикан д'Кундарак (Morrikan d'Kundarak)",
+    desc: "Патриарх Дома Кундарак",
+    age: "199",
+    gender: "Мужской",
+    race: "Дварф",
+    home: "Korunda Gate, Чертоги Мрора",
+    img: "https://i.ibb.co/gVBc1wh/73c7dc1f84344895d581c9391f6579ea.jpg",
+    addDesc: "",
+    organisation: "Дом Кундарак",
+    hidden: true,
+    major: false
+  }, 
 ];

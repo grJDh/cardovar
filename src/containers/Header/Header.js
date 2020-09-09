@@ -12,7 +12,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { isMajor } = useSelector(filtersSelector);
 
-  const onToggleMajor = event => dispatch(toggleMajor(!isMajor));
+  const onToggleMajor = () => dispatch(toggleMajor(!isMajor));
 
   return (
     <header className='header'>
