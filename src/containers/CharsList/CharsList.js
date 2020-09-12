@@ -11,12 +11,13 @@ import "./CharsList.scss"
 
 const Chars = ({chars}) => {
 
-  const { isMajor } = useSelector(filtersSelector);
+  const { isMajor, isDead } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(mainSelector);
 
   const filteredChars = chars
   .filter(char => !char.hidden)
   .filter(char => !isMajor || char.major)
+  .filter(char => isDead || !char.dead)
   .sort((a, b) => {
     if (a.name > b.name) return 1;
     if (a.name < b.name) return -1;

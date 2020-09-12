@@ -10,20 +10,22 @@ export const chars = [
     addDesc: "",
     organisation: "Аундаир",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Боранел ир'Винарн (Boranel ir'Wynarn)",
     desc: "Король Бреландии",
     age: "71",
-    gender: "m",
+    gender: "Мужской",
     race: "Мужской",
     home: "Wroat, Бреландия",
     img: "https://i.ibb.co/jLGL8Q9/Boranel.jpg",
     addDesc: "",
     organisation: "Бреландия",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Арриас (Arrias)",
@@ -36,7 +38,8 @@ export const chars = [
     addDesc: "",
     organisation: "?",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Целирия ир'Тэйн (Celyria ir'Tain)",
@@ -49,7 +52,8 @@ export const chars = [
     addDesc: "",
     organisation: "Шарн, Тэйны",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Фарвен (Farven)",
@@ -62,7 +66,8 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: false
+    major: false,
+    dead: true
   },
   {
     name: "Гримунд Солдорак (Grymund Soldorak)",
@@ -75,7 +80,8 @@ export const chars = [
     addDesc: "",
     organisation: "Чертоги Мрора, Клан Солдорак",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Кайус III ир'Винарн (Kaius III ir'Wynarn)",
@@ -88,7 +94,8 @@ export const chars = [
     addDesc: "",
     organisation: "Каррнат",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Кванти д'Ориен (Kwanti d'Orien)",
@@ -101,7 +108,8 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Ориен",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Меррикс д'Каннит (Merrix d'Cannith)",
@@ -114,7 +122,8 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Каннит (Южный Анклав)",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Рессиса д'Медани (Ressysa d'Medani)",
@@ -127,20 +136,22 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: true
+    major: true,
+    dead: true
   },
   {
     name: "Рирдар Риста (Rirdar Rista)",
-    desc: "Начальник (уже нет?) партии в Двенадцать",
-    age: "~70",
-    gender: "Мужской",
-    race: "Человек",
-    home: "Alstein, Каррнат",
+    desc: "???",
+    age: "~70?",
+    gender: "Мужской?",
+    race: "Человек?",
+    home: "???",
     img: "https://i.ibb.co/N2D1Zs9/jr-Sux3xj-AKapm5iv-OH5-DAil-TUs-ACCJ9-BCIWqq-Oh-D.jpg",
     addDesc: "",
-    organisation: "Двенадцать",
+    organisation: "Палата?",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Шасса Тарр (Shassa Tarr)",
@@ -153,7 +164,8 @@ export const chars = [
     addDesc: "Член Совета Шарна (Lower Northedge), Глава и представитель шифтерского сообщества в Шарне (и в Совете), Член Аурума",
     organisation: "Шарн, Аурум",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Тиотас д'Денейт (Tiotas d'Deneith)",
@@ -166,7 +178,8 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: false
+    major: false,
+    dead: true
   },
   {
     name: "Вум Менкрад д'Ориен (Vum Menkrad d'Orien)",
@@ -179,7 +192,8 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: false
+    major: false,
+    dead: true
   },
   {
     name: "Занрил д'Лирандар (Zanril d'Lyrandar)",
@@ -192,7 +206,8 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: false
+    major: false,
+    dead: true
   },
   {
     name: "Зорлан д'Каннит (Zorlan d'Cannith)",
@@ -205,7 +220,8 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Каннит",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Явик Лапвункрект",
@@ -213,12 +229,13 @@ export const chars = [
     age: "~27",
     gender: "Мужской",
     race: "Человек",
-    home: "Планарная обсерватория, Чертоги Мрора",
+    home: "???",
     img: "https://i.ibb.co/Q6KF7RF/b986ba5d74325ab7c785b4858004b846.jpg",
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Мирол д'Ориен (Mirol d'Orien)",
@@ -231,7 +248,8 @@ export const chars = [
     addDesc: "",
     organisation: "",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Ол ир'Грик (Ol ir'Grik)",
@@ -244,7 +262,8 @@ export const chars = [
     addDesc: "",
     organisation: "",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Веро (Vero)",
@@ -257,7 +276,8 @@ export const chars = [
     addDesc: "",
     organisation: "",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Бехмед д'Вадалис (Behmed d'Vadalis)",
@@ -270,7 +290,8 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Вадалис",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Эйрнан Ки (Eirnan Ki)",
@@ -283,7 +304,8 @@ export const chars = [
     addDesc: "",
     organisation: "Круг Ауреона",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Гли Зетиш (Glee Zetish)",
@@ -296,7 +318,8 @@ export const chars = [
     addDesc: "",
     organisation: "Ядовитые Владения",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Эльвинора Элорренти д'Фиарлан (Elvinora Elorrenthi d'Phiarlan)",
@@ -309,7 +332,8 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Фиарлан",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Трелиб д'Медани (Trelib d'Medani)",
@@ -322,7 +346,8 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Медани",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Чайли",
@@ -335,7 +360,8 @@ export const chars = [
     addDesc: "",
     organisation: "Элдинские Пределы",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Мала Боромар д’Джораско (Mala Boromar d'Jorasco)",
@@ -348,7 +374,8 @@ export const chars = [
     addDesc: "",
     organisation: "Боромары",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Илира Боромар (Ilyra Boromar)",
@@ -361,7 +388,8 @@ export const chars = [
     addDesc: "",
     organisation: "Боромары",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Сэйдан Боромар (Saidan Boromar)",
@@ -374,7 +402,8 @@ export const chars = [
     addDesc: "",
     organisation: "Боромары",
     hidden: false,
-    major: false
+    major: false,
+    dead: false
   },
   {
     name: "Джорланна д'Каннит (Jorlanna d'Cannith)",
@@ -387,7 +416,8 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Каннит",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Оринан д'Лирандар",
@@ -400,7 +430,8 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Сарлена Долдарун",
@@ -413,7 +444,8 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Орхани Элайра ир'Корран",
@@ -426,7 +458,8 @@ export const chars = [
     addDesc: "",
     organisation: "Двенадцать",
     hidden: false,
-    major: true
+    major: true,
+    dead: false
   },
   {
     name: "Зани д'Каннит (Zani d'Cannith)",
@@ -438,8 +471,9 @@ export const chars = [
     img: "https://i.ibb.co/B6r5Djg/9HXF0Yg.png",
     addDesc: "",
     organisation: "Дом Каннит (Южный Анклав)",
-    hidden: true,
-    major: false
+    hidden: false,
+    major: false,
+    dead: false
   },
   {
     name: "Моррикан д'Кундарак (Morrikan d'Kundarak)",
@@ -452,6 +486,21 @@ export const chars = [
     addDesc: "",
     organisation: "Дом Кундарак",
     hidden: true,
-    major: false
+    major: false,
+    dead: false
+  },
+  {
+    name: "Верван Рог (Vervan Rog)",
+    desc: "Начальник охраны Двенадцати",
+    age: "~35",
+    gender: "Мужской",
+    race: "Человек (Денейт)",
+    home: "Корт, Каррнат",
+    img: "https://i.ibb.co/BP77fWn/aurore-folny-7-arthos.jpg",
+    addDesc: "",
+    organisation: "Двенадцать",
+    hidden: false,
+    major: false,
+    dead: false
   }, 
 ];

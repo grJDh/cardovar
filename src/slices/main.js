@@ -15,7 +15,7 @@ const mainSlice = createSlice({
       state.modalImageAlt = payload.alt;
       state.modalImageSrc = payload.src;
     },
-    closeModalImage: (state ) => {
+    closeModalImage: (state) => {
       state.modalImageOpened = false;
     },
   }

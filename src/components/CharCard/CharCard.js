@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { openModalImage } from '../../slices/main';
 
-import fullscreenIcon from '../../fullscreen.svg';
+import fullscreenIcon from '../../fullscreen.png';
 
 import './CharCard.scss';
 
 const CharCard = ({char}) => {
 
-  const {name, desc, img, age, organisation, gender, race, home, addDesc } = char;
+  const {name, desc, img, age, organisation, gender, race, home, addDesc, dead } = char;
 
   const dispatch = useDispatch();
 
@@ -25,23 +25,13 @@ const CharCard = ({char}) => {
       <div className='char-card-inner'>
         <div className='char-card-front'>
           <div className="char-name">
-            <h2>{name}</h2>
+            <h2 className={`${!dead ? "" : "char-dead"}`}>{name}</h2>
           </div>
-
-          {/* <div className="char-img" style={{ backgroundImage: `url(${img})`}} /> */}
 
           <div className='char-img-container'>
-            <img className='char-img' src={img} alt={name}/>
-            <img className='char-img-icon' src={fullscreenIcon} alt="Fulscreen Icon" onClick={onOpenModalImage} />
+            <img className={`char-img ${!dead ? "" : "char-dead"}`} src={img} alt={name}/>
+            <img className='char-img-icon' src={fullscreenIcon} alt="Open full image" onClick={onOpenModalImage} />
           </div>
-          
-          
-          {/* <ModalImage
-            small={img}
-            medium={img}
-            alt={name}
-            className='char-img'
-          /> */}
         
           <div className="char-desc">
             <h3>{desc}</h3>
