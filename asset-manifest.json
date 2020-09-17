@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/campaign-characters/static/css/main.637e11b0.chunk.css",
+    "main.css": "/campaign-characters/static/css/main.b74eada0.chunk.css",
     "main.js": "/campaign-characters/static/js/main.91836ab3.chunk.js",
     "main.js.map": "/campaign-characters/static/js/main.91836ab3.chunk.js.map",
     "runtime-main.js": "/campaign-characters/static/js/runtime-main.1f9460c2.js",
@@ -8,15 +8,15 @@
     "static/js/2.53f01eee.chunk.js": "/campaign-characters/static/js/2.53f01eee.chunk.js",
     "static/js/2.53f01eee.chunk.js.map": "/campaign-characters/static/js/2.53f01eee.chunk.js.map",
     "index.html": "/campaign-characters/index.html",
-    "precache-manifest.35b4a5cc2c35c4a8b911815ee10a4d04.js": "/campaign-characters/precache-manifest.35b4a5cc2c35c4a8b911815ee10a4d04.js",
+    "precache-manifest.2f9b69bf89ceeedb00fe72dadb4e5a1c.js": "/campaign-characters/precache-manifest.2f9b69bf89ceeedb00fe72dadb4e5a1c.js",
     "service-worker.js": "/campaign-characters/service-worker.js",
-    "static/css/main.637e11b0.chunk.css.map": "/campaign-characters/static/css/main.637e11b0.chunk.css.map",
+    "static/css/main.b74eada0.chunk.css.map": "/campaign-characters/static/css/main.b74eada0.chunk.css.map",
     "static/js/2.53f01eee.chunk.js.LICENSE.txt": "/campaign-characters/static/js/2.53f01eee.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1f9460c2.js",
     "static/js/2.53f01eee.chunk.js",
-    "static/css/main.637e11b0.chunk.css",
+    "static/css/main.b74eada0.chunk.css",
     "static/js/main.91836ab3.chunk.js"
   ]
 }
