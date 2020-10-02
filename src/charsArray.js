@@ -531,4 +531,18 @@ export const chars = [
     major: false,
     dead: false
   },
+  {
+    name: 'Грарос “Левиафан” Глин (Graror "Leviathan" Glin)',
+    desc: "Знаменитый пират (заточен в Дредхолде)",
+    age: "28",
+    gender: "Мужской",
+    race: "Полуэльф (Коравар)",
+    home: "Дредхолд",
+    img: "https://i.ibb.co/VxqTTJt/g-ZGv2-Jb-e8-Oz-Y56-XUi-NKyr-Rg-B0-Mg-Crefw-mlm-WQg-Zm4.jpg",
+    addDesc: "",
+    organisation: "Лаазарские Княжества",
+    hidden: false,
+    major: false,
+    dead: false
+  },
 ];
