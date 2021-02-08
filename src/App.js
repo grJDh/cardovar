@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
 
 import CharsList from './containers/CharsList/CharsList';
@@ -18,3 +18,8 @@ const App = () => {
 }
 
 export default App;
+
+// tags
+// different styles
+// categories
+// hidden/shown

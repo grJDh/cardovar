@@ -11,13 +11,17 @@ import "./CharsList.scss"
 
 const Chars = ({chars}) => {
 
-  const { isMajor, isDead } = useSelector(filtersSelector);
+  const { isMajor, isDead, searchFilterValue } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(mainSelector);
 
+  // делай коммиты, чтобы в гитхабе было видно, что ты работаешь
   const filteredChars = chars
   .filter(char => !char.hidden)
-  .filter(char => !isMajor || char.major)
-  .filter(char => isDead || !char.dead)
+
+  .filter(char => !isMajor || char.tags.major)
+  .filter(char => isDead || !char.tags.dead)
+
+  .filter(char => char.title.toLowerCase().includes(searchFilterValue.toLowerCase()))
   .sort((a, b) => {
     if (a.name > b.name) return 1;
     if (a.name < b.name) return -1;

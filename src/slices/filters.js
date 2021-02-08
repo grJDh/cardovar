@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   isMajor: false,
   isDead: true,
+
+  searchFilterValue: '',
 }
 
 const filtersSlice = createSlice({
@@ -15,10 +17,14 @@ const filtersSlice = createSlice({
     toggleDead: (state, { payload }) => {
       state.isDead = payload;
     },
+
+    changeSearchField: (state, { payload }) => {
+      state.searchFilterValue = payload;
+    },
   }
 });
 
-export const { toggleMajor, toggleDead } = filtersSlice.actions;
+export const { toggleMajor, toggleDead, changeSearchField } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 

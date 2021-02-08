@@ -1,5 +1,25 @@
 export const chars = [
   {
+    title: "Аурелия ир'Винарн (Aurelia ir'Wynarn)",
+    desc: "Королева Аундаира",
+    img: "https://i.ibb.co/zshv4sp/BXDK7-G3-Imgur.jpg",
+    imgFull: "https://i.ibb.co/MnD0Cnr/BXDK7-G3-Imgur.jpg",
+    tags: {
+      age: "37",
+      gender: "Женский",
+      race: "Человек",
+      home: "Fairhaven, Аундаир",
+      organisation: "Аундаир",
+      major: false,
+      dead: false
+    },
+    category: "",
+    hidden: false,
+  }
+]
+
+export const oldChars = [
+  {
     name: "Аурелия ир'Винарн (Aurelia ir'Wynarn)",
     desc: "Королева Аундаира",
     age: "37",

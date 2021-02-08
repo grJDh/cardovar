@@ -9,8 +9,6 @@ const ModalImage = ({alt, src, opened}) => {
 
   const dispatch = useDispatch();
 
-  const onCloseModalImage = () => dispatch(closeModalImage());
-
   const onClose = (event) => {
     // if (event.target.tagName !== "IMG") dispatch(closeModalImage());
     dispatch(closeModalImage());

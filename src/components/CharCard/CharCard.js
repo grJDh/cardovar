@@ -9,11 +9,11 @@ import './CharCard.scss';
 
 const CharCard = ({char}) => {
 
-  const {name, desc, img, age, organisation, gender, race, home, addDesc, dead } = char;
+  const {title, desc, img, imgFull, tags } = char;
 
   const dispatch = useDispatch();
 
-  const onOpenModalImage = () => dispatch(openModalImage({alt:name, src:img}));
+  const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
 
   const [isFlipped, toggleFlipped] = useState(false);
   const onToggleFlipped = (event) => {
@@ -25,12 +25,12 @@ const CharCard = ({char}) => {
       <div className='char-card-inner'>
         <div className='char-card-front'>
           <div className="char-name">
-            <h2 className={`${!dead ? "" : "char-dead"}`}>{name}</h2>
+            <h2 className={`${!tags.dead ? "" : "char-dead"}`}>{title}</h2>
           </div>
 
           <div className='char-img-container'>
-            <img className={`char-img ${!dead ? "" : "char-dead"}`} src={img} alt={name}/>
-            <img className='char-img-icon' src={fullscreenIcon} alt="Open full image" onClick={onOpenModalImage} />
+            <img className={`char-img ${!tags.dead ? "" : "char-dead"}`} src={img} alt={title}/>
+            <img className='char-img-icon' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
           </div>
         
           <div className="char-desc">
@@ -41,27 +41,27 @@ const CharCard = ({char}) => {
         <div className='char-card-back'>
           <div>
             <h2>Пол:</h2>
-            <p>{gender}</p>
+            <p>{tags.gender}</p>
           </div>
 
           <div>
             <h2>Раса:</h2>
-            <p>{race}</p>
+            <p>{tags.race}</p>
           </div>
 
           <div>
             <h2>Возраст:</h2>
-            <p>{age}</p>
+            <p>{tags.age}</p>
           </div>
 
           <div>
             <h2>Местонахождение:</h2>
-            <p>{home}</p>
+            <p>{tags.home}</p>
           </div>
 
           <div>
             <h2>Фракция:</h2>
-            <p>{organisation}</p>
+            <p>{tags.organisation}</p>
           </div>
         </div>
       </div>
