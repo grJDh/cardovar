@@ -11,10 +11,10 @@ import { filtersSelector, toggleMajor, toggleDead, changeSearchField } from '../
 const Header = () => {
 
   const dispatch = useDispatch();
-  const { isMajor, isDead, searchFilterValue } = useSelector(filtersSelector);
+  const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
 
-  const onToggleMajor = () => dispatch(toggleMajor(!isMajor));
-  const onToggleDead = () => dispatch(toggleDead(!isDead));
+  const onToggleMajor = () => dispatch(toggleMajor(!boolFilters.major));
+  const onToggleDead = () => dispatch(toggleDead(!boolFilters.alive));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
 
 

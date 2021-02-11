@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { openModalImage } from '../../slices/main';
+import { openModalImage } from '../../slices/modal';
 
 import fullscreenIcon from '../../fullscreen.png';
 
@@ -9,7 +9,7 @@ import './CharCard.scss';
 
 const CharCard = ({char}) => {
 
-  const {title, desc, img, imgFull, tags } = char;
+  const {title, desc, img, imgFull, tags, boolTags } = char;
 
   const dispatch = useDispatch();
 
@@ -25,11 +25,11 @@ const CharCard = ({char}) => {
       <div className='char-card-inner'>
         <div className='char-card-front'>
           <div className="char-name">
-            <h2 className={`${!tags.dead ? "" : "char-dead"}`}>{title}</h2>
+            <h2 className={`${boolTags.alive ? "" : "char-dead"}`}>{title}</h2>
           </div>
 
           <div className='char-img-container'>
-            <img className={`char-img ${!tags.dead ? "" : "char-dead"}`} src={img} alt={title}/>
+            <img className={`char-img ${boolTags.alive ? "" : "char-dead"}`} src={img} alt={title}/>
             <img className='char-img-icon' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
           </div>
         

@@ -6,8 +6,8 @@ export const initialState = {
   modalImageSrc: ''
 }
 
-const mainSlice = createSlice({
-  name: 'main',
+const modalSlice = createSlice({
+  name: 'modal',
   initialState,
   reducers: {
     openModalImage: (state, { payload }) => {
@@ -21,8 +21,8 @@ const mainSlice = createSlice({
   }
 });
 
-export const { openModalImage, closeModalImage } = mainSlice.actions;
+export const { openModalImage, closeModalImage } = modalSlice.actions;
 
-export const mainSelector = state => state.main;
+export const modalSelector = state => state.modal;
 
-export default mainSlice.reducer;
+export default modalSlice.reducer;

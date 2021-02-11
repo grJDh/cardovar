@@ -4,35 +4,80 @@ export const chars = [
     desc: "Королева Аундаира",
     img: "https://i.ibb.co/zshv4sp/BXDK7-G3-Imgur.jpg",
     imgFull: "https://i.ibb.co/MnD0Cnr/BXDK7-G3-Imgur.jpg",
+    category: "",
     tags: {
       age: "37",
       gender: "Женский",
       race: "Человек",
       home: "Fairhaven, Аундаир",
       organisation: "Аундаир",
-      major: false,
-      dead: false
     },
+    boolTags: {
+      major: false,
+      alive: true
+    },
+    hidden: false,
+  },
+  {
+    title: "Фарвен (Farven)",
+    desc: "Шпион Палаты в Двенадцать",
+    img: "https://i.ibb.co/SrM5bP6/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
+    imgFull: "https://i.ibb.co/vYTVpHc/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
     category: "",
+    tags: {
+      age: ">100",
+      gender: "Мужской",
+      race: "Эльф",
+      home: "—",
+      organisation: "Палата",
+    },
+    boolTags: {
+      major: false,
+      alive: false
+    },
+    hidden: false,
+  },
+  {
+    title: "Меррикс д'Каннит (Merrix d'Cannith)",
+    desc: "Барон Южного Анклава Дома Каннит",
+    img: "https://i.ibb.co/ZKg7qfk/e20ca86f7a72f736079ac1eed1d51b25.jpg",
+    imgFull: "https://i.ibb.co/ftNLjXP/e20ca86f7a72f736079ac1eed1d51b25.jpg",
+    category: "",
+    tags: {
+      age: "27",
+      gender: "Мужской",
+      race: "Человек",
+      home: "Башня Каннит, Шарн",
+      organisation: "Дом Каннит (Южный Анклав)",
+    },
+    boolTags: {
+      major: true,
+      alive: true
+    },
+    hidden: false,
+  },
+  {
+    title: "Джорланна д'Каннит (Jorlanna d'Cannith)",
+    desc: "Баронесса Западного Анклава Дома Каннит",
+    img: "https://i.ibb.co/mDVwSqJ/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
+    imgFull: "https://i.ibb.co/5Mgy28T/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
+    category: "",
+    tags: {
+      age: "57",
+      gender: "Женский",
+      race: "Человек",
+      home: "Fairhaven, Аундаир",
+      organisation: "Дом Каннит",
+    },
+    boolTags: {
+      major: false,
+      alive: false
+    },
     hidden: false,
   }
 ]
 
 export const oldChars = [
-  {
-    name: "Аурелия ир'Винарн (Aurelia ir'Wynarn)",
-    desc: "Королева Аундаира",
-    age: "37",
-    gender: "Женский",
-    race: "Человек",
-    home: "Fairhaven, Аундаир",
-    img: "https://i.ibb.co/rcRnC30/BXDK7-G3-Imgur.jpg",
-    addDesc: "",
-    organisation: "Аундаир",
-    hidden: false,
-    major: false,
-    dead: false
-  },
   {
     name: "Боранел ир'Винарн (Boranel ir'Wynarn)",
     desc: "Король Бреландии",
@@ -76,20 +121,6 @@ export const oldChars = [
     dead: false
   },
   {
-    name: "Фарвен (Farven)",
-    desc: "Шпион Палаты в Двенадцать",
-    age: ">100",
-    gender: "Мужской",
-    race: "Эльф",
-    home: "—",
-    img: "https://i.ibb.co/8BKYh5J/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
-    addDesc: "",
-    organisation: "Палата",
-    hidden: false,
-    major: false,
-    dead: true
-  },
-  {
     name: "Гримунд Солдорак (Grymund Soldorak)",
     desc: "Генерал клана Солдорак",
     age: ">150",
@@ -128,21 +159,7 @@ export const oldChars = [
     addDesc: "",
     organisation: "Дом Ориен",
     hidden: false,
-    major: true,
-    dead: false
-  },
-  {
-    name: "Меррикс д'Каннит (Merrix d'Cannith)",
-    desc: "Барон Южного Анклава Дома Каннит",
-    age: "27",
-    gender: "Мужской",
-    race: "Человек",
-    home: "Башня Каннит, Шарн",
-    img: "https://i.ibb.co/8rcSLHW/e20ca86f7a72f736079ac1eed1d51b25.jpg",
-    addDesc: "",
-    organisation: "Дом Каннит (Южный Анклав)",
-    hidden: false,
-    major: true,
+    major: false,
     dead: false
   },
   {
@@ -408,7 +425,7 @@ export const oldChars = [
     addDesc: "",
     organisation: "Боромары",
     hidden: false,
-    major: true,
+    major: false,
     dead: false
   },
   {
@@ -423,20 +440,6 @@ export const oldChars = [
     organisation: "Боромары",
     hidden: false,
     major: false,
-    dead: false
-  },
-  {
-    name: "Джорланна д'Каннит (Jorlanna d'Cannith)",
-    desc: "Баронесса Западного Анклава Дома Каннит",
-    age: "57",
-    gender: "Женский",
-    race: "Человек",
-    home: "Fairhaven, Аундаир",
-    img: "https://i.ibb.co/mDVwSqJ/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
-    addDesc: "",
-    organisation: "Дом Каннит",
-    hidden: false,
-    major: true,
     dead: false
   },
   {

@@ -8,12 +8,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
+import tagsReducer from './slices/tags';
 import filtersReducer from './slices/filters';
-import mainReducer from './slices/main';
+import modalReducer from './slices/modal';
 
 const rootReducer = combineReducers({
+  tags: tagsReducer,
   filters: filtersReducer,
-  main: mainReducer,
+  modal: modalReducer,
 });
 
 const store = configureStore({ reducer: rootReducer });

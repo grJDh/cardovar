@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { mainSelector, closeModalImage } from '../../slices/main';
+import { modalSelector, closeModalImage } from '../../slices/modal';
 
 import "./ModalImage.scss"
 
