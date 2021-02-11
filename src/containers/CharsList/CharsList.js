@@ -19,9 +19,7 @@ const Chars = ({chars}) => {
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
     if (boolTagsKeys.length) {
-      //console.log(boolTagsKeys);
       for (let i of boolTagsKeys) {
-        //console.log(i, boolFilters[i], boolTags[i]);
         if (!(!boolFilters[i] || boolTags[i])) return false;
       };
 

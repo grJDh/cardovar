@@ -4,24 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '../../components/CheckBox/CheckBox';
 import SearchBox from '../../components/SearchBox/SearchBox';
 
-import './Header.scss';
+import { filtersSelector, toggleFilter, changeSearchField } from '../../slices/filters';
+import { tagsSelector } from '../../slices/tags';
 
-import { filtersSelector, toggleMajor, toggleDead, changeSearchField } from '../../slices/filters';
+import { capitalize } from '../../exported';
+
+import './Header.scss';
 
 const Header = () => {
 
   const dispatch = useDispatch();
-  const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
+  const { boolFilters } = useSelector(filtersSelector);
+  const { boolTags } = useSelector(tagsSelector);
 
-  const onToggleMajor = () => dispatch(toggleMajor(!boolFilters.major));
-  const onToggleDead = () => dispatch(toggleDead(!boolFilters.alive));
+  const onToggleFilter = (tag) => dispatch(toggleFilter(tag));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
-
 
   return (
     <header className='header'>
-      <Checkbox label='Только важные' onFunc={onToggleMajor} />
-      <Checkbox label='Только живые' onFunc={onToggleDead} />
+      {Object.keys(boolTags).map((tag) => (
+        <Checkbox key={tag} label={capitalize(tag)} onFunc={() => onToggleFilter(tag)} />
+        ))}
 
       <SearchBox label='Поиск' onFunc={onChangeSearchField} />
     </header>

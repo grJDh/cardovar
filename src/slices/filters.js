@@ -14,11 +14,8 @@ const filtersSlice = createSlice({
       state.boolFilters = payload;
     },
 
-    toggleMajor: (state, { payload }) => {
-      state.boolFilters.major = payload;
-    },
-    toggleDead: (state, { payload }) => {
-      state.boolFilters.alive = payload;
+    toggleFilter: (state, { payload }) => {
+      state.boolFilters[payload] = !state.boolFilters[payload];
     },
 
     changeSearchField: (state, { payload }) => {
@@ -27,7 +24,7 @@ const filtersSlice = createSlice({
   }
 });
 
-export const { createBooleanFilters, toggleMajor, toggleDead, changeSearchField } = filtersSlice.actions;
+export const { createBooleanFilters, toggleFilter, changeSearchField } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 

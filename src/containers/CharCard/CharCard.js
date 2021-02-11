@@ -7,6 +7,8 @@ import TagBox from "../../components/TagBox/TagBox";
 
 import fullscreenIcon from '../../fullscreen.png';
 
+import { capitalize } from '../../exported';
+
 import './CharCard.scss';
 
 const CharCard = ({char}) => {
@@ -43,7 +45,7 @@ const CharCard = ({char}) => {
         <div className='char-card-back'>
 
           {Object.keys(tags).map((tag) => (
-            <TagBox key={tag} title={tag} value={tags[tag]}/>
+            <TagBox key={tag} title={capitalize(tag)} value={tags[tag]}/>
             ))}
 
         </div>
