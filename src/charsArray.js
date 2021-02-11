@@ -4,7 +4,6 @@ export const chars = [
     desc: "Королева Аундаира",
     img: "https://i.ibb.co/zshv4sp/BXDK7-G3-Imgur.jpg",
     imgFull: "https://i.ibb.co/MnD0Cnr/BXDK7-G3-Imgur.jpg",
-    category: "",
     tags: {
       age: "37",
       gender: "Женский",
@@ -23,7 +22,6 @@ export const chars = [
     desc: "Шпион Палаты в Двенадцать",
     img: "https://i.ibb.co/SrM5bP6/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
     imgFull: "https://i.ibb.co/vYTVpHc/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
-    category: "",
     tags: {
       age: ">100",
       gender: "Мужской",
@@ -42,7 +40,6 @@ export const chars = [
     desc: "Барон Южного Анклава Дома Каннит",
     img: "https://i.ibb.co/ZKg7qfk/e20ca86f7a72f736079ac1eed1d51b25.jpg",
     imgFull: "https://i.ibb.co/ftNLjXP/e20ca86f7a72f736079ac1eed1d51b25.jpg",
-    category: "",
     tags: {
       age: "27",
       gender: "Мужской",
@@ -61,7 +58,6 @@ export const chars = [
     desc: "Баронесса Западного Анклава Дома Каннит",
     img: "https://i.ibb.co/mDVwSqJ/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
     imgFull: "https://i.ibb.co/5Mgy28T/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
-    category: "",
     tags: {
       age: "57",
       gender: "Женский",

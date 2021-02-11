@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 
-import CharsList from './containers/CharsList/CharsList';
+import CardList from './pages/CardList/CardList';
 import Header from './containers/Header/Header';
 
 import { chars } from './charsArray';
@@ -34,14 +34,17 @@ const App = () => {
     <div className="app">
       <Header/>
 
-      <CharsList chars={chars}/>
+      <CardList chars={chars}/>
     </div>
   );
 }
 
 export default App;
 
-// tags
-// different styles
-// categories
+// adding new cards
+// editing existing cards
+// adding new tags
+// settings
 // hidden/shown
+// albums
+// different styles

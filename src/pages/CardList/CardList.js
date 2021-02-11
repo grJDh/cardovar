@@ -1,15 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CharCard from '../CharCard/CharCard';
-import ModalImage from "../../components/ModalImage/ModalImage";
+import Card from './containers/Card/Card';
+import ModalImage from "./parts/ModalImage/ModalImage";
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
 
-import "./CharsList.scss"
+import "./CardList.scss"
 
-const Chars = ({chars}) => {
+const CardList = ({chars}) => {
 
   const dispatch = useDispatch();
 
@@ -51,10 +51,10 @@ const Chars = ({chars}) => {
       <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose}/>
 
       {filteredChars.map((char) => (
-        <CharCard key={char.name} char={char}/>
+        <Card key={char.name} char={char}/>
         ))}
     </div>
   );
 }
 
-export default Chars;
+export default CardList;

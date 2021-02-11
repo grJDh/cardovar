@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { openModalImage } from '../../slices/modal';
+import { openModalImage } from '../../../../slices/modal';
 
-import TagBox from "../../components/TagBox/TagBox";
+import TagBox from "../../parts/TagBox/TagBox";
 
-import fullscreenIcon from '../../fullscreen.png';
+import fullscreenIcon from '../../../../fullscreen.png';
 
-import { capitalize } from '../../exported';
+import { capitalize } from '../../../../exported';
 
-import './CharCard.scss';
+import './Card.scss';
 
-const CharCard = ({char}) => {
+const Card = ({char}) => {
 
   const {title, desc, img, imgFull, tags, boolTags } = char;
 
@@ -54,4 +54,4 @@ const CharCard = ({char}) => {
   );
 }
 
-export default CharCard;
+export default Card;
