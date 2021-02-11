@@ -1,15 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import CharCard from '../../components/CharCard/CharCard';
+import CharCard from '../CharCard/CharCard';
 import ModalImage from "../../components/ModalImage/ModalImage";
 
 import { filtersSelector } from '../../slices/filters';
-import { modalSelector } from '../../slices/modal';
+import { modalSelector, closeModalImage } from '../../slices/modal';
 
 import "./CharsList.scss"
 
 const Chars = ({chars}) => {
+
+  const dispatch = useDispatch();
 
   const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
@@ -40,10 +42,15 @@ const Chars = ({chars}) => {
     return 0;
   });
 
+  const onClose = (event) => {
+    // if (event.target.tagName !== "IMG") dispatch(closeModalImage());
+    dispatch(closeModalImage());
+  }
+
   return (
     <div className='chars-list'>
 
-      <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} />
+      <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose}/>
 
       {filteredChars.map((char) => (
         <CharCard key={char.name} char={char}/>

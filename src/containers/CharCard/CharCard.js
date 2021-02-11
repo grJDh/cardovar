@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import { openModalImage } from '../../slices/modal';
 
+import TagBox from "../../components/TagBox/TagBox";
+
 import fullscreenIcon from '../../fullscreen.png';
 
 import './CharCard.scss';
@@ -39,30 +41,11 @@ const CharCard = ({char}) => {
         </div>
 
         <div className='char-card-back'>
-          <div>
-            <h2>Пол:</h2>
-            <p>{tags.gender}</p>
-          </div>
 
-          <div>
-            <h2>Раса:</h2>
-            <p>{tags.race}</p>
-          </div>
+          {Object.keys(tags).map((tag) => (
+            <TagBox key={tag} title={tag} value={tags[tag]}/>
+            ))}
 
-          <div>
-            <h2>Возраст:</h2>
-            <p>{tags.age}</p>
-          </div>
-
-          <div>
-            <h2>Местонахождение:</h2>
-            <p>{tags.home}</p>
-          </div>
-
-          <div>
-            <h2>Фракция:</h2>
-            <p>{tags.organisation}</p>
-          </div>
         </div>
       </div>
     </div>

@@ -2,15 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   tags: {
-    age: "",
-    gender: "",
-    race: "",
-    home: "",
-    organisation: "",
+    "Age": "",
+    "Gender": "",
+    "Race": "",
+    "Home": "",
+    "Organisation": "",
   },
   boolTags: {
-    major: false,
-    alive: true
+    "Major": false,
+    "Alive": true
   },
 }
 

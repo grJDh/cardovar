@@ -1,22 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { modalSelector, closeModalImage } from '../../slices/modal';
 
 import "./ModalImage.scss"
 
-const ModalImage = ({alt, src, opened}) => {
-
-  const dispatch = useDispatch();
-
-  const onClose = (event) => {
-    // if (event.target.tagName !== "IMG") dispatch(closeModalImage());
-    dispatch(closeModalImage());
-  }
+const ModalImage = ({alt, src, opened, close}) => {
 
   if (opened) {
     return (
-      <div className={`modal ${!opened ? "" : "opened"}`} onClick={(event) => onClose(event)}>
+      <div className={`modal ${!opened ? "" : "opened"}`} onClick={(event) => close(event)}>
         <img alt={alt} src={src} />
       </div>
     );
