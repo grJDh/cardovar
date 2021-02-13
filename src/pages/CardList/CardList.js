@@ -3,18 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Card from './containers/Card/Card';
 import ModalImage from "./parts/ModalImage/ModalImage";
+import CreateCard from './containers/CardTemplate/CardTemplate';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
+import { cardsSelector } from '../../slices/cards';
 
 import "./CardList.scss"
 
-const CardList = ({chars}) => {
+const CardList = () => {
 
   const dispatch = useDispatch();
 
   const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
+  const { cards, cardTemplateOpened, cardTemplateMode } = useSelector(cardsSelector);
 
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
@@ -27,12 +30,12 @@ const CardList = ({chars}) => {
     }
   }
 
-  const filteredChars = chars
-  .filter(char => !char.hidden)
+  const filteredCards = cards
+  .filter(card => !card.hidden)
 
-  .filter(char => boolTagsFilter(char.boolTags))
+  .filter(card => boolTagsFilter(card.boolTags))
 
-  .filter(char => char.title.toLowerCase().includes(searchFilterValue.toLowerCase()))
+  .filter(card => card.title.toLowerCase().includes(searchFilterValue.toLowerCase()))
   .sort((a, b) => {
     if (a.name > b.name) return 1;
     if (a.name < b.name) return -1;
@@ -50,9 +53,11 @@ const CardList = ({chars}) => {
 
       <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose}/>
 
-      {filteredChars.map((char) => (
-        <Card key={char.name} char={char}/>
+      {filteredCards.map((card) => (
+        <Card key={card.img} card={card}/>
         ))}
+
+      <CreateCard opened={cardTemplateOpened} mode={cardTemplateMode} />
     </div>
   );
 }

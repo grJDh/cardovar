@@ -4,8 +4,6 @@ import { useDispatch, useSelector  } from 'react-redux';
 import CardList from './pages/CardList/CardList';
 import Header from './containers/Header/Header';
 
-import { chars } from './charsArray';
-
 import { tagsSelector } from './slices/tags';
 import { createBooleanFilters } from './slices/filters';
 
@@ -34,16 +32,16 @@ const App = () => {
     <div className="app">
       <Header/>
 
-      <CardList chars={chars}/>
+      <CardList />
     </div>
   );
 }
 
 export default App;
 
-// adding new cards
 // editing existing cards
 // adding new tags
+// search by tags
 // settings
 // hidden/shown
 // albums

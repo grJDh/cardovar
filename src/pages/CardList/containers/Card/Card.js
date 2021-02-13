@@ -6,14 +6,13 @@ import { openModalImage } from '../../../../slices/modal';
 import TagBox from "../../parts/TagBox/TagBox";
 
 import fullscreenIcon from '../../../../fullscreen.png';
-
-import { capitalize } from '../../../../exported';
+import editIcon from '../../../../edit.png';
 
 import './Card.scss';
 
-const Card = ({char}) => {
+const Card = ({card}) => {
 
-  const {title, desc, img, imgFull, tags, boolTags } = char;
+  const {title, desc, img, imgFull, tags, boolTags } = card;
 
   const dispatch = useDispatch();
 
@@ -21,7 +20,7 @@ const Card = ({char}) => {
 
   const [isFlipped, toggleFlipped] = useState(false);
   const onToggleFlipped = (event) => {
-    if (event.target.className !== 'char-img-icon' && window.getSelection().toString().length === 0) toggleFlipped(!isFlipped);
+    if (!event.target.className.includes('char-img-icon') && window.getSelection().toString().length === 0) toggleFlipped(!isFlipped);
   }
 
   return (
@@ -29,12 +28,13 @@ const Card = ({char}) => {
       <div className='char-card-inner'>
         <div className='char-card-front'>
           <div className="char-name">
-            <h2 className={`${boolTags.alive ? "" : "char-dead"}`}>{title}</h2>
+            <h2 className={`${boolTags["Alive"] ? "" : "char-dead"}`}>{title}</h2>
           </div>
 
           <div className='char-img-container'>
-            <img className={`char-img ${boolTags.alive ? "" : "char-dead"}`} src={img} alt={title}/>
-            <img className='char-img-icon' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
+            <img className={`char-img ${boolTags["Alive"] ? "" : "char-dead"}`} src={img} alt={title}/>
+            <img className='char-img-icon icon-full' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
+            <img className='char-img-icon icon-edit' src={editIcon} alt="Open full" onClick={onOpenModalImage} />
           </div>
         
           <div className="char-desc">
@@ -45,7 +45,7 @@ const Card = ({char}) => {
         <div className='char-card-back'>
 
           {Object.keys(tags).map((tag) => (
-            <TagBox key={tag} title={capitalize(tag)} value={tags[tag]}/>
+            <TagBox key={tag} title={tag} value={tags[tag]}/>
             ))}
 
         </div>

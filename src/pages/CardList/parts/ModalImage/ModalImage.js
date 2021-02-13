@@ -16,8 +16,6 @@ const ModalImage = ({alt, src, opened, close}) => {
       </div>
     );
   }
-
-  
 }
 
 export default ModalImage;
