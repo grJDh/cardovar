@@ -18,7 +18,7 @@ const Header = () => {
 
   const onToggleFilter = (tag) => dispatch(toggleFilter(tag));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
-  const onOpenCardTemplateMode = () => dispatch(openCardTemplateMode("new"));
+  const onOpenCardTemplateMode = () => dispatch(openCardTemplateMode(["new", ""]));
 
   return (
     <header className='header'>

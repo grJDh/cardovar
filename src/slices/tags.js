@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   tags: {
-    "Age": "—",
-    "Gender": "—",
-    "Race": "—",
-    "Home": "—",
-    "Organisation": "—",
+    "Age": "",
+    "Gender": "",
+    "Race": "",
+    "Home": "",
+    "Organisation": "",
   },
   boolTags: {
     "Major": false,

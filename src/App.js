@@ -39,7 +39,7 @@ const App = () => {
 
 export default App;
 
-// editing existing cards
+// sorting
 // adding new tags
 // search by tags
 // settings

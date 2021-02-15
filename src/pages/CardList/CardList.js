@@ -17,7 +17,7 @@ const CardList = () => {
 
   const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
-  const { cards, cardTemplateOpened, cardTemplateMode } = useSelector(cardsSelector);
+  const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
 
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
@@ -30,15 +30,15 @@ const CardList = () => {
     }
   }
 
-  const filteredCards = cards
-  .filter(card => !card.hidden)
+  const filteredCards = Object.keys(cards)
+  .filter(key => !cards[key].hidden)
 
-  .filter(card => boolTagsFilter(card.boolTags))
+  .filter(key => boolTagsFilter(cards[key].boolTags))
 
-  .filter(card => card.title.toLowerCase().includes(searchFilterValue.toLowerCase()))
-  .sort((a, b) => {
-    if (a.name > b.name) return 1;
-    if (a.name < b.name) return -1;
+  .filter(key => cards[key].title.toLowerCase().includes(searchFilterValue.toLowerCase()))
+  .sort((keyA, keyB) => {
+    if (cards[keyA].title > cards[keyB].title) return 1;
+    if (cards[keyA].title < cards[keyB].title) return -1;
     // if (a.name === b.name) return 0;
     return 0;
   });
@@ -53,11 +53,11 @@ const CardList = () => {
 
       <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose}/>
 
-      {filteredCards.map((card) => (
-        <Card key={card.img} card={card}/>
+      {filteredCards.map((key) => (
+        <Card key={key} cardKey={key} card={cards[key]}/>
         ))}
 
-      <CreateCard opened={cardTemplateOpened} mode={cardTemplateMode} />
+      <CreateCard opened={cardTemplateOpened} mode={cardTemplateMode} card={(editedCard) ? cards[editedCard] : ""} />
     </div>
   );
 }

@@ -2,11 +2,22 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { cards } from '../cardsArray'
 
+const generateCardsArray = () => {
+  let newArray = {};
+  for (let i=0; i<cards.length; i++) {
+    newArray[i] = cards[i]
+  }
+
+  return newArray;
+}
+
 export const initialState = {
-  cards: cards,
+  cards: generateCardsArray(),
 
   cardTemplateOpened: false,
   cardTemplateMode: "new",
+
+  editedCard: "",
 }
 
 const cardsSlice = createSlice({
@@ -14,12 +25,16 @@ const cardsSlice = createSlice({
   initialState,
   reducers: {
     addCard: (state, { payload }) => {
-      state.cards = [...state.cards, payload];
+      state.cards[Object.keys(state.cards).length] = payload;
+    },
+    changeCard: (state, { payload }) => {
+      state.cards[state.editedCard] = payload;
     },
 
     openCardTemplateMode: (state, { payload }) => {
       state.cardTemplateOpened = true;
-      state.cardTemplateMode = payload;
+      state.cardTemplateMode = payload[0];
+      state.editedCard = payload[1];
     },
     closeCardTemplateMode: (state) => {
       state.cardTemplateOpened = false;
@@ -27,7 +42,7 @@ const cardsSlice = createSlice({
   }
 });
 
-export const { addCard, openCardTemplateMode, closeCardTemplateMode } = cardsSlice.actions;
+export const { addCard, changeCard, openCardTemplateMode, closeCardTemplateMode } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 
