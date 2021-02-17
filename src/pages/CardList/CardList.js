@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Card from './containers/Card/Card';
 import ModalImage from "./parts/ModalImage/ModalImage";
-import CreateCard from './containers/CardTemplate/CardTemplate';
+import CardTemplate from './containers/CardTemplate/CardTemplate';
+import TagTemplate from './containers/TagTemplate/TagTemplate';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
 import { cardsSelector } from '../../slices/cards';
+import { tagsSelector } from '../../slices/tags';
 
 import "./CardList.scss"
 
@@ -18,6 +20,7 @@ const CardList = () => {
   const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
   const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
+  const { tagTemplateOpened, tagTemplateMode } = useSelector(tagsSelector);
 
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
@@ -57,7 +60,9 @@ const CardList = () => {
         <Card key={key} cardKey={key} card={cards[key]}/>
         ))}
 
-      <CreateCard opened={cardTemplateOpened} mode={cardTemplateMode} card={(editedCard) ? cards[editedCard] : ""} />
+      <CardTemplate opened={cardTemplateOpened} mode={cardTemplateMode} card={(editedCard) ? cards[editedCard] : ""} />
+
+      <TagTemplate opened={tagTemplateOpened} mode={tagTemplateMode} />
     </div>
   );
 }

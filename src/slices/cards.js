@@ -16,7 +16,6 @@ export const initialState = {
 
   cardTemplateOpened: false,
   cardTemplateMode: "new",
-
   editedCard: "",
 }
 
@@ -31,18 +30,24 @@ const cardsSlice = createSlice({
       state.cards[state.editedCard] = payload;
     },
 
-    openCardTemplateMode: (state, { payload }) => {
+    addTagtoCards: (state, { payload }) => {
+      for (let i = 0; i < Object.keys(state.cards).length; i++) {
+        state.cards[i][payload[0]] = {...state.cards[i][payload[0]], [payload[1]]: payload[2]}
+      }
+    },
+
+    openCardTemplate: (state, { payload }) => {
       state.cardTemplateOpened = true;
       state.cardTemplateMode = payload[0];
       state.editedCard = payload[1];
     },
-    closeCardTemplateMode: (state) => {
+    closeCardTemplate: (state) => {
       state.cardTemplateOpened = false;
     },
   }
 });
 
-export const { addCard, changeCard, openCardTemplateMode, closeCardTemplateMode } = cardsSlice.actions;
+export const { addCard, changeCard, openCardTemplate, closeCardTemplate, addTagtoCards } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

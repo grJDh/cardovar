@@ -4,6 +4,8 @@ export const initialState = {
   boolFilters: {},
 
   searchFilterValue: '',
+
+  sorting: "",
 }
 
 const filtersSlice = createSlice({

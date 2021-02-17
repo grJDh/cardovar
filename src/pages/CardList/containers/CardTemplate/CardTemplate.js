@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { tagsSelector } from '../../../../slices/tags';
-import { addCard, changeCard, closeCardTemplateMode } from '../../../../slices/cards';
+import { addCard, changeCard, closeCardTemplate } from '../../../../slices/cards';
 
 import TextBox from '../../../../components/TextBox/TextBox';
 import Checkbox from '../../../../components/CheckBox/CheckBox';
@@ -19,7 +19,7 @@ const CardTemplate = ({opened, mode, card}) => {
 
   const [newCardReqs, setNewCardReqs] = useState("");
   const [newCardTags, setNewCardTags] = useState("");
-  const [newCardBools, setNewCardBools] = useState("");
+  const [newCardBools, setNewCardBools] = useState(false);
   const [filePreview, setFilePreview] = useState("");
   const [newCardFile, setNewCardFile] = useState();
 
@@ -35,9 +35,7 @@ const CardTemplate = ({opened, mode, card}) => {
     reader.readAsDataURL(event.target.files[0]);
   }
 
-  const onCloseCardTemplateMode = () => dispatch(closeCardTemplateMode());
-
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
 
     const executeAction = (payload) => {
@@ -64,12 +62,14 @@ const CardTemplate = ({opened, mode, card}) => {
       .catch((error) => console.error('Error: ', error));
     } else executeAction({...{...newCardReqs, img: newCardReqs.img, imgFull: newCardReqs.imgFull}, tags: newCardTags, boolTags: newCardBools});
 
-    onCloseCardTemplateMode();
+    onCloseCardTemplate();
   };
+
+  const onCloseCardTemplate = () => dispatch(closeCardTemplate());
 
   const escListener = (event) => {
     if (event.isComposing || event.key === "Escape") {
-      onCloseCardTemplateMode();
+      onCloseCardTemplate();
     }
   };
 
@@ -82,56 +82,36 @@ const CardTemplate = ({opened, mode, card}) => {
   });
 
   useEffect(() => {
-    const returnVars = category => {
-      if (mode === "new") {
-        switch (category) {
-          case "tags":
-            return tags;
-          case "boolTags":
-            return boolTags;
-          case "img":
-            return "";
-          default:
-            return {
-              title: "",
-              desc: "",
-              img: "",
-              imgFull: "",
-              hidden: false
-            };
-        }
-      } else {
-        switch (category) {
-          case "tags":
-            return card.tags;
-          case "boolTags":
-            return card.boolTags;
-          case "img":
-            return card.img;
-          default:
-            return {
-              title: card.title,
-              desc: card.desc,
-              img: card.img,
-              imgFull: card.imgFull,
-              hidden: card.hidden
-            };
-        }
-      }
+    if (mode === "new") {
+      setNewCardReqs({
+        title: "",
+        desc: "",
+        img: "",
+        imgFull: "",
+        hidden: false
+      });
+      setNewCardTags(tags);
+      setNewCardBools(boolTags);
+      setFilePreview("");
+    } else {
+      setNewCardReqs({
+        title: card.title,
+        desc: card.desc,
+        img: card.img,
+        imgFull: card.imgFull,
+        hidden: card.hidden
+      });
+      setNewCardTags(card.tags);
+      setNewCardBools(card.boolTags);
+      setFilePreview(card.img);
     }
-
-    setNewCardReqs(returnVars(""));
-    setNewCardTags(returnVars("tags"));
-    setNewCardBools(returnVars("boolTags"));
-    setFilePreview(returnVars("img"));
-
   }, [opened, boolTags, card, mode, tags]);
 
   return (
     <div className={`card-template ${!opened ? "" : "opened"}`}>
       <form className='card-form' onSubmit={onSubmit}>
 
-        <Button type="button" className="card-form-close" label={"Close"} onFunc={onCloseCardTemplateMode}/>
+        <Button type="button" className="card-form-close" label={"Close"} onFunc={onCloseCardTemplate}/>
 
         <div className='card-form-part card-form-front'>
           <TextBox label="Title" onFunc={onSetNewCardReqs} autocomplete="off" name='title' value={newCardReqs.title}/>

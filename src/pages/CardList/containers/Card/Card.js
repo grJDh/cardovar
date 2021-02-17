@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { openModalImage } from '../../../../slices/modal';
-import { openCardTemplateMode } from '../../../../slices/cards';
+import { openCardTemplate } from '../../../../slices/cards';
 
 import TagBox from "../../parts/TagBox/TagBox";
 
@@ -18,7 +18,7 @@ const Card = ({card, cardKey}) => {
   const dispatch = useDispatch();
 
   const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
-  const onOpenCardTemplateMode = () => dispatch(openCardTemplateMode(["edit", cardKey]));
+  const onOpenCardTemplate = () => dispatch(openCardTemplate(["edit", cardKey]));
 
   const [isFlipped, toggleFlipped] = useState(false);
   const onToggleFlipped = (event) => {
@@ -36,7 +36,7 @@ const Card = ({card, cardKey}) => {
           <div className='char-img-container'>
             <img className={`char-img ${boolTags["Alive"] ? "" : "char-dead"}`} src={img} alt={title}/>
             <img className='char-img-icon icon-full' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
-            <img className='char-img-icon icon-edit' src={editIcon} alt="Open full" onClick={onOpenCardTemplateMode} />
+            <img className='char-img-icon icon-edit' src={editIcon} alt="Open full" onClick={onOpenCardTemplate} />
           </div>
         
           <div className="char-desc">

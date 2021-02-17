@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 
 import CardList from './pages/CardList/CardList';
@@ -15,18 +15,20 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const booleanFilters = () => {
-    let tempFilters = {};
-    for (let i of Object.keys(boolTags)) {
-      tempFilters = {...tempFilters, [i]: false}
+  useEffect(() => {
+    const booleanFilters = () => {
+      let tempFilters = {};
+      for (let i of Object.keys(boolTags)) {
+        tempFilters = {...tempFilters, [i]: false}
+      }
+    
+      return tempFilters;
     }
   
-    return tempFilters;
-  }
+    const onCreateBooleanFilters = () => dispatch(createBooleanFilters(booleanFilters()));
 
-  const onCreateBooleanFilters = () => dispatch(createBooleanFilters(booleanFilters()));
-
-  onCreateBooleanFilters();
+    onCreateBooleanFilters();
+  }, [boolTags, dispatch]);
 
   return (
     <div className="app">
@@ -39,10 +41,11 @@ const App = () => {
 
 export default App;
 
-// sorting
-// adding new tags
+// editing tags
+// deleting cards and tags
 // search by tags
 // settings
 // hidden/shown
+// sorting
 // albums
 // different styles
