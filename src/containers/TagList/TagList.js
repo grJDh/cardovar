@@ -11,7 +11,7 @@ import Button from '../../components/Button/Button';
 
 const TagList = () => {
 
-  const { tagListOpened, tags } = useSelector(tagsSelector);
+  const { tagListOpened, tags, boolTags } = useSelector(tagsSelector);
 
   const dispatch = useDispatch();
 
@@ -19,9 +19,15 @@ const TagList = () => {
   const [tagNamesList, setTagNamesList] = useState(Object.keys(tags).reduce((obj, key) => {
     return {...obj, [key]: key}
   }, {}));
+  const [boolTagList, setboolTagList] = useState(boolTags);
+  const [boolTagNamesList, setboolTagNamesList] = useState(Object.keys(boolTags).reduce((obj, key) => {
+    return {...obj, [key]: key}
+  }, {}));
 
   const onSetTagValue = event => setTagList({...tagList, [event.target.name]: event.target.value});
   const onSetTagName = event => setTagNamesList({...tagNamesList, [event.target.name]: event.target.value});
+  const onSetBoolTagValue = event => setboolTagList({...boolTagList, [event.target.name]: !boolTagList[event.target.name]});
+  const onSetBoolTagName = event => setboolTagNamesList({...boolTagNamesList, [event.target.name]: event.target.value});
 
   const onSubmit = e => {
     e.preventDefault();
@@ -29,11 +35,9 @@ const TagList = () => {
     const newTags = Object.keys(tags).reduce((obj, key) => {
       return {...obj, [tagNamesList[key]]: tagList[key]}
     }, {})
-
-    const newBoolTags = {
-      "Major": false,
-      "Alive": true
-    };
+    const newBoolTags = Object.keys(boolTags).reduce((obj, key) => {
+      return {...obj, [boolTagNamesList[key]]: boolTagList[key]}
+    }, {})
 
     dispatch(updateTags([newTags, newBoolTags]))
 
@@ -61,18 +65,19 @@ const TagList = () => {
         <Button type="button" className="tag-form-close" label={"Close"} onFunc={onCloseTagTemplate}/>
 
         <div className='tag-form-part tag-form-main'>
-          {/* <TextBox label="Name" onFunc={onSetNewTagName} autocomplete="off" name='key' value={newTagName} />
-
-          { (newTagIsBool) ?
-          <Checkbox label="Default value" onFunc={onSetNewTagBoolValue} name='value' value={newTagBoolValue} /> : 
-          <TextBox label="Default value" onFunc={onSetNewTagValue} autocomplete="off" name='value' value={newTagValue} />}
-
-          <Checkbox label="Is boolean?" onFunc={onSetTagIsBool} name="Is boolean?" value={newTagIsBool} /> */}
- 
           {Object.keys(tagList).map((tag) => (
             <div key={tag}>
               <TextBox key={"tag"+tag} onFunc={onSetTagName} autocomplete="off" name={tag} value={tagNamesList[tag]} />
               <TextBox key={"value"+tag} onFunc={onSetTagValue} autocomplete="off" name={tag} value={tagList[tag]} />
+            </div>
+          ))}
+        </div>
+
+        <div className='tag-form-part tag-form-second'>
+          {Object.keys(boolTagList).map((tag) => (
+            <div key={tag}>
+              <TextBox key={"boolTag"+tag} onFunc={onSetBoolTagName} autocomplete="off" name={tag} value={boolTagNamesList[tag]} />
+              <Checkbox key={"boolValue"+tag} onFunc={onSetBoolTagValue} autocomplete="off" name={tag} value={boolTagList[tag]} />
             </div>
           ))}
         </div>

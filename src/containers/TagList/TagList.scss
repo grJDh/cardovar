@@ -19,13 +19,14 @@
   grid-template-rows: 0.2fr 3fr 0.2fr;
   gap: 10px 10px;
   grid-template-areas:
-    "tag-form-close"
-    "tag-form-main"
-    "tag-form-submit";
+    "tag-form-close tag-form-close"
+    "tag-form-main tag-form-second"
+    "tag-form-submit tag-form-submit";
 }
 
 .tag-form-close { grid-area: tag-form-close; }
 .tag-form-main { grid-area: tag-form-main; }
+.tag-form-second { grid-area: tag-form-second; }
 .tag-form-submit { grid-area: tag-form-submit; }
 
 .tag-form-part {
