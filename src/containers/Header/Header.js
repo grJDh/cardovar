@@ -7,7 +7,7 @@ import Button from '../../components/Button/Button';
 import Dropdowm from '../../components/Dropdowm/Dropdowm';
 
 import { toggleFilter, changeSearchField } from '../../slices/filters';
-import { tagsSelector, openTagTemplate } from '../../slices/tags';
+import { tagsSelector, openTagList } from '../../slices/tags';
 import { openCardTemplate } from '../../slices/cards';
 
 import './Header.scss';
@@ -20,7 +20,7 @@ const Header = () => {
   const onToggleFilter = tag => dispatch(toggleFilter(tag));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["new", ""]));
-  const onOpenTagTemplate = () => dispatch(openTagTemplate(["new", ""]));
+  const onOpenTagList = () => dispatch(openTagList());
   const onSortingChange = () => "";
 
   return (
@@ -35,7 +35,7 @@ const Header = () => {
 
       <Button label='New card' onFunc={onOpenCardTemplate}/>
 
-      <Button label='New tag' onFunc={onOpenTagTemplate}/>
+      <Button label='Tag list' onFunc={onOpenTagList}/>
     </header>
   );
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from './containers/Card/Card';
 import ModalImage from "./parts/ModalImage/ModalImage";
 import CardTemplate from './containers/CardTemplate/CardTemplate';
-import TagTemplate from './containers/TagTemplate/TagTemplate';
+import TagList from '../../containers/TagList/TagList';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
@@ -20,7 +20,7 @@ const CardList = () => {
   const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
   const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
-  const { tagTemplateOpened, tagTemplateMode } = useSelector(tagsSelector);
+  const { tagListOpened } = useSelector(tagsSelector);
 
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
@@ -54,15 +54,15 @@ const CardList = () => {
   return (
     <div className='chars-list'>
 
-      <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose}/>
+      <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose} />
 
       {filteredCards.map((key) => (
-        <Card key={key} cardKey={key} card={cards[key]}/>
+        <Card key={key} cardKey={key} card={cards[key]} />
         ))}
 
       <CardTemplate opened={cardTemplateOpened} mode={cardTemplateMode} card={(editedCard) ? cards[editedCard] : ""} />
 
-      <TagTemplate opened={tagTemplateOpened} mode={tagTemplateMode} />
+      <TagList />
     </div>
   );
 }

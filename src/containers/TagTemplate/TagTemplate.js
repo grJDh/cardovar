@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { tagsSelector, closeTagTemplate, addTag } from '../../../../slices/tags';
-import { addTagtoCards } from '../../../../slices/cards';
+import { tagsSelector, closeTagTemplate, addTag } from '../../slices/tags';
+import { addTagtoCards } from '../../slices/cards';
 
-import TextBox from '../../../../components/TextBox/TextBox';
-import Checkbox from '../../../../components/CheckBox/CheckBox';
-import Button from '../../../../components/Button/Button';
+import TextBox from '../../components/TextBox/TextBox';
+import Checkbox from '../../components/CheckBox/CheckBox';
+import Button from '../../components/Button/Button';
 
 import './TagTemplate.scss';
 

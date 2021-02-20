@@ -13,9 +13,7 @@ export const initialState = {
     "Alive": true
   },
 
-  tagTemplateOpened: false,
-  tagTemplateMode: "new",
-  editedTag: "",
+  tagListOpened: false,
 }
 
 const tagsSlice = createSlice({
@@ -25,19 +23,21 @@ const tagsSlice = createSlice({
     addTag: (state, { payload }) => {
       state[[payload[0]]] = {...state[[payload[0]]], [payload[1]]: payload[2]};
     },
-
-    openTagTemplate: (state, { payload }) => {
-      state.tagTemplateOpened = true;
-      state.tagTemplateMode = payload[0];
-      state.editedTag = payload[1];
+    updateTags: (state, { payload }) => {
+      state.tags = payload[0];
+      state.boolTags = payload[1];
     },
-    closeTagTemplate: (state) => {
-      state.tagTemplateOpened = false;
+
+    openTagList: (state, { payload }) => {
+      state.tagListOpened = true;
+    },
+    closeTagList: (state) => {
+      state.tagListOpened = false;
     },
   }
 });
 
-export const { addTag, openTagTemplate, closeTagTemplate } = tagsSlice.actions;
+export const { addTag, openTagList, closeTagList, updateTags } = tagsSlice.actions;
 
 export const tagsSelector = state => state.tags;
 
