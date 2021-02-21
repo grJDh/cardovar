@@ -9,7 +9,6 @@ import TagList from '../../containers/TagList/TagList';
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
 import { cardsSelector } from '../../slices/cards';
-import { tagsSelector } from '../../slices/tags';
 
 import "./CardList.scss"
 
@@ -20,7 +19,6 @@ const CardList = () => {
   const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
   const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
-  const { tagListOpened } = useSelector(tagsSelector);
 
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
