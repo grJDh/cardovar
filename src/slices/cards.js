@@ -30,10 +30,26 @@ const cardsSlice = createSlice({
       state.cards[state.editedCard] = payload;
     },
 
-    addTagtoCards: (state, { payload }) => {
-      for (let i = 0; i < Object.keys(state.cards).length; i++) {
-        state.cards[i][payload[0]] = {...state.cards[i][payload[0]], [payload[1]]: payload[2]}
-      }
+    // addTagtoCards: (state, { payload }) => {
+    //   for (let i = 0; i < Object.keys(state.cards).length; i++) {
+    //     state.cards[i][payload[0]] = {...state.cards[i][payload[0]], [payload[1]]: payload[2]}
+    //   }
+    // },
+    updateTagsinCards: (state, { payload }) => {
+      state.cards = Object.keys(state.cards).reduce((obj, i) => {
+
+        const updatedTags = Object.keys(payload[0][0]).reduce((obj, tag) => {
+          if (state.cards[i].tags[tag] !== undefined) return {...obj, [payload[0][0][tag]]: state.cards[i].tags[tag]}
+          else return {...obj, [payload[0][0][tag]]: payload[0][1][payload[0][0][tag]]}
+        }, {});
+
+        const updatedBoolTags = Object.keys(payload[1][0]).reduce((obj, tag) => {
+          if (state.cards[i].boolTags[tag] !== undefined) return {...obj, [payload[1][0][tag]]: state.cards[i].boolTags[tag]}
+          else return {...obj, [payload[1][0][tag]]: payload[1][1][payload[1][0][tag]]}
+        }, {});
+
+        return {...obj, [i]: {...state.cards[i], tags: updatedTags, boolTags: updatedBoolTags}}
+      }, {});
     },
 
     openCardTemplate: (state, { payload }) => {
@@ -47,7 +63,7 @@ const cardsSlice = createSlice({
   }
 });
 
-export const { addCard, changeCard, openCardTemplate, closeCardTemplate, addTagtoCards } = cardsSlice.actions;
+export const { addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsinCards } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

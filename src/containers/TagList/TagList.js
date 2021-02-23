@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './TagList.scss';
 
 import { tagsSelector, closeTagList, updateTags } from '../../slices/tags';
+import { updateTagsinCards } from '../../slices/cards';
 
 import TextBox from '../../components/TextBox/TextBox';
 import Checkbox from '../../components/CheckBox/CheckBox';
@@ -42,7 +43,7 @@ const TagList = () => {
     setboolTagNamesList({...boolTagNamesList, "": ""});
   };
 
-  const checkForDuplicates = val => {
+  const checkForDuplicates = useCallback(val => {
     let dupl = [];
 
     const list = !val ? tagNamesList : boolTagNamesList;
@@ -54,10 +55,10 @@ const TagList = () => {
     }
 
     !val ? setDuplicates(dupl) : setBoolDuplicates(dupl);
-  };
+  }, [boolTagNamesList, tagNamesList]);
   
-  useEffect(() => checkForDuplicates(0), [tagNamesList]);
-  useEffect(() => checkForDuplicates(1), [boolTagNamesList]);
+  useEffect(() => checkForDuplicates(0), [checkForDuplicates]);
+  useEffect(() => checkForDuplicates(1), [checkForDuplicates]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -71,10 +72,14 @@ const TagList = () => {
       }, {});
   
       dispatch(updateTags([newTags, newBoolTags]));
+      dispatch(updateTagsinCards([[tagNamesList, newTags], [boolTagNamesList, newBoolTags]]));
   
       onCloseTagTemplate();
-    } else window.alert("Duplicates in tag keys are not allowed!");
+    }
+
+    else window.alert("Duplicates in tag names are not allowed!");
   };
+
 
   useEffect(() => {
     setTagList(tags);

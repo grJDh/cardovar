@@ -41,11 +41,11 @@ const App = () => {
 
 export default App;
 
-// editing tags
+// проверь добавление новых буловых тегов к картам, их переключени и фильтрование
 // deleting cards and tags
 // search by tags
-// settings
 // hidden/shown
+// settings
 // sorting
 // albums
 // different styles
