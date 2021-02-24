@@ -29,7 +29,10 @@ const cardsSlice = createSlice({
     changeCard: (state, { payload }) => {
       state.cards[state.editedCard] = payload;
     },
-
+    deleteCard: (state, { payload }) => {
+      const { [payload]: value, ...newCards } = state.cards;
+      state.cards = newCards;
+    },
     // addTagtoCards: (state, { payload }) => {
     //   for (let i = 0; i < Object.keys(state.cards).length; i++) {
     //     state.cards[i][payload[0]] = {...state.cards[i][payload[0]], [payload[1]]: payload[2]}
@@ -48,7 +51,7 @@ const cardsSlice = createSlice({
           else return {...obj, [payload[1][0][tag]]: payload[1][1][payload[1][0][tag]]}
         }, {});
 
-        return {...obj, [i]: {...state.cards[i], tags: updatedTags, boolTags: updatedBoolTags}}
+        return {...obj, [i]: {...state.cards[i], tags: updatedTags, boolTags: updatedBoolTags}};
       }, {});
     },
 
@@ -63,7 +66,7 @@ const cardsSlice = createSlice({
   }
 });
 
-export const { addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsinCards } = cardsSlice.actions;
+export const { addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsinCards, deleteCard } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

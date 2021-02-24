@@ -41,7 +41,6 @@ const App = () => {
 
 export default App;
 
-// проверь добавление новых буловых тегов к картам, их переключени и фильтрование
 // deleting cards and tags
 // search by tags
 // hidden/shown
