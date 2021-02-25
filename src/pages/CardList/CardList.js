@@ -16,7 +16,7 @@ const CardList = () => {
 
   const dispatch = useDispatch();
 
-  const { boolFilters, searchFilterValue } = useSelector(filtersSelector);
+  const { boolFilters, searchFilterValue, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
   const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
 
@@ -31,12 +31,29 @@ const CardList = () => {
     }
   }
 
+  const searchFilter = key => {
+    const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase())
+
+    switch (searchIn) {
+      case "everywhere":
+        const searchinTags = Object.keys(cards[key].tags).map(tag => searching(cards[key].tags[tag])).includes(true);
+        return (searching(cards[key].title) || searching(cards[key].desc) || searchinTags) ? true : false;
+      case "titles":
+        return searching(cards[key].title);
+      case "desc":
+        return searching(cards[key].desc);
+      default:
+        return searching(cards[key].tags[searchIn]);
+    }
+  }
+
   const filteredCards = Object.keys(cards)
   .filter(key => !cards[key].hidden)
 
   .filter(key => boolTagsFilter(cards[key].boolTags))
 
-  .filter(key => cards[key].title.toLowerCase().includes(searchFilterValue.toLowerCase()))
+  .filter(key => searchFilter(key))
+
   .sort((keyA, keyB) => {
     if (cards[keyA].title > cards[keyB].title) return 1;
     if (cards[keyA].title < cards[keyB].title) return -1;
@@ -44,11 +61,8 @@ const CardList = () => {
     return 0;
   });
 
-  const onClose = (event) => {
-    // if (event.target.tagName !== "IMG") dispatch(closeModalImage());
-    dispatch(closeModalImage());
-  }
-
+  const onClose = event => (event.target.tagName !== "IMG") ? dispatch(closeModalImage()) : "";
+ 
   return (
     <div className='chars-list'>
 

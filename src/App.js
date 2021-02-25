@@ -41,8 +41,6 @@ const App = () => {
 
 export default App;
 
-// deleting cards and tags
-// search by tags
 // hidden/shown
 // settings
 // sorting

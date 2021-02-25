@@ -20,8 +20,8 @@ const TagList = () => {
   const [tagNamesList, setTagNamesList] = useState(Object.keys(tags).reduce((obj, key) => {
     return {...obj, [key]: key}
   }, {}));
-  const [boolTagList, setboolTagList] = useState(boolTags);
-  const [boolTagNamesList, setboolTagNamesList] = useState(Object.keys(boolTags).reduce((obj, key) => {
+  const [boolTagList, setBoolTagList] = useState(boolTags);
+  const [boolTagNamesList, setBoolTagNamesList] = useState(Object.keys(boolTags).reduce((obj, key) => {
     return {...obj, [key]: key}
   }, {}));
   const [duplicates, setDuplicates] = useState([]);
@@ -30,8 +30,8 @@ const TagList = () => {
   const onSetTagValue = event => setTagList({...tagList, [event.target.name]: event.target.value});
   const onSetTagName = event => setTagNamesList({...tagNamesList, [event.target.name]: event.target.value});
 
-  const onSetBoolTagValue = event => setboolTagList({...boolTagList, [event.target.name]: !boolTagList[event.target.name]});
-  const onSetBoolTagName = event => setboolTagNamesList({...boolTagNamesList, [event.target.name]: event.target.value});
+  const onSetBoolTagValue = event => setBoolTagList({...boolTagList, [event.target.name]: !boolTagList[event.target.name]});
+  const onSetBoolTagName = event => setBoolTagNamesList({...boolTagNamesList, [event.target.name]: event.target.value});
 
   const createNewTag = () => {
     const num = Date.now();
@@ -39,8 +39,21 @@ const TagList = () => {
     setTagNamesList({...tagNamesList, [num]: ""});
   };
   const createNewBoolTag = () => {
-    setboolTagList({...boolTagList, "": false});
-    setboolTagNamesList({...boolTagNamesList, "": ""});
+    setBoolTagList({...boolTagList, "": false});
+    setBoolTagNamesList({...boolTagNamesList, "": ""});
+  };
+
+  const deleteTag = tag => {
+    const { [tag]: temp, ...remainingTags } = tagList;
+    setTagList(remainingTags);
+    const { [tag]: temp2, ...remainingNameTags } = tagNamesList;
+    setTagNamesList(remainingNameTags);
+  };
+  const deleteBoolTag = tag => {
+    const { [tag]: temp, ...remainingTags } = boolTagList;
+    setBoolTagList(remainingTags);
+    const { [tag]: temp2, ...remainingNameTags } = boolTagNamesList;
+    setBoolTagNamesList(remainingNameTags);
   };
 
   const checkForDuplicates = useCallback(val => {
@@ -80,20 +93,20 @@ const TagList = () => {
     else window.alert("Duplicates in tag names are not allowed!");
   };
 
-
   useEffect(() => {
     setTagList(tags);
     setTagNamesList(Object.keys(tags).reduce((obj, key) => {
       return {...obj, [key]: key}
     }, {}));
-    setboolTagList(boolTags);
-    setboolTagNamesList(Object.keys(boolTags).reduce((obj, key) => {
+    setBoolTagList(boolTags);
+    setBoolTagNamesList(Object.keys(boolTags).reduce((obj, key) => {
       return {...obj, [key]: key}
     }, {}));
     setDuplicates([]);
     setBoolDuplicates([]);
-  }, [boolTags, tags]);
+  }, [tagListOpened, boolTags, tags]);
 
+  const onClose = event => (event.target.className === "tags-template opened") ? dispatch(closeTagList()) : "";
   const onCloseTagTemplate = () => dispatch(closeTagList());
   const escListener = (event) => {
     if (event.isComposing || event.key === "Escape") {
@@ -109,7 +122,7 @@ const TagList = () => {
   });
 
   return (
-    <div className={`tags-template ${!tagListOpened ? "" : "opened"}`}>
+    <div className={`tags-template ${!tagListOpened ? "" : "opened"}`} onClick={(event) => onClose(event)}>
       <form className='tag-form' onSubmit={onSubmit}>
 
         <Button type="button" className="tag-form-close" label={"Close"} onFunc={onCloseTagTemplate}/>
@@ -119,6 +132,7 @@ const TagList = () => {
             <div key={tag}>
               <TextBox className={`${!duplicates.includes(tag) ? "" : "tag-error"}`} key={"tag"+tag} onFunc={onSetTagName} autocomplete="off" name={tag} value={tagNamesList[tag]} />
               <TextBox key={"value"+tag} onFunc={onSetTagValue} autocomplete="off" name={tag} value={tagList[tag]} />
+              <Button type="button" className="tag-form-close" label="🗑️" onFunc={() => deleteTag(tag)}/>
             </div>
           ))}
 
@@ -130,6 +144,7 @@ const TagList = () => {
             <div key={tag}>
               <TextBox className={`${!boolDuplicates.includes(tag) ? "" : "tag-error"}`} key={"boolTag"+tag} onFunc={onSetBoolTagName} autocomplete="off" name={tag} value={boolTagNamesList[tag]} />
               <Checkbox key={"boolValue"+tag} onFunc={onSetBoolTagValue} autocomplete="off" name={tag} value={boolTagList[tag]} />
+              <Button type="button" className="tag-form-close" label="🗑️" onFunc={() => deleteBoolTag(tag)}/>
             </div>
           ))}
 

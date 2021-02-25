@@ -6,6 +6,8 @@ export const initialState = {
   searchFilterValue: '',
 
   sorting: "",
+
+  searchIn: "titles",
 }
 
 const filtersSlice = createSlice({
@@ -23,10 +25,14 @@ const filtersSlice = createSlice({
     changeSearchField: (state, { payload }) => {
       state.searchFilterValue = payload;
     },
+
+    setSearchIn: (state, { payload }) => {
+      state.searchIn = payload;
+    },
   }
 });
 
-export const { createBooleanFilters, toggleFilter, changeSearchField } = filtersSlice.actions;
+export const { createBooleanFilters, toggleFilter, changeSearchField, setSearchIn } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 

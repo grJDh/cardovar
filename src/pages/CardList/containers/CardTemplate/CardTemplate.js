@@ -66,6 +66,7 @@ const CardTemplate = ({opened, mode, card}) => {
   };
 
   const onCloseCardTemplate = () => dispatch(closeCardTemplate());
+  const onClose = event => (event.target.className === "card-template opened") ? dispatch(closeCardTemplate()) : "";
 
   const escListener = (event) => {
     if (event.isComposing || event.key === "Escape") {
@@ -108,7 +109,7 @@ const CardTemplate = ({opened, mode, card}) => {
   }, [opened, boolTags, card, mode, tags]);
 
   return (
-    <div className={`card-template ${!opened ? "" : "opened"}`}>
+    <div className={`card-template ${!opened ? "" : "opened"}`} onClick={(event) => onClose(event)}>
       <form className='card-form' onSubmit={onSubmit}>
 
         <Button type="button" className="card-form-close" label={"Close"} onFunc={onCloseCardTemplate}/>

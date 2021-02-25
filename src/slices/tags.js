@@ -28,7 +28,7 @@ const tagsSlice = createSlice({
       state.boolTags = payload[1];
     },
 
-    openTagList: (state, { payload }) => {
+    openTagList: (state) => {
       state.tagListOpened = true;
     },
     closeTagList: (state) => {

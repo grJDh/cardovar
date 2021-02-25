@@ -5,7 +5,8 @@ import { cards } from '../cardsArray'
 const generateCardsArray = () => {
   let newArray = {};
   for (let i=0; i<cards.length; i++) {
-    newArray[i] = cards[i]
+    const rand = Math.floor(Math.random() * 1000000);
+    newArray[rand] = cards[i]
   }
 
   return newArray;
@@ -30,7 +31,7 @@ const cardsSlice = createSlice({
       state.cards[state.editedCard] = payload;
     },
     deleteCard: (state, { payload }) => {
-      const { [payload]: value, ...newCards } = state.cards;
+      const { [payload]: temp, ...newCards } = state.cards;
       state.cards = newCards;
     },
     // addTagtoCards: (state, { payload }) => {
