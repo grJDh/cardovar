@@ -18,7 +18,7 @@ const CardList = () => {
 
   const { boolFilters, searchFilterValue, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
-  const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
+  const { cards, cardTemplateOpened, cardTemplateMode, editedCard, showHidden } = useSelector(cardsSelector);
 
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
@@ -48,7 +48,7 @@ const CardList = () => {
   }
 
   const filteredCards = Object.keys(cards)
-  .filter(key => !cards[key].hidden)
+  .filter(key => (!cards[key].hidden || showHidden))
 
   .filter(key => boolTagsFilter(cards[key].boolTags))
 

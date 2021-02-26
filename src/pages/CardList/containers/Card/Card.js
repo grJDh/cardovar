@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { openModalImage } from '../../../../slices/modal';
-import { openCardTemplate, deleteCard } from '../../../../slices/cards';
+import { openCardTemplate, deleteCard, toggleCardVisibility } from '../../../../slices/cards';
 
 import TagBox from "../../parts/TagBox/TagBox";
 
 import fullscreenIcon from '../../../../fullscreen.png';
 import editIcon from '../../../../edit.png';
 import deleteIcon from '../../../../delete.png';
+import hideIcon from '../../../../hide.png';
+import showIcon from '../../../../show.png';
 
 import './Card.scss';
 
@@ -21,12 +23,13 @@ const Card = ({card, cardKey}) => {
   const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["edit", cardKey]));
   const onDeleteCard = () => (window.confirm('Are you sure you want to delete this card?')) ? dispatch(deleteCard(cardKey)) : "";
+  const onToggleCardVisibility = () => dispatch(toggleCardVisibility(cardKey));
 
   const [isFlipped, toggleFlipped] = useState(false);
-  const onToggleFlipped = (event) => (event.target.tagName !== "INPUT") ? toggleFlipped(!isFlipped) : "";
+  const onToggleFlipped = event => (event.target.tagName !== "INPUT") ? toggleFlipped(!isFlipped) : "";
 
   return (
-    <div className={`char-card ${!isFlipped ? "" : "flipped"}`} onClick={(event) => onToggleFlipped(event)}>
+    <div className={`char-card ${!isFlipped ? "" : "flipped"} ${!card.hidden ? "" : "hidden"}`} onClick={(event) => onToggleFlipped(event)}>
       <div className='char-card-inner'>
         <div className='char-card-front'>
           <div className="char-name">
@@ -35,9 +38,10 @@ const Card = ({card, cardKey}) => {
 
           <div className='char-img-container'>
             <img className={`char-img ${boolTags["Alive"] ? "" : "char-dead"}`} src={img} alt={title}/>
+            <input type="image" className='char-img-icon icon-hide' src={card.hidden ? showIcon : hideIcon} alt={card.hidden ? "Show card"  : "Hide card" } onClick={onToggleCardVisibility} />
+            <input type="image" className='char-img-icon icon-delete' src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
             <input type="image" className='char-img-icon icon-full' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
             <input type="image" className='char-img-icon icon-edit' src={editIcon} alt="Edit card" onClick={onOpenCardTemplate} />
-            <input type="image" className='char-img-icon icon-delete' src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
           </div>
         
           <div className="char-desc">

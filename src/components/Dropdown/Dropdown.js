@@ -7,9 +7,9 @@ const Dropdown = ({ label, onFunc, value, name, options }) => {
   return (
     <div className='dropdowm'>
       <label htmlFor={label}>{label}</label>
-      <select id={label} name={name} onChange={onFunc} value={value}>
+      <select id={label} name={name} onChange={onFunc} defaultValue={value}>
         <option value="everywhere">everywhere</option>
-        <option value="titles" selected="selected">in titles</option>
+        <option value="titles">in titles</option>
         <option value="desc">in descriptions</option>
         {options.map((i) => (
           <option key={i} value={i}>in {i}</option>

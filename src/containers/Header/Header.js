@@ -8,7 +8,7 @@ import Dropdown from '../../components/Dropdown/Dropdown';
 
 import { filtersSelector, toggleFilter, changeSearchField, setSearchIn } from '../../slices/filters';
 import { tagsSelector, openTagList } from '../../slices/tags';
-import { openCardTemplate } from '../../slices/cards';
+import { cardsSelector, openCardTemplate, toggleShowHidden } from '../../slices/cards';
 
 import './Header.scss';
 
@@ -17,12 +17,15 @@ const Header = () => {
   const dispatch = useDispatch();
   const { tags, boolTags } = useSelector(tagsSelector);
   const { boolFilters } = useSelector(filtersSelector);
+  const { showHidden } = useSelector(cardsSelector);
 
   const onToggleFilter = tag => dispatch(toggleFilter(tag));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["new", ""]));
   const onOpenTagList = () => dispatch(openTagList());
   const onSetSearchIn = event => dispatch(setSearchIn(event.target.value));
+
+  const onToggleShowHidden = () => dispatch(toggleShowHidden());
 
   return (
     <header className='header'>
@@ -32,11 +35,13 @@ const Header = () => {
 
       <SearchBox label='Search' onFunc={onChangeSearchField} autocomplete="off"/>
 
-      <Dropdown label='' onFunc={onSetSearchIn} options={Object.keys(tags)}/>
+      <Dropdown label='' onFunc={onSetSearchIn} options={Object.keys(tags)} value={"titles"}/>
 
       <Button label='New card' onFunc={onOpenCardTemplate}/>
 
       <Button label='Tag list' onFunc={onOpenTagList}/>
+
+      <Button label={(showHidden) ? 'Hide hidden cards' : 'Show hidden cards'}   onFunc={onToggleShowHidden}/>
     </header>
   );
 }

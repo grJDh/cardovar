@@ -90,16 +90,20 @@
 }
 
 .icon-full {
-  bottom: 0px;
+  bottom: 0;
   right: 0;
 }
 .icon-edit {
-  bottom: 0px;
+  bottom: 0;
   left: 0;
 }
 .icon-delete {
-  top: 0px;
+  top: 0;
   right: 0;
+}
+.icon-hide {
+  top: 0;
+  left: 0;
 }
 
 .char-name {
@@ -149,4 +153,8 @@ img.char-dead:hover {
 
 h2.char-dead::after {
   content: '💀';
+}
+
+.hidden {
+  opacity: 0.5;
 }
