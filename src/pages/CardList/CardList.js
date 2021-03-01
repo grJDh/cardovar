@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from './containers/Card/Card';
@@ -8,7 +8,7 @@ import TagList from '../../containers/TagList/TagList';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
-import { cardsSelector } from '../../slices/cards';
+import { cardsSelector, fetchCards } from '../../slices/cards';
 
 import "./CardList.scss"
 
@@ -18,7 +18,7 @@ const CardList = () => {
 
   const { boolFilters, searchFilterValue, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
-  const { cards, cardTemplateOpened, cardTemplateMode, editedCard, showHidden } = useSelector(cardsSelector);
+  const { cards, cardsLoading, cardsHasErrors, cardTemplateOpened, cardTemplateMode, editedCard, showHidden } = useSelector(cardsSelector);
 
   const boolTagsFilter = boolTags => {
     const boolTagsKeys = Object.keys(boolTags);
@@ -62,15 +62,25 @@ const CardList = () => {
   });
 
   const onClose = event => (event.target.tagName !== "IMG") ? dispatch(closeModalImage()) : "";
+
+  useEffect(() => {
+    dispatch(fetchCards())
+  }, [dispatch]);
+
+  const renderCardList = () => {
+    if (cardsLoading) return <p>Loading categories...</p>
+    if (cardsHasErrors) return <p>Unable to display categories.</p>
+
+    return filteredCards.map((key) => (
+          <Card key={key} cardKey={key} card={cards[key]} />
+          ))
+  }
  
   return (
     <div className='chars-list'>
-
       <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose} />
 
-      {filteredCards.map((key) => (
-        <Card key={key} cardKey={key} card={cards[key]} />
-        ))}
+      {renderCardList()}
 
       <CardTemplate opened={cardTemplateOpened} mode={cardTemplateMode} card={(editedCard) ? cards[editedCard] : ""} />
 

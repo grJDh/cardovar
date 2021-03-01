@@ -1,19 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { cards } from '../cardsArray'
+export const fetchCards = () => {
+  return async dispatch => {
+    dispatch(getCards());
 
-const generateCardsArray = () => {
-  let newArray = {};
-  for (let i=0; i<cards.length; i++) {
-    const rand = Math.floor(Math.random() * 1000000);
-    newArray[rand] = cards[i]
+    try {
+      const response = await fetch('https://api.npoint.io/6092f6f51e0ff89498be');
+      const data = await response.json();
+
+      dispatch(getCardsSuccess(data));
+    } catch (error) {
+      dispatch(getCardsFailure());
+    }
   }
-
-  return newArray;
 }
 
 export const initialState = {
-  cards: generateCardsArray(),
+  cards: {},
+
+  cardsLoading: false,
+  cardsHasErrors: false,
 
   cardTemplateOpened: false,
   cardTemplateMode: "new",
@@ -26,6 +32,19 @@ const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
+    getCards: state => {
+      state.cardsLoading = true;
+    },
+    getCardsSuccess: (state, { payload }) => {
+      state.cards = payload
+      state.cardsLoading = false
+      state.cardsHasErrors = false
+    },
+    getCardsFailure: state => {
+      state.cardsLoading = false
+      state.cardsHasErrors = true
+    },
+
     addCard: (state, { payload }) => {
       state.cards[Object.keys(state.cards).length] = payload;
     },
@@ -39,11 +58,6 @@ const cardsSlice = createSlice({
     toggleCardVisibility: (state, { payload }) => {
       state.cards[payload] = {...state.cards[payload], hidden: !state.cards[payload].hidden};
     },
-    // addTagtoCards: (state, { payload }) => {
-    //   for (let i = 0; i < Object.keys(state.cards).length; i++) {
-    //     state.cards[i][payload[0]] = {...state.cards[i][payload[0]], [payload[1]]: payload[2]}
-    //   }
-    // },
     updateTagsinCards: (state, { payload }) => {
       state.cards = Object.keys(state.cards).reduce((obj, i) => {
 
@@ -66,17 +80,17 @@ const cardsSlice = createSlice({
       state.cardTemplateMode = payload[0];
       state.editedCard = payload[1];
     },
-    closeCardTemplate: (state) => {
+    closeCardTemplate: state => {
       state.cardTemplateOpened = false;
     },
 
-    toggleShowHidden: (state) => {
+    toggleShowHidden: state => {
       state.showHidden = !state.showHidden;
     },
   }
 });
 
-export const { addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsinCards, deleteCard, toggleShowHidden, toggleCardVisibility } = cardsSlice.actions;
+export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsinCards, deleteCard, toggleShowHidden, toggleCardVisibility } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

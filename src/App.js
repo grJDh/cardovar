@@ -41,8 +41,7 @@ const App = () => {
 
 export default App;
 
-// hidden/shown
-// settings
 // sorting
 // albums
+// settings
 // different styles
