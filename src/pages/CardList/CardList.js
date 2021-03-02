@@ -16,7 +16,7 @@ const CardList = () => {
 
   const dispatch = useDispatch();
 
-  const { boolFilters, searchFilterValue, searchIn } = useSelector(filtersSelector);
+  const { boolFilters, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
   const { cards, cardsLoading, cardsHasErrors, cardTemplateOpened, cardTemplateMode, editedCard, showHidden } = useSelector(cardsSelector);
 
@@ -38,7 +38,7 @@ const CardList = () => {
       case "everywhere":
         const searchinTags = Object.keys(cards[key].tags).map(tag => searching(cards[key].tags[tag])).includes(true);
         return (searching(cards[key].title) || searching(cards[key].desc) || searchinTags) ? true : false;
-      case "titles":
+      case "title":
         return searching(cards[key].title);
       case "desc":
         return searching(cards[key].desc);
@@ -55,10 +55,20 @@ const CardList = () => {
   .filter(key => searchFilter(key))
 
   .sort((keyA, keyB) => {
-    if (cards[keyA].title > cards[keyB].title) return 1;
-    if (cards[keyA].title < cards[keyB].title) return -1;
-    // if (a.name === b.name) return 0;
-    return 0;
+    const compare = (a, b) => {
+      if (a > b) return 1;
+      if (a < b) return -1;
+      return 0;
+    }
+
+    switch (sorting) {
+      case "title":
+        return compare(cards[keyA].title, cards[keyB].title)
+      case "desc":
+        return compare(cards[keyA].desc, cards[keyB].desc)
+      default:
+        return compare(cards[keyA].tags[sorting], cards[keyB].tags[sorting])
+    }
   });
 
   const onClose = event => (event.target.tagName !== "IMG") ? dispatch(closeModalImage()) : "";
@@ -68,8 +78,8 @@ const CardList = () => {
   }, [dispatch]);
 
   const renderCardList = () => {
-    if (cardsLoading) return <p>Loading categories...</p>
-    if (cardsHasErrors) return <p>Unable to display categories.</p>
+    if (cardsLoading) return <p>Loading cards...</p>
+    if (cardsHasErrors) return <p>Unable to display cards.</p>
 
     return filteredCards.map((key) => (
           <Card key={key} cardKey={key} card={cards[key]} />

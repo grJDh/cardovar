@@ -8,11 +8,8 @@ const Dropdown = ({ label, onFunc, value, name, options }) => {
     <div className='dropdowm'>
       <label htmlFor={label}>{label}</label>
       <select id={label} name={name} onChange={onFunc} defaultValue={value}>
-        <option value="everywhere">everywhere</option>
-        <option value="titles">in titles</option>
-        <option value="desc">in descriptions</option>
-        {options.map((i) => (
-          <option key={i} value={i}>in {i}</option>
+        {options.map((currentOption) => (
+          <option key={currentOption[0]} value={currentOption[0]}>{currentOption[1]}</option>
           ))}
       </select>
     </div>

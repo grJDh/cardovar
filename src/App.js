@@ -42,6 +42,8 @@ const App = () => {
 export default App;
 
 // sorting
+// categories
 // albums
+// code review
 // settings
 // different styles
