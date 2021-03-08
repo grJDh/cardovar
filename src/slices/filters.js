@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
-  boolFilters: {},
+  categoriesFilterArray: [],
 
   searchFilterValue: '',
 
@@ -14,12 +14,10 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    createBooleanFilters: (state, { payload }) => {
-      state.boolFilters = payload;
-    },
-
-    toggleFilter: (state, { payload }) => {
-      state.boolFilters[payload] = !state.boolFilters[payload];
+    toggleCategoryFilter: (state, { payload }) => {
+      const id = state.categoriesFilterArray.indexOf(payload);
+      if (id === -1) state.categoriesFilterArray = [...state.categoriesFilterArray, payload]
+      else state.categoriesFilterArray = state.categoriesFilterArray.filter(category => category !== payload);
     },
 
     changeSearchField: (state, { payload }) => {
@@ -36,7 +34,7 @@ const filtersSlice = createSlice({
   }
 });
 
-export const { createBooleanFilters, toggleFilter, changeSearchField, setSorting, setSearchIn } = filtersSlice.actions;
+export const { toggleCategoryFilter, changeSearchField, setSorting, setSearchIn } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 

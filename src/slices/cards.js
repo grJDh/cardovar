@@ -61,17 +61,17 @@ const cardsSlice = createSlice({
     updateTagsinCards: (state, { payload }) => {
       state.cards = Object.keys(state.cards).reduce((obj, i) => {
 
-        const updatedTags = Object.keys(payload[0][0]).reduce((obj, tag) => {
-          if (state.cards[i].tags[tag] !== undefined) return {...obj, [payload[0][0][tag]]: state.cards[i].tags[tag]}
-          else return {...obj, [payload[0][0][tag]]: payload[0][1][payload[0][0][tag]]}
+        const updatedTags = Object.keys(payload[0]).reduce((obj, tag) => {
+          if (state.cards[i].tags[tag] !== undefined) return {...obj, [payload[0][tag]]: state.cards[i].tags[tag]}
+          else return {...obj, [payload[0][tag]]: payload[1][payload[0][tag]]}
         }, {});
 
-        const updatedBoolTags = Object.keys(payload[1][0]).reduce((obj, tag) => {
-          if (state.cards[i].boolTags[tag] !== undefined) return {...obj, [payload[1][0][tag]]: state.cards[i].boolTags[tag]}
-          else return {...obj, [payload[1][0][tag]]: payload[1][1][payload[1][0][tag]]}
-        }, {});
+        const updatedCategories = state.cards[i].categories.reduce((arr, category) => {
+          if (payload[2][category]) return [...arr, payload[2][category]];
+          else return arr;
+        }, []);
 
-        return {...obj, [i]: {...state.cards[i], tags: updatedTags, boolTags: updatedBoolTags}};
+        return {...obj, [i]: {...state.cards[i], tags: updatedTags, categories: updatedCategories}};
       }, {});
     },
 

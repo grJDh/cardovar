@@ -8,10 +8,10 @@ export const initialState = {
     "Home": "",
     "Organisation": "",
   },
-  boolTags: {
-    "Major": false,
-    "Alive": true
-  },
+  categories: [
+    "Major",
+    "Alive",
+  ],
 
   tagListOpened: false,
 }
@@ -20,12 +20,9 @@ const tagsSlice = createSlice({
   name: 'tags',
   initialState,
   reducers: {
-    addTag: (state, { payload }) => {
-      state[[payload[0]]] = {...state[[payload[0]]], [payload[1]]: payload[2]};
-    },
-    updateTags: (state, { payload }) => {
+    updateInfo: (state, { payload }) => {
       state.tags = payload[0];
-      state.boolTags = payload[1];
+      state.categories = payload[1];
     },
 
     openTagList: (state) => {
@@ -37,7 +34,7 @@ const tagsSlice = createSlice({
   }
 });
 
-export const { addTag, openTagList, closeTagList, updateTags } = tagsSlice.actions;
+export const { updateInfo, openTagList, closeTagList } = tagsSlice.actions;
 
 export const tagsSelector = state => state.tags;
 

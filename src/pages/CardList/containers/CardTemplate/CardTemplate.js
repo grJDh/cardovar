@@ -15,17 +15,21 @@ const CardTemplate = ({opened, mode, card}) => {
 
   const dispatch = useDispatch();
 
-  const { tags, boolTags } = useSelector(tagsSelector);
+  const { tags, categories } = useSelector(tagsSelector);
 
   const [newCardReqs, setNewCardReqs] = useState("");
   const [newCardTags, setNewCardTags] = useState("");
-  const [newCardBools, setNewCardBools] = useState(false);
+  const [newCardCategories, setNewCardCategories] = useState([]);
   const [filePreview, setFilePreview] = useState("");
   const [newCardFile, setNewCardFile] = useState();
 
   const onSetNewCardReqs = event => setNewCardReqs({...newCardReqs, [event.target.name]: event.target.value});
   const onSetNewCardTags = event => setNewCardTags({...newCardTags, [event.target.name]: event.target.value});
-  const onSetNewCardBools = event => setNewCardBools({...newCardBools, [event.target.name]: !newCardBools[event.target.name]});
+  const onSetNewCardCategories = category => {
+    const id = newCardCategories.indexOf(category);
+    if (id === -1) setNewCardCategories([...newCardCategories, category]);
+    else setNewCardCategories(newCardCategories.filter(i => i !== category));
+  };
   const onSetNewCardFile = event => {
     setNewCardFile(event.target.files[0]);
 
@@ -33,7 +37,7 @@ const CardTemplate = ({opened, mode, card}) => {
     reader.onload = (e) => setFilePreview(e.target.result);
 
     reader.readAsDataURL(event.target.files[0]);
-  }
+  };
 
   const onSubmit = e => {
     e.preventDefault();
@@ -58,9 +62,12 @@ const CardTemplate = ({opened, mode, card}) => {
         }
       )
       .then((response) => response.json())
-      .then((result) => executeAction({...{...newCardReqs, img: result.data.medium.url, imgFull: result.data.image.url}, tags: newCardTags, boolTags: newCardBools}))
+      .then((result) => executeAction({...{...newCardReqs, img: result.data.medium.url, imgFull: result.data.image.url},
+        tags: newCardTags, categories: newCardCategories}))
       .catch((error) => console.error('Error: ', error));
-    } else executeAction({...{...newCardReqs, img: newCardReqs.img, imgFull: newCardReqs.imgFull}, tags: newCardTags, boolTags: newCardBools});
+    }
+    else executeAction({...{...newCardReqs, img: newCardReqs.img, imgFull: newCardReqs.imgFull},
+      tags: newCardTags, categories: newCardCategories});
 
     onCloseCardTemplate();
   };
@@ -92,7 +99,7 @@ const CardTemplate = ({opened, mode, card}) => {
         hidden: false
       });
       setNewCardTags(tags);
-      setNewCardBools(boolTags);
+      setNewCardCategories([]);
       setFilePreview("");
     } else {
       setNewCardReqs({
@@ -103,10 +110,10 @@ const CardTemplate = ({opened, mode, card}) => {
         hidden: card.hidden
       });
       setNewCardTags(card.tags);
-      setNewCardBools(card.boolTags);
+      setNewCardCategories(card.categories);
       setFilePreview(card.img);
     }
-  }, [opened, boolTags, card, mode, tags]);
+  }, [opened, card, mode, tags]);
 
   return (
     <div className={`card-template ${!opened ? "" : "opened"}`} onClick={(event) => onClose(event)}>
@@ -127,8 +134,8 @@ const CardTemplate = ({opened, mode, card}) => {
             <TextBox key={tag} label={tag} onFunc={onSetNewCardTags} autocomplete="off" name={tag} value={newCardTags[tag]}/>
             ))}
 
-          {Object.keys(boolTags).map((tag) => (
-            <Checkbox key={tag} label={"Is " + tag.toLowerCase() + "?"} onFunc={onSetNewCardBools} name={tag} value={newCardBools[tag]} />
+          {categories.map((category) => (
+            <Checkbox key={category} label={category} onFunc={() => onSetNewCardCategories(category)} name={category} value={newCardCategories.includes(category)} />
             ))}
         </div>
 

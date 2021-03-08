@@ -16,19 +16,16 @@ const CardList = () => {
 
   const dispatch = useDispatch();
 
-  const { boolFilters, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
+  const { categoriesFilterArray, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
   const { cards, cardsLoading, cardsHasErrors, cardTemplateOpened, cardTemplateMode, editedCard, showHidden } = useSelector(cardsSelector);
 
-  const boolTagsFilter = boolTags => {
-    const boolTagsKeys = Object.keys(boolTags);
-    if (boolTagsKeys.length) {
-      for (let i of boolTagsKeys) {
-        if (!(!boolFilters[i] || boolTags[i])) return false;
-      };
+  const categoriesFilter = cardCategories => {
+    for (let category of cardCategories) {
+      if (categoriesFilterArray.includes(category)) return true;
+    };
 
-      return true;
-    }
+    return false;
   }
 
   const searchFilter = key => {
@@ -47,10 +44,12 @@ const CardList = () => {
     }
   }
 
+  const isCategoriesFilterEmpty = categoriesFilterArray.length;
+
   const filteredCards = Object.keys(cards)
   .filter(key => (!cards[key].hidden || showHidden))
 
-  .filter(key => boolTagsFilter(cards[key].boolTags))
+  .filter(key => (isCategoriesFilterEmpty) ? categoriesFilter(cards[key].categories) : true)
 
   .filter(key => searchFilter(key))
 
@@ -71,7 +70,20 @@ const CardList = () => {
     }
   });
 
-  const onClose = event => (event.target.tagName !== "IMG") ? dispatch(closeModalImage()) : "";
+  const onCloseModalImage = event => (event.target.tagName !== "IMG") ? dispatch(closeModalImage()) : "";
+
+  // const escListener = (event) => {
+  //   if (event.isComposing || event.key === "Escape") {
+  //     onCloseModalImage();
+  //   }
+  // };
+  // useEffect(() => {
+  //   window.addEventListener("keydown", event => escListener(event));
+  
+  //   return () => {
+  //     window.removeEventListener("keydown", event => escListener(event))
+  //   }
+  // });
 
   useEffect(() => {
     dispatch(fetchCards())
@@ -88,7 +100,7 @@ const CardList = () => {
  
   return (
     <div className='chars-list'>
-      <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onClose} />
+      <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onCloseModalImage} />
 
       {renderCardList()}
 

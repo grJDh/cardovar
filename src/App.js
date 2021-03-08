@@ -4,31 +4,29 @@ import { useDispatch, useSelector  } from 'react-redux';
 import CardList from './pages/CardList/CardList';
 import Header from './containers/Header/Header';
 
-import { tagsSelector } from './slices/tags';
-import { createBooleanFilters } from './slices/filters';
+// import { tagsSelector } from './slices/tags';
+// import { createCategories } from './slices/filters';
 
 import './App.scss';
 
 const App = () => {
 
-  const { boolTags } = useSelector(tagsSelector);
+  // const { categories } = useSelector(tagsSelector);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    const booleanFilters = () => {
-      let tempFilters = {};
-      for (let i of Object.keys(boolTags)) {
-        tempFilters = {...tempFilters, [i]: false}
-      }
+  // useEffect(() => {
+  //   const booleanFilters = () => {
+  //     let tempFilters = {};
+  //     for (let i of Object.keys(boolTags)) {
+  //       tempFilters = {...tempFilters, [i]: false}
+  //     }
     
-      return tempFilters;
-    }
+  //     return tempFilters;
+  //   }
   
-    const onCreateBooleanFilters = () => dispatch(createBooleanFilters(booleanFilters()));
-
-    onCreateBooleanFilters();
-  }, [boolTags, dispatch]);
+  //   dispatch(createCategories(booleanFilters()));
+  // }, [boolTags, dispatch]);
 
   return (
     <div className="app">
@@ -41,8 +39,8 @@ const App = () => {
 
 export default App;
 
-// sorting
 // categories
+// попытка добавить несколько новых категорйи не работает
 // albums
 // code review
 // settings

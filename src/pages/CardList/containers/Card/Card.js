@@ -16,7 +16,7 @@ import './Card.scss';
 
 const Card = ({card, cardKey}) => {
 
-  const {title, desc, img, imgFull, tags, boolTags} = card;
+  const {title, desc, img, imgFull, tags, categories } = card;
 
   const dispatch = useDispatch();
 
@@ -29,15 +29,15 @@ const Card = ({card, cardKey}) => {
   const onToggleFlipped = event => (event.target.tagName !== "INPUT") ? toggleFlipped(!isFlipped) : "";
 
   return (
-    <div className={`char-card ${!isFlipped ? "" : "flipped"} ${!card.hidden ? "" : "hidden"}`} onClick={(event) => onToggleFlipped(event)}>
+    <div className={`char-card ${isFlipped && "flipped"} ${card.hidden && "hidden"}`} onClick={(event) => onToggleFlipped(event)}>
       <div className='char-card-inner'>
         <div className='char-card-front'>
           <div className="char-name">
-            <h2 className={`${boolTags["Alive"] ? "" : "char-dead"}`}>{title}</h2>
+            <h2 className={`${!categories.includes("Alive") && "char-dead"}`}>{title}</h2>
           </div>
 
           <div className='char-img-container'>
-            <img className={`char-img ${boolTags["Alive"] ? "" : "char-dead"}`} src={img} alt={title}/>
+            <img className={`char-img ${!categories.includes("Alive") && "char-dead"}`} src={img} alt={title}/>
             <input type="image" className='char-img-icon icon-hide' src={card.hidden ? showIcon : hideIcon} alt={card.hidden ? "Show card"  : "Hide card" } onClick={onToggleCardVisibility} />
             <input type="image" className='char-img-icon icon-delete' src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
             <input type="image" className='char-img-icon icon-full' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
