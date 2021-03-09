@@ -52,6 +52,7 @@ const cardsSlice = createSlice({
       state.cards[state.editedCard] = payload;
     },
     deleteCard: (state, { payload }) => {
+      state.cardTemplateMode = "new";
       const { [payload]: temp, ...newCards } = state.cards;
       state.cards = newCards;
     },

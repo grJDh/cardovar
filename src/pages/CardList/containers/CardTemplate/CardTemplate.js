@@ -113,7 +113,7 @@ const CardTemplate = ({opened, mode, card}) => {
       setNewCardCategories(card.categories);
       setFilePreview(card.img);
     }
-  }, [opened, card, mode, tags]);
+  }, [card, mode, tags]);
 
   return (
     <div className={`card-template ${!opened ? "" : "opened"}`} onClick={(event) => onClose(event)}>

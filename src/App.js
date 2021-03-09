@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector  } from 'react-redux';
+import React from 'react';
+// import { useDispatch, useSelector  } from 'react-redux';
 
 import CardList from './pages/CardList/CardList';
 import Header from './containers/Header/Header';
@@ -39,8 +39,6 @@ const App = () => {
 
 export default App;
 
-// categories
-// попытка добавить несколько новых категорйи не работает
 // albums
 // code review
 // settings
