@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './TagList.scss';
 
-import { tagsSelector, updateInfo, closeTagList } from '../../slices/tags';
-import { updateTagsinCards } from '../../slices/cards';
+import { tagsSelector, updateInfo, closeTagList } from '../../../../slices/tags';
+import { updateInfoInCards } from '../../../../slices/cards';
 
-import TextBox from '../../components/TextBox/TextBox';
-import Button from '../../components/Button/Button';
+import TextBox from '../../../../components/TextBox/TextBox';
+import Button from '../../../../components/Button/Button';
 
 const TagList = () => {
 
@@ -74,7 +74,7 @@ const TagList = () => {
       const newCategories = Object.values(categoriesNamesList);
   
       dispatch(updateInfo([newTags, newCategories]));
-      dispatch(updateTagsinCards([tagNamesList, newTags, categoriesNamesList]));
+      dispatch(updateInfoInCards([tagNamesList, newTags, categoriesNamesList]));
   
       onCloseTagTemplate();
     }

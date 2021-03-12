@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from "@reach/router"
 
 import Checkbox from '../../components/CheckBox/CheckBox';
 import SearchBox from '../../components/SearchBox/SearchBox';
@@ -41,6 +42,8 @@ const Header = () => {
 
   return (
     <header className='header'>
+      <Link to="/">Albums</Link>
+
       {categories.map((category) => (
         <Checkbox key={category} label={category} onFunc={() => onToggleCategoryFilter(category)} value={categoriesFilterArray.includes(category)} />
         ))}

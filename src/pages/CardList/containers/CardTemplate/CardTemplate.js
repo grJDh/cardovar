@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { tagsSelector } from '../../../../slices/tags';
-import { addCard, changeCard, closeCardTemplate } from '../../../../slices/cards';
+import { cardsSelector, addCard, changeCard, closeCardTemplate } from '../../../../slices/cards';
 
 import TextBox from '../../../../components/TextBox/TextBox';
 import Checkbox from '../../../../components/CheckBox/CheckBox';
@@ -11,19 +11,22 @@ import Button from '../../../../components/Button/Button';
 
 import './CardTemplate.scss';
 
-const CardTemplate = ({opened, mode, card}) => {
-
+const CardTemplate = () => {
   const dispatch = useDispatch();
 
+  const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
   const { tags, categories } = useSelector(tagsSelector);
+
+  const card = cards[editedCard]
 
   const [newCardReqs, setNewCardReqs] = useState("");
   const [newCardTags, setNewCardTags] = useState("");
   const [newCardCategories, setNewCardCategories] = useState([]);
-  const [filePreview, setFilePreview] = useState("");
+  const [filePreview, setFilePreview] = useState();
   const [newCardFile, setNewCardFile] = useState();
 
   const onSetNewCardReqs = event => setNewCardReqs({...newCardReqs, [event.target.name]: event.target.value});
+  const onSetNewCardHidden = () => setNewCardReqs({...newCardReqs, hidden: !newCardReqs.hidden})
   const onSetNewCardTags = event => setNewCardTags({...newCardTags, [event.target.name]: event.target.value});
   const onSetNewCardCategories = category => {
     const id = newCardCategories.indexOf(category);
@@ -42,8 +45,8 @@ const CardTemplate = ({opened, mode, card}) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const executeAction = (payload) => {
-      if (mode === "edit") {
+    const executeAction = payload => {
+      if (cardTemplateMode === "edit") {
         dispatch(changeCard(payload));
       } else {
         dispatch(addCard(payload));
@@ -90,7 +93,7 @@ const CardTemplate = ({opened, mode, card}) => {
   });
 
   useEffect(() => {
-    if (mode === "new") {
+    if (cardTemplateMode === "new") {
       setNewCardReqs({
         title: "",
         desc: "",
@@ -113,10 +116,10 @@ const CardTemplate = ({opened, mode, card}) => {
       setNewCardCategories(card.categories);
       setFilePreview(card.img);
     }
-  }, [card, mode, tags]);
+  }, [card, cardTemplateMode, tags]);
 
   return (
-    <div className={`card-template ${!opened ? "" : "opened"}`} onClick={(event) => onClose(event)}>
+    <div className={`card-template ${!cardTemplateOpened ? "" : "opened"}`} onClick={(event) => onClose(event)}>
       <form className='card-form' onSubmit={onSubmit}>
 
         <Button type="button" className="card-form-close" label={"Close"} onFunc={onCloseCardTemplate}/>
@@ -137,6 +140,8 @@ const CardTemplate = ({opened, mode, card}) => {
           {categories.map((category) => (
             <Checkbox key={category} label={category} onFunc={() => onSetNewCardCategories(category)} name={category} value={newCardCategories.includes(category)} />
             ))}
+
+          <Checkbox label={"Hide card"} onFunc={onSetNewCardHidden} value={newCardReqs.hidden} />
         </div>
 
         <input className="card-form-submit" type="submit" value="Submit" />

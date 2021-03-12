@@ -17,6 +17,8 @@ const modalSlice = createSlice({
     },
     closeModalImage: (state) => {
       state.modalImageOpened = false;
+      state.modalImageAlt = "";
+      state.modalImageSrc = "";
     },
   }
 });

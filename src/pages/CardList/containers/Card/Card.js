@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { openModalImage } from '../../../../slices/modal';
-import { openCardTemplate, deleteCard, toggleCardVisibility } from '../../../../slices/cards';
+import { cardsSelector, openCardTemplate, deleteCard, toggleCardVisibility } from '../../../../slices/cards';
 
 import TagBox from "../../parts/TagBox/TagBox";
 
@@ -14,19 +14,21 @@ import showIcon from '../../../../show.png';
 
 import './Card.scss';
 
-const Card = ({card, cardKey}) => {
+const Card = ({card, cardKey, selected}) => {
 
   const {title, desc, img, imgFull, tags, categories } = card;
 
   const dispatch = useDispatch();
 
+  const { selectingMode } = useSelector(cardsSelector);
+
   const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["edit", cardKey]));
-  const onDeleteCard = () => (window.confirm('Are you sure you want to delete this card?')) ? dispatch(deleteCard(cardKey)) : "";
+  const onDeleteCard = () => (window.confirm('Are you sure you want to delete this card?')) && dispatch(deleteCard(cardKey));
   const onToggleCardVisibility = () => dispatch(toggleCardVisibility(cardKey));
 
   const [isFlipped, toggleFlipped] = useState(false);
-  const onToggleFlipped = event => (event.target.tagName !== "INPUT") ? toggleFlipped(!isFlipped) : "";
+  const onToggleFlipped = event => (event.target.tagName !== "INPUT") && toggleFlipped(!isFlipped)
 
   return (
     <div className={`char-card ${isFlipped && "flipped"} ${card.hidden && "hidden"}`} onClick={(event) => onToggleFlipped(event)}>

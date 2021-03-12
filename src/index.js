@@ -12,12 +12,15 @@ import tagsReducer from './slices/tags';
 import filtersReducer from './slices/filters';
 import modalReducer from './slices/modal';
 import cardsReducer from './slices/cards';
+import albumsReducer from './slices/albums';
+
 
 const rootReducer = combineReducers({
   tags: tagsReducer,
   filters: filtersReducer,
   modal: modalReducer,
   cards: cardsReducer,
+  albums: albumsReducer,
 });
 
 const store = configureStore({ reducer: rootReducer });

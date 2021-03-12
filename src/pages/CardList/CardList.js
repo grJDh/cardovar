@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 
+import Header from '../../containers/Header/Header';
 import Card from './containers/Card/Card';
-import ModalImage from "./parts/ModalImage/ModalImage";
 import CardTemplate from './containers/CardTemplate/CardTemplate';
-import TagList from '../../containers/TagList/TagList';
+import TagList from './containers/TagList/TagList';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
@@ -12,13 +13,40 @@ import { cardsSelector, fetchCards } from '../../slices/cards';
 
 import "./CardList.scss"
 
-const CardList = () => {
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`;
 
+const StyledModalImage = styled.div`
+  display: ${props => props.opened ? 'flex': 'none'};
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+`;
+
+const CardList = () => {
   const dispatch = useDispatch();
 
   const { categoriesFilterArray, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
-  const { cards, cardsLoading, cardsHasErrors, cardTemplateOpened, cardTemplateMode, editedCard, showHidden } = useSelector(cardsSelector);
+  const { cards, cardsLoading, cardsHasErrors, showHidden, selectedCards } = useSelector(cardsSelector);
 
   const categoriesFilter = cardCategories => {
     for (let category of cardCategories) {
@@ -28,19 +56,19 @@ const CardList = () => {
     return false;
   }
 
-  const searchFilter = key => {
+  const searchFilter = card => {
     const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase())
 
     switch (searchIn) {
       case "everywhere":
-        const searchinTags = Object.keys(cards[key].tags).map(tag => searching(cards[key].tags[tag])).includes(true);
-        return (searching(cards[key].title) || searching(cards[key].desc) || searchinTags) ? true : false;
+        const searchinTags = Object.keys(card.tags).map(tag => searching(card.tags[tag])).includes(true);
+        return (searching(card.title) || searching(card.desc) || searchinTags) ? true : false;
       case "title":
-        return searching(cards[key].title);
+        return searching(card.title);
       case "desc":
-        return searching(cards[key].desc);
+        return searching(card.desc);
       default:
-        return searching(cards[key].tags[searchIn]);
+        return searching(card.tags[searchIn]);
     }
   }
 
@@ -51,7 +79,7 @@ const CardList = () => {
 
   .filter(key => (isCategoriesFilterEmpty) ? categoriesFilter(cards[key].categories) : true)
 
-  .filter(key => searchFilter(key))
+  .filter(key => searchFilter(cards[key]))
 
   .sort((keyA, keyB) => {
     const compare = (a, b) => {
@@ -93,21 +121,25 @@ const CardList = () => {
     if (cardsLoading) return <p>Loading cards...</p>
     if (cardsHasErrors) return <p>Unable to display cards.</p>
 
-    return filteredCards.map((key) => (
-          <Card key={key} cardKey={key} card={cards[key]} />
-          ))
+    return filteredCards.map(key => (
+      <Card key={key} cardKey={key} card={cards[key]} selected={selectedCards.includes(cards[key])} />
+      ))
   }
  
   return (
-    <div className='chars-list'>
-      <ModalImage alt={modalImageAlt} src={modalImageSrc} opened={modalImageOpened} close={onCloseModalImage} />
+    <Wrapper>
+      <Header />
 
       {renderCardList()}
 
-      <CardTemplate opened={cardTemplateOpened} mode={cardTemplateMode} card={(editedCard) ? cards[editedCard] : ""} />
+      <StyledModalImage opened={modalImageOpened} onClick={(event) => onCloseModalImage(event)}>
+        <img alt={modalImageAlt} src={modalImageSrc} />
+      </StyledModalImage>
+
+      <CardTemplate />
 
       <TagList />
-    </div>
+    </Wrapper>
   );
 }
 
