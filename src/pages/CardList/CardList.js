@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import Header from '../../containers/Header/Header';
+import CardListHeader from '../../containers/CardListHeader/CardListHeader';
 import Card from './containers/Card/Card';
 import CardTemplate from './containers/CardTemplate/CardTemplate';
 import TagList from './containers/TagList/TagList';
@@ -128,7 +128,7 @@ const CardList = () => {
  
   return (
     <Wrapper>
-      <Header />
+      <CardListHeader />
 
       {renderCardList()}
 

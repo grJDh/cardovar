@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 
 import { openModalImage } from '../../../../slices/modal';
 import { cardsSelector, openCardTemplate, deleteCard, toggleCardVisibility } from '../../../../slices/cards';
@@ -13,6 +14,132 @@ import hideIcon from '../../../../hide.png';
 import showIcon from '../../../../show.png';
 
 import './Card.scss';
+
+const CardInner = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+`;
+
+const CardWrapper = styled.div`
+  min-width: 300px;
+  width: 100%;
+  max-width: 420px;
+  height: 550px;
+  margin: 1rem;
+  padding: 0.5rem;
+  background-color: transparent;
+
+  text-align: center;
+  perspective: 1000px;
+
+  &.flipped ${CardInner} {
+    transform: rotateY(180deg);
+  }
+`;
+
+const CardFront = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+
+  background-color: #212121;
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  color: white;
+`;
+
+const CardBack = styled(CardFront)`
+  transform: rotateY(180deg);
+
+  p, h2 {
+    margin: 0px;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+`;
+
+const CardTitle = styled.div`
+  height: 65px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CardImgContainer = styled.div`
+  max-height: 420px;
+  max-width: 350px;
+  position: relative;
+
+  img {
+    width: auto;
+    height: auto;
+
+    max-height: 420px;
+    max-width: 350px;
+  }
+`;
+
+const IconInput = styled.input`
+  position: absolute;
+  width: 35px;
+
+  opacity: 0.5;
+  transition: 0.5s ease;
+
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    transition: 0.5s ease;
+  }
+
+  ${({ alt }) => {
+    console.log(alt)
+    switch (alt) {
+      case "Show card":
+      case "Hide card":
+        return `
+          top: 0;
+          left: 0;
+        `
+      case "Delete card":
+        return `
+          top: 0;
+          right: 0;
+        `
+      case "Open full":
+        return `
+          bottom: 0;
+          right: 0;
+        `
+      default:
+        return `
+          bottom: 0;
+          left: 0;
+        `
+    }
+  }}
+`;
+
+const CardDesc = styled.div`
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Card = ({card, cardKey, selected}) => {
 
@@ -31,35 +158,33 @@ const Card = ({card, cardKey, selected}) => {
   const onToggleFlipped = event => (event.target.tagName !== "INPUT") && toggleFlipped(!isFlipped)
 
   return (
-    <div className={`char-card ${isFlipped && "flipped"} ${card.hidden && "hidden"}`} onClick={(event) => onToggleFlipped(event)}>
-      <div className='char-card-inner'>
-        <div className='char-card-front'>
-          <div className="char-name">
+    <CardWrapper className={`${isFlipped && "flipped"} ${card.hidden && "hidden"}`} onClick={(event) => onToggleFlipped(event)}>
+      <CardInner>
+        <CardFront>
+          <CardTitle>
             <h2 className={`${!categories.includes("Alive") && "char-dead"}`}>{title}</h2>
-          </div>
+          </CardTitle>
 
-          <div className='char-img-container'>
-            <img className={`char-img ${!categories.includes("Alive") && "char-dead"}`} src={img} alt={title}/>
-            <input type="image" className='char-img-icon icon-hide' src={card.hidden ? showIcon : hideIcon} alt={card.hidden ? "Show card"  : "Hide card" } onClick={onToggleCardVisibility} />
-            <input type="image" className='char-img-icon icon-delete' src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
-            <input type="image" className='char-img-icon icon-full' src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
-            <input type="image" className='char-img-icon icon-edit' src={editIcon} alt="Edit card" onClick={onOpenCardTemplate} />
-          </div>
+          <CardImgContainer>
+            <img className={`${!categories.includes("Alive") && "char-dead"}`} src={img} alt={title}/>
+            <IconInput type="image" src={card.hidden ? showIcon : hideIcon} alt={card.hidden ? "Show card"  : "Hide card" } onClick={onToggleCardVisibility} />
+            <IconInput type="image" src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
+            <IconInput type="image" src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
+            <IconInput type="image" src={editIcon} alt="Edit card" onClick={onOpenCardTemplate} />
+          </CardImgContainer>
         
-          <div className="char-desc">
+          <CardDesc>
             <h3>{desc}</h3>
-          </div>
-        </div>
+          </CardDesc>
+        </CardFront>
 
-        <div className='char-card-back'>
-
+        <CardBack>
           {Object.keys(tags).map((tag) => (
             <TagBox key={tag} title={tag} value={tags[tag]}/>
             ))}
-
-        </div>
-      </div>
-    </div>
+        </CardBack>
+      </CardInner>
+    </CardWrapper>
   );
 }
 

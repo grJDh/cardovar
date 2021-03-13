@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "@reach/router"
+import styled from 'styled-components';
+import { colors } from '../../colors.js';
 
 import Checkbox from '../../components/CheckBox/CheckBox';
 import SearchBox from '../../components/SearchBox/SearchBox';
@@ -11,9 +13,20 @@ import { filtersSelector, toggleCategoryFilter, changeSearchField, setSorting, s
 import { tagsSelector, openTagList } from '../../slices/tags';
 import { cardsSelector, openCardTemplate, toggleShowHidden } from '../../slices/cards';
 
-import './Header.scss';
+const Header = styled.header`
+  width: 100%;
+  height: 40px;
 
-const Header = () => {
+  background-color: ${props => props.color};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+`;
+
+const CardListHeader = () => {
 
   const dispatch = useDispatch();
   const { tags, categories } = useSelector(tagsSelector);
@@ -41,7 +54,7 @@ const Header = () => {
   ].concat(Object.keys(tags).map((tag) => [tag, tag]));
 
   return (
-    <header className='header'>
+    <Header color={colors.main}>
       <Link to="/">Albums</Link>
 
       {categories.map((category) => (
@@ -59,8 +72,8 @@ const Header = () => {
       <Dropdown label='Sort by' onFunc={onSetSorting} options={sortingOptionsArray} value={"titles"}/>
 
       <Button label={(showHidden) ? 'Hide hidden cards' : 'Show hidden cards'}   onFunc={onToggleShowHidden}/>
-    </header>
+    </Header>
   );
 }
 
-export default Header;
+export default CardListHeader;

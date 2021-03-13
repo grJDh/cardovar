@@ -1,4 +1,83 @@
-export const oldChars = [
+const oldNewChars = {
+	0: {
+		"title": "Аурелия ир'Винарн (Aurelia ir'Wynarn)",
+		"desc": "Королева Аундаира",
+		"img": "https://i.ibb.co/zshv4sp/BXDK7-G3-Imgur.jpg",
+		"imgFull": "https://i.ibb.co/MnD0Cnr/BXDK7-G3-Imgur.jpg",
+		"tags": {
+			"Age": "37",
+			"Gender": "Женский",
+			"Race": "Человек",
+			"Home": "Fairhaven, Аундаир",
+			"Organisation": "Аундаир"
+		},
+		"boolTags": {
+			"Major": false,
+			"Alive": true
+		},
+		"categories": ["Alive"],
+		"hidden": false
+	},
+	1: {
+		"title": "Фарвен (Farven)",
+		"desc": "Шпион Палаты в Двенадцать",
+		"img": "https://i.ibb.co/SrM5bP6/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
+		"imgFull": "https://i.ibb.co/vYTVpHc/090c5373c69d0d74ea3e0a3840c9eb4c.jpg",
+		"tags": {
+			"Age": ">100",
+			"Gender": "Мужской",
+			"Race": "Эльф",
+			"Home": "—",
+			"Organisation": "Палата"
+		},
+		"boolTags": {
+			"Major": false,
+			"Alive": false
+		},
+		"categories": [],
+		"hidden": false
+	},
+	2: {
+		"title": "Меррикс д'Каннит (Merrix d'Cannith)",
+		"desc": "Барон Южного Анклава Дома Каннит",
+		"img": "https://i.ibb.co/ZKg7qfk/e20ca86f7a72f736079ac1eed1d51b25.jpg",
+		"imgFull": "https://i.ibb.co/ftNLjXP/e20ca86f7a72f736079ac1eed1d51b25.jpg",
+		"tags": {
+			"Age": "27",
+			"Gender": "Мужской",
+			"Race": "Человек",
+			"Home": "Башня Каннит, Шарн",
+			"Organisation": "Дом Каннит (Южный Анклав)"
+		},
+		"boolTags": {
+			"Major": true,
+			"Alive": true
+		},
+		"categories": ["Alive", "Major"],
+		"hidden": false
+	},
+	3: {
+		"title": "Джорланна д'Каннит (Jorlanna d'Cannith)",
+		"desc": "Баронесса Западного Анклава Дома Каннит",
+		"img": "https://i.ibb.co/mDVwSqJ/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
+		"imgFull": "https://i.ibb.co/5Mgy28T/wieke-pratiwi-prabowo-witcher-inspired-oc-2.jpg",
+		"tags": {
+			"Age": "57",
+			"Gender": "Женский",
+			"Race": "Человек",
+			"Home": "Fairhaven, Аундаир",
+			"Organisation": "Дом Каннит"
+		},
+		"boolTags": {
+			"Major": false,
+			"Alive": false
+		},
+		"categories": [],
+		"hidden": false
+	},
+}
+
+const oldChars = [
   {
     name: "Боранел ир'Винарн (Boranel ir'Wynarn)",
     "desc": "Король Бреландии",

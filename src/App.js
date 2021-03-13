@@ -4,8 +4,6 @@ import { Router } from "@reach/router"
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
 
-import './App.scss';
-
 const App = () => {
   return (
     <Router>
