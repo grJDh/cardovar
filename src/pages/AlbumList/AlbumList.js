@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 
 import Album from './containers/Album/Album';
 import AlbumTemplate from './containers/AlbumTemplate/AlbumTemplate';
 import AlbumListHeader from './containers/AlbumListHeader/AlbumListHeader';
 
 import { albumsSelector, fetchAlbums, openAlbumTemplate } from '../../slices/albums';
+
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;

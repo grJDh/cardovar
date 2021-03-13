@@ -1,17 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
-  tags: {
-    "Age": "",
-    "Gender": "",
-    "Race": "",
-    "Home": "",
-    "Organisation": "",
-  },
-  categories: [
-    "Major",
-    "Alive",
-  ],
+  tags: [],
 
   tagListOpened: false,
 }
@@ -20,9 +10,8 @@ const tagsSlice = createSlice({
   name: 'tags',
   initialState,
   reducers: {
-    updateInfo: (state, { payload }) => {
-      state.tags = payload[0];
-      state.categories = payload[1];
+    setFetchedTags: (state, { payload }) => {
+      state.tags = payload;
     },
 
     openTagList: (state) => {
@@ -34,7 +23,7 @@ const tagsSlice = createSlice({
   }
 });
 
-export const { updateInfo, openTagList, closeTagList } = tagsSlice.actions;
+export const { setFetchedTags, openTagList, closeTagList } = tagsSlice.actions;
 
 export const tagsSelector = state => state.tags;
 

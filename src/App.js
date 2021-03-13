@@ -16,5 +16,6 @@ const App = () => {
 export default App;
 
 // code review
+// selecting cards to edit them
 // settings
 // different styles

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setFetchedTags } from './tags';
 
 export const fetchCards = () => {
   return async dispatch => {
@@ -8,7 +9,8 @@ export const fetchCards = () => {
       const response = await fetch('https://api.npoint.io/6092f6f51e0ff89498be');
       const data = await response.json();
 
-      dispatch(getCardsSuccess(data));
+      dispatch(getCardsSuccess(data.cards));
+      dispatch(setFetchedTags(data.tags));
     } catch (error) {
       dispatch(getCardsFailure());
     }
@@ -74,20 +76,17 @@ const cardsSlice = createSlice({
     toggleCardVisibility: (state, { payload }) => {
       state.cards[payload] = {...state.cards[payload], hidden: !state.cards[payload].hidden};
     },
-    updateInfoInCards: (state, { payload }) => {
+    updateTagsInCards: (state, { payload }) => {
       state.cards = Object.keys(state.cards).reduce((cardsList, currentCard) => {
+        
+        const oldTags = new Set(state.cards[currentCard].tags);
 
-        const updatedTags = Object.keys(payload[0]).reduce((obj, tag) => {
-          if (state.cards[currentCard].tags[tag] !== undefined) return {...obj, [payload[0][tag]]: state.cards[currentCard].tags[tag]}
-          else return {...obj, [payload[0][tag]]: payload[1][payload[0][tag]]}
-        }, {});
-
-        const updatedCategories = state.cards[currentCard].categories.reduce((arr, category) => {
-          if (payload[2][category]) return [...arr, payload[2][category]];
+        const updatedTags = Object.keys(payload).reduce((arr, tag) => {
+          if (oldTags.has(tag)) return [...arr, payload[tag]];
           else return arr;
         }, []);
 
-        return {...cardsList, [currentCard]: {...state.cards[currentCard], tags: updatedTags, categories: updatedCategories}};
+        return {...cardsList, [currentCard]: {...state.cards[currentCard], tags: updatedTags}};
       }, {});
     },
 
@@ -97,7 +96,8 @@ const cardsSlice = createSlice({
   }
 });
 
-export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, openCardTemplate, closeCardTemplate, updateInfoInCards, deleteCard, toggleShowHidden, toggleCardVisibility } = cardsSlice.actions;
+export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsInCards,
+               deleteCard, toggleShowHidden, toggleCardVisibility } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

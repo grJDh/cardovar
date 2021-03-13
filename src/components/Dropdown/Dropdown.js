@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './Dropdown.scss';
-
 const Dropdown = ({ label, onFunc, value, name, options }) => {
 
   return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { navigate } from "@reach/router"
-import styled from 'styled-components';
 
 import { openAlbumTemplate, deleteAlbum, duplicateAlbum } from '../../../../slices/albums';
 
@@ -9,6 +8,9 @@ import editIcon from '../../../../edit.png';
 import deleteIcon from '../../../../delete.png';
 import duplicateIcon from '../../../../duplicate.png';
 // import showIcon from '../../../../show.png';
+
+import styled from 'styled-components';
+import { colors } from '../../../../colors.js';
 
 const Wrapper = styled.div`
   height: 360px;
@@ -19,6 +21,8 @@ const Wrapper = styled.div`
   position: relative;
 
   cursor: pointer;
+
+  background-color: ${props => props.color};
 
   img {
     width: 100%;
@@ -54,7 +58,6 @@ const IconInput = styled.input`
   }
 
   ${({ alt }) => {
-    console.log(alt)
     switch (alt) {
       case "Delete album":
         return `
@@ -85,7 +88,7 @@ const Album = ({ album, albumKey }) => {
   const onAlbumClick = event => (event.target.tagName !== "INPUT") && navigate("/CardList");
 
   return (
-    <Wrapper onClick={(event) => onAlbumClick(event)}>
+    <Wrapper onClick={(event) => onAlbumClick(event)} color={colors.main}>
         <AlbumImgContainer>
           <img src={album.img} alt={album.title} />
           <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} />

@@ -99,7 +99,7 @@ const AlbumTemplate = () => {
     if (albumTemplateMode === "new") {
       setNewAlbumTitle("");
       toggleNewAlbumHidden(false)
-      setFilePreview("");
+      setFilePreview();
     } else {
       setNewAlbumTitle(album.title);
       toggleNewAlbumHidden(album.hidden);

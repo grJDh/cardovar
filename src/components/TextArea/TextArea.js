@@ -9,28 +9,25 @@ const Label = styled.label`
   margin: 10px;
   width: 100%; 
 
-  input {
+  textarea {
     border:none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
 
     width: 80%;
-    text-align: center;
     border-radius: 4px;
-    appearance: none;
-    outline: none;
   }
 `;
 
-const TextBox = ({ label, onFunc, autocomplete, name, value=" "}) => {
+const TextArea = ({ label, onFunc, cols, rows, name, value=" "}) => {
 
   return (
     <Label>
       {label}
-      <input type="text" onChange={onFunc} autoComplete={autocomplete} name={name} value={value}/>
+      <textarea onChange={onFunc} cols={cols} rows={rows} name={name} value={value}></textarea>
     </Label>
   );
 }
 
-export default TextBox;
+export default TextArea;

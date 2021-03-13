@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 
 import CardListHeader from '../../containers/CardListHeader/CardListHeader';
 import Card from './containers/Card/Card';
@@ -12,12 +11,16 @@ import { modalSelector, closeModalImage } from '../../slices/modal';
 import { cardsSelector, fetchCards } from '../../slices/cards';
 
 import "./CardList.scss"
+import styled from 'styled-components';
+import { colors } from '../../colors.js';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+
+  background-color: ${props => props.color};
 `;
 
 const StyledModalImage = styled.div`
@@ -29,7 +32,6 @@ const StyledModalImage = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.9);
 
   justify-content: center;
@@ -127,8 +129,8 @@ const CardList = () => {
   }
  
   return (
-    <Wrapper>
-      <CardListHeader />
+    <Wrapper color={colors.mainBack}>
+      {!(cardsLoading || cardsHasErrors) && <CardListHeader />}
 
       {renderCardList()}
 

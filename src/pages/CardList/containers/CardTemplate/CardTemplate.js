@@ -1,38 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { tagsSelector } from '../../../../slices/tags';
 import { cardsSelector, addCard, changeCard, closeCardTemplate } from '../../../../slices/cards';
 
 import TextBox from '../../../../components/TextBox/TextBox';
 import Checkbox from '../../../../components/CheckBox/CheckBox';
 import FileInput from '../../../../components/FileInput/FileInput';
 import Button from '../../../../components/Button/Button';
+import TextArea from '../../../../components/TextArea/TextArea';
 
 import './CardTemplate.scss';
+
+import styled from 'styled-components';
+import { colors } from '../../../../colors.js';
+
+const Wrapper = styled.div`
+  display: ${props => props.opened ? 'flex': 'none'};
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+
+  justify-content: center;
+  align-items: center;
+`;
+
+const Form = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.2fr 3fr 0.2fr;
+  gap: 10px 10px;
+  grid-template-areas:
+    "card-form-close card-form-close"
+    "card-form-front card-form-back"
+    "card-form-submit card-form-submit";
+`;
+
+const FormPart = styled.div`
+  min-width: 400px;
+  width: 100%;
+  max-width: 420px;
+  height: 550px;
+
+  background-color: #212121;
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  color: white;
+`;
 
 const CardTemplate = () => {
   const dispatch = useDispatch();
 
   const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
-  const { tags, categories } = useSelector(tagsSelector);
 
   const card = cards[editedCard]
 
-  const [newCardReqs, setNewCardReqs] = useState("");
-  const [newCardTags, setNewCardTags] = useState("");
-  const [newCardCategories, setNewCardCategories] = useState([]);
+  const [newCardProps, setNewCardProps] = useState({});
   const [filePreview, setFilePreview] = useState();
   const [newCardFile, setNewCardFile] = useState();
 
-  const onSetNewCardReqs = event => setNewCardReqs({...newCardReqs, [event.target.name]: event.target.value});
-  const onSetNewCardHidden = () => setNewCardReqs({...newCardReqs, hidden: !newCardReqs.hidden})
-  const onSetNewCardTags = event => setNewCardTags({...newCardTags, [event.target.name]: event.target.value});
-  const onSetNewCardCategories = category => {
-    const id = newCardCategories.indexOf(category);
-    if (id === -1) setNewCardCategories([...newCardCategories, category]);
-    else setNewCardCategories(newCardCategories.filter(i => i !== category));
-  };
+  const onSetNewCardProps = event => setNewCardProps({...newCardProps, [event.target.name]: event.target.value});
+  const onSetNewCardHidden = () => setNewCardProps({...newCardProps, hidden: !newCardProps.hidden})
   const onSetNewCardFile = event => {
     setNewCardFile(event.target.files[0]);
 
@@ -53,6 +90,8 @@ const CardTemplate = () => {
       }
     }
 
+    const tagsStringToArray = tags => [...new Set(tags.split(","))].map(tag => tag.trim().toLowerCase());
+
     if (newCardFile) {
       const formData = new FormData();
       formData.append('image', newCardFile);
@@ -65,18 +104,16 @@ const CardTemplate = () => {
         }
       )
       .then((response) => response.json())
-      .then((result) => executeAction({...{...newCardReqs, img: result.data.medium.url, imgFull: result.data.image.url},
-        tags: newCardTags, categories: newCardCategories}))
-      .catch((error) => console.error('Error: ', error));
+      .then((result) => executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: result.data.medium.url, imgFull: result.data.image.url}}))
+      .catch((error) => console.error('Uploading error: ', error));
     }
-    else executeAction({...{...newCardReqs, img: newCardReqs.img, imgFull: newCardReqs.imgFull},
-      tags: newCardTags, categories: newCardCategories});
+    else executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: newCardProps.img, imgFull: newCardProps.imgFull}});
 
     onCloseCardTemplate();
   };
 
   const onCloseCardTemplate = () => dispatch(closeCardTemplate());
-  const onClose = event => (event.target.className === "card-template opened") ? dispatch(closeCardTemplate()) : "";
+  const onClose = event => (event.target.className.includes("wrapper")) && dispatch(closeCardTemplate());
 
   const escListener = (event) => {
     if (event.isComposing || event.key === "Escape") {
@@ -94,59 +131,55 @@ const CardTemplate = () => {
 
   useEffect(() => {
     if (cardTemplateMode === "new") {
-      setNewCardReqs({
+      setNewCardProps({
         title: "",
-        desc: "",
+        shortDesc: "",
+        longDesc: "",
         img: "",
         imgFull: "",
+        tags: [],
         hidden: false
       });
-      setNewCardTags(tags);
-      setNewCardCategories([]);
       setFilePreview("");
     } else {
-      setNewCardReqs({
+      setNewCardProps({
         title: card.title,
-        desc: card.desc,
+        shortDesc: card.desc,
+        longDesc: card.longDesc,
         img: card.img,
         imgFull: card.imgFull,
+        tags: card.tags.join(),
         hidden: card.hidden
       });
-      setNewCardTags(card.tags);
-      setNewCardCategories(card.categories);
       setFilePreview(card.img);
     }
-  }, [card, cardTemplateMode, tags]);
+  }, [card, cardTemplateMode]);
 
   return (
-    <div className={`card-template ${!cardTemplateOpened ? "" : "opened"}`} onClick={(event) => onClose(event)}>
-      <form className='card-form' onSubmit={onSubmit}>
+    <Wrapper opened={cardTemplateOpened} onClick={(event) => onClose(event)} className="wrapper">
+      <Form onSubmit={onSubmit}>
 
-        <Button type="button" className="card-form-close" label={"Close"} onFunc={onCloseCardTemplate}/>
+        <Button className="card-form-close" type="button" label={"Close"} onFunc={onCloseCardTemplate}/>
 
-        <div className='card-form-part card-form-front'>
-          <TextBox label="Title" onFunc={onSetNewCardReqs} autocomplete="off" name='title' value={newCardReqs.title}/>
+        <FormPart color={colors.main} className='card-form-front'>
+          <TextBox label="Title" onFunc={onSetNewCardProps} autocomplete="off" name='title' value={newCardProps.title}/>
 
           <FileInput label="Select a picture" onFunc={onSetNewCardFile} name='file' src={filePreview} />
 
-          <TextBox label="Description" onFunc={onSetNewCardReqs} autocomplete="off" name='desc' value={newCardReqs.desc}/>
-        </div>
+          <TextBox label="Short description" onFunc={onSetNewCardProps} autocomplete="off" name='shortDesc' value={newCardProps.shortDesc}/>
+        </FormPart>
 
-        <div className='card-form-part card-form-back'>
-          {Object.keys(tags).map((tag) => (
-            <TextBox key={tag} label={tag} onFunc={onSetNewCardTags} autocomplete="off" name={tag} value={newCardTags[tag]}/>
-            ))}
+        <FormPart className='card-form-back'>
+          <TextArea label="Description" onFunc={onSetNewCardProps} name={"longDesc"} cols="40" rows="20" value={newCardProps.longDesc} />
 
-          {categories.map((category) => (
-            <Checkbox key={category} label={category} onFunc={() => onSetNewCardCategories(category)} name={category} value={newCardCategories.includes(category)} />
-            ))}
+          <TextArea label="Tags" onFunc={onSetNewCardProps} name={"tags"} cols="40" rows="3" value={newCardProps.tags} />
 
-          <Checkbox label={"Hide card"} onFunc={onSetNewCardHidden} value={newCardReqs.hidden} />
-        </div>
+          <Checkbox label={"Hidden"} onFunc={onSetNewCardHidden} value={newCardProps.hidden} />
+        </FormPart>
 
         <input className="card-form-submit" type="submit" value="Submit" />
-      </form>
-    </div>
+      </Form>
+    </Wrapper>
   );
 }
 

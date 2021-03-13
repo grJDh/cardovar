@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 
 import { openModalImage } from '../../../../slices/modal';
 import { cardsSelector, openCardTemplate, deleteCard, toggleCardVisibility } from '../../../../slices/cards';
 
-import TagBox from "../../parts/TagBox/TagBox";
+// import TagBox from "../../parts/TagBox/TagBox";
 
 import fullscreenIcon from '../../../../fullscreen.png';
 import editIcon from '../../../../edit.png';
@@ -14,6 +13,8 @@ import hideIcon from '../../../../hide.png';
 import showIcon from '../../../../show.png';
 
 import './Card.scss';
+import styled from 'styled-components';
+import { colors } from '../../../../colors.js';
 
 const CardInner = styled.div`
   position: relative;
@@ -106,7 +107,6 @@ const IconInput = styled.input`
   }
 
   ${({ alt }) => {
-    console.log(alt)
     switch (alt) {
       case "Show card":
       case "Hide card":
@@ -143,10 +143,10 @@ const CardDesc = styled.div`
 
 const Card = ({card, cardKey, selected}) => {
 
-  const {title, desc, img, imgFull, tags, categories } = card;
+  const {title, shortDesc, longDesc, img, imgFull, tags } = card;
 
   const dispatch = useDispatch();
-
+  // eslint-disable-next-line
   const { selectingMode } = useSelector(cardsSelector);
 
   const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
@@ -160,13 +160,13 @@ const Card = ({card, cardKey, selected}) => {
   return (
     <CardWrapper className={`${isFlipped && "flipped"} ${card.hidden && "hidden"}`} onClick={(event) => onToggleFlipped(event)}>
       <CardInner>
-        <CardFront>
+        <CardFront color={colors.main}>
           <CardTitle>
-            <h2 className={`${!categories.includes("Alive") && "char-dead"}`}>{title}</h2>
+            <h2 className={`${tags.includes("dead") && "char-dead"}`}>{title}</h2>
           </CardTitle>
 
           <CardImgContainer>
-            <img className={`${!categories.includes("Alive") && "char-dead"}`} src={img} alt={title}/>
+            <img className={`${tags.includes("dead") && "char-dead"}`} src={img} alt={title}/>
             <IconInput type="image" src={card.hidden ? showIcon : hideIcon} alt={card.hidden ? "Show card"  : "Hide card" } onClick={onToggleCardVisibility} />
             <IconInput type="image" src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
             <IconInput type="image" src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
@@ -174,14 +174,15 @@ const Card = ({card, cardKey, selected}) => {
           </CardImgContainer>
         
           <CardDesc>
-            <h3>{desc}</h3>
+            <h3>{shortDesc}</h3>
           </CardDesc>
         </CardFront>
 
         <CardBack>
-          {Object.keys(tags).map((tag) => (
+          {/* {Object.keys(tags).map((tag) => (
             <TagBox key={tag} title={tag} value={tags[tag]}/>
-            ))}
+            ))} */}
+          <p>{longDesc}</p>
         </CardBack>
       </CardInner>
     </CardWrapper>
