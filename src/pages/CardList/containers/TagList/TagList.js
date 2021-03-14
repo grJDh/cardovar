@@ -38,7 +38,7 @@ const FormPart = styled.div`
   min-width: 400px;
   width: 100%;
   max-width: 420px;
-  height: 550px;
+  height: 750px;
 
   background-color: #212121;
   border-radius: 6px;
@@ -79,7 +79,7 @@ const TagList = () => {
 
     for (let i in tagList) {
       for (let j in tagList) {
-        if (i !== j && tagList[i] === tagList[j]) dupl.push(i);
+        if (i !== j && tagList[i].toLowerCase() === tagList[j].toLowerCase()) dupl.push(i);
       }
     }
 
@@ -125,14 +125,13 @@ const TagList = () => {
   return (
     <Wrapper opened={tagListOpened} onClick={(event) => onClose(event)} className="wrapper">
       <Form onSubmit={onSubmit}>
-
         <Button className="tag-form-close" type="button" label={"Close"} onFunc={onCloseTagTemplate}/>
 
         <FormPart className='tag-form' color={colors.main}>
           {tags.map((tag) => (
               <TagBox key={tag}>
-                <TextBox className={`${duplicates.includes(tag) && "tag-error"}`} key={"tag"+tag} onFunc={onSetTagList} autocomplete="off" name={tag} value={tagList[tag]} />
-                <Button type="button" className="tag-form-close" label="🗑️" onFunc={() => deleteTag(tag)}/>
+                <TextBox className={`${duplicates.includes(tag) && "tag-error"}`} label={tag} onFunc={onSetTagList} autocomplete="off" name={tag} value={tagList[tag]} />
+                <Button type="button" label="🗑️" onFunc={() => deleteTag(tag)}/>
               </TagBox>
             ))}
         </FormPart>

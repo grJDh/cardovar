@@ -15,6 +15,7 @@ const Label = styled.label`
     -moz-box-shadow: none;
     box-shadow: none;
 
+    margin-top: 5px;
     width: 80%;
     border-radius: 4px;
   }
