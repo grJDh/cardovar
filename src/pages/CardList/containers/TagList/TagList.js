@@ -10,10 +10,9 @@ import Button from '../../../../components/Button/Button';
 import './TagList.scss';
 
 import styled from 'styled-components';
-import { colors } from '../../../../colors.js';
 
 const Wrapper = styled.div`
-  display: ${props => props.opened ? 'flex': 'none'};
+  display: flex;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -40,7 +39,7 @@ const FormPart = styled.div`
   max-width: 420px;
   height: 750px;
 
-  background-color: #212121;
+  background-color: ${props => props.theme.main};
   border-radius: 6px;
 
   display: flex;
@@ -123,11 +122,11 @@ const TagList = () => {
   });
 
   return (
-    <Wrapper opened={tagListOpened} onClick={(event) => onClose(event)} className="wrapper">
+    <Wrapper onClick={(event) => onClose(event)} className="wrapper">
       <Form onSubmit={onSubmit}>
         <Button className="tag-form-close" type="button" label={"Close"} onFunc={onCloseTagTemplate}/>
 
-        <FormPart className='tag-form' color={colors.main}>
+        <FormPart className='tag-form'>
           {tags.map((tag) => (
               <TagBox key={tag}>
                 <TextBox className={`${duplicates.includes(tag) && "tag-error"}`} label={tag} onFunc={onSetTagList} autocomplete="off" name={tag} value={tagList[tag]} />

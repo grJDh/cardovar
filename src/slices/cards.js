@@ -73,9 +73,14 @@ const cardsSlice = createSlice({
     duplicateCard: (state, { payload }) => {
       state.cards = {...state.cards, [Object.keys(state.cards).length]: state.cards[payload]};
     },
-    toggleCardVisibility: (state, { payload }) => {
-      state.cards[payload] = {...state.cards[payload], hidden: !state.cards[payload].hidden};
+
+    toggleShowHidden: state => {
+      state.showHidden = !state.showHidden;
     },
+    // toggleCardVisibility: (state, { payload }) => {
+    //   state.cards[payload] = {...state.cards[payload], hidden: !state.cards[payload].hidden};
+    // },
+
     updateTagsInCards: (state, { payload }) => {
       state.cards = Object.keys(state.cards).reduce((cardsList, currentCard) => {
         
@@ -90,14 +95,45 @@ const cardsSlice = createSlice({
       }, {});
     },
 
-    toggleShowHidden: state => {
-      state.showHidden = !state.showHidden;
+    toggleSelectingMode: state => {
+      state.selectedCards = [];
+      state.selectingMode = !state.selectingMode;
+    },
+    toggleCardSelection: (state, { payload }) => {
+      const index = state.selectedCards.indexOf(payload);
+      if (index === -1) state.selectedCards = [...state.selectedCards, payload];
+      else {
+        state.selectedCards = [...state.selectedCards.slice(0, index), ...state.selectedCards.slice(index+1)]
+      }
+    },
+
+    massAddTagToCard: (state, { payload }) => {
+      for (const key of state.selectedCards) {
+        state.cards = {...state.cards, [key]: {...state.cards[key], tags: [...state.cards[key].tags, payload]}};
+      }
+    },
+    massDeleteTagFromCard: (state, { payload }) => {
+      for (const key of state.selectedCards) {
+        state.cards = {...state.cards, [key]: {...state.cards[key], tags: state.cards[key].tags.filter(tag => tag !== payload)}};
+      }
+    },
+    massDeleteCard: state => {
+      state.cards = Object.keys(state.cards).reduce((obj, key) => {
+          if (state.selectedCards.includes(key)) return obj;
+          else return {...obj, [key]: state.cards[key]};
+        }, {});
+    },
+    massToggleCardVisibility: state => {
+      for (const key of state.selectedCards) {
+        state.cards[key] = {...state.cards[key], hidden: !state.cards[key].hidden};
+      }
     },
   }
 });
 
 export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsInCards,
-               deleteCard, toggleShowHidden, toggleCardVisibility } = cardsSlice.actions;
+               deleteCard, duplicateCard, toggleShowHidden, toggleSelectingMode, toggleCardSelection, massAddTagToCard, massDeleteTagFromCard,
+               massDeleteCard, massToggleCardVisibility } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

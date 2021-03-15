@@ -1,27 +1,39 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CardListHeader from '../../containers/CardListHeader/CardListHeader';
+import CardListSidebar from './containers/CardListSidebar';
 import Card from './containers/Card/Card';
 import CardTemplate from './containers/CardTemplate/CardTemplate';
 import TagList from './containers/TagList/TagList';
+import MassButtonList from './containers/MassButtonList';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
 import { cardsSelector, fetchCards } from '../../slices/cards';
+import { tagsSelector} from '../../slices/tags';
 
 import "./CardList.scss"
 import styled from 'styled-components';
-import { colors } from '../../colors.js';
 
 const Wrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+
+  background-color: ${props => props.theme.mainBack};
+`;
+
+const Cards = styled.div`
+  margin-left: ${props => props.sidebarOpened ? "300px" : "60px"};
+  transition: margin-left 0.5s ease-in-out;
+  width: 100%;
+
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-
-  background-color: ${props => props.color};
 `;
+
 
 const StyledModalImage = styled.div`
   display: ${props => props.opened ? 'flex': 'none'};
@@ -46,40 +58,40 @@ const StyledModalImage = styled.div`
 const CardList = () => {
   const dispatch = useDispatch();
 
-  const { categoriesFilterArray, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
+  const { sidebarOpened, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
-  const { cards, cardsLoading, cardsHasErrors, showHidden, selectedCards } = useSelector(cardsSelector);
+  const { cards, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened } = useSelector(cardsSelector);
+  const { tagListOpened } = useSelector(tagsSelector);
 
-  const categoriesFilter = cardCategories => {
-    for (let category of cardCategories) {
-      if (categoriesFilterArray.includes(category)) return true;
-    };
 
-    return false;
-  }
+  // const categoriesFilter = cardCategories => {
+  //   for (let category of cardCategories) {
+  //     if (categoriesFilterArray.includes(category)) return true;
+  //   };
+
+  //   return false;
+  // }
 
   const searchFilter = card => {
     const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase())
 
     switch (searchIn) {
-      case "everywhere":
-        const searchinTags = Object.keys(card.tags).map(tag => searching(card.tags[tag])).includes(true);
-        return (searching(card.title) || searching(card.desc) || searchinTags) ? true : false;
       case "title":
         return searching(card.title);
       case "desc":
-        return searching(card.desc);
+        return searching(card.longDesc);
       default:
-        return searching(card.tags[searchIn]);
+        // const searchinTags = Object.keys(card.tags).map(tag => searching(card.tags[tag])).includes(true);
+        return (searching(card.title) || searching(card.longDesc)) ? true : false;
     }
   }
 
-  const isCategoriesFilterEmpty = categoriesFilterArray.length;
+  // const isCategoriesFilterEmpty = tagFilterArray.length;
 
   const filteredCards = Object.keys(cards)
   .filter(key => (!cards[key].hidden || showHidden))
 
-  .filter(key => (isCategoriesFilterEmpty) ? categoriesFilter(cards[key].categories) : true)
+  // .filter(key => (isCategoriesFilterEmpty) ? categoriesFilter(cards[key].categories) : true)
 
   .filter(key => searchFilter(cards[key]))
 
@@ -124,23 +136,27 @@ const CardList = () => {
     if (cardsHasErrors) return <p>Unable to display cards.</p>
 
     return filteredCards.map(key => (
-      <Card key={key} cardKey={key} card={cards[key]} selected={selectedCards.includes(cards[key])} />
+      <Card key={key} cardKey={key} card={cards[key]} />
       ))
   }
  
   return (
-    <Wrapper color={colors.mainBack}>
-      {!(cardsLoading || cardsHasErrors) && <CardListHeader />}
+    <Wrapper>
+      <Cards sidebarOpened={sidebarOpened}>
+        {!(cardsLoading || cardsHasErrors) && <CardListSidebar />}
 
-      {renderCardList()}
+        {renderCardList()}
 
-      <StyledModalImage opened={modalImageOpened} onClick={(event) => onCloseModalImage(event)}>
-        <img alt={modalImageAlt} src={modalImageSrc} />
-      </StyledModalImage>
+        <StyledModalImage opened={modalImageOpened} onClick={(event) => onCloseModalImage(event)}>
+          <img alt={modalImageAlt} src={modalImageSrc} />
+        </StyledModalImage>
 
-      <CardTemplate />
+        {(cardTemplateOpened) && <CardTemplate />}
 
-      <TagList />
+        {(tagListOpened) && <TagList />}
+
+        {(selectingMode) && <MassButtonList />}
+      </Cards>
     </Wrapper>
   );
 }

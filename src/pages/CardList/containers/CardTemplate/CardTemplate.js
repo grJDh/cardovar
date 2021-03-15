@@ -12,10 +12,9 @@ import TextArea from '../../../../components/TextArea/TextArea';
 import './CardTemplate.scss';
 
 import styled from 'styled-components';
-import { colors } from '../../../../colors.js';
 
 const Wrapper = styled.div`
-  display: ${props => props.opened ? 'flex': 'none'};
+  display: flex;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -46,7 +45,7 @@ const FormPart = styled.div`
   max-width: 420px;
   height: 550px;
 
-  background-color: #212121;
+  background-color: ${props => props.theme.main};
   border-radius: 6px;
 
   display: flex;
@@ -156,12 +155,12 @@ const CardTemplate = () => {
   }, [card, cardTemplateMode]);
 
   return (
-    <Wrapper opened={cardTemplateOpened} onClick={(event) => onClose(event)} className="wrapper">
+    <Wrapper onClick={(event) => onClose(event)} className="wrapper">
       <Form onSubmit={onSubmit}>
 
         <Button className="card-form-close" type="button" label={"Close"} onFunc={onCloseCardTemplate}/>
 
-        <FormPart color={colors.main} className='card-form-front'>
+        <FormPart className='card-form-front'>
           <TextBox label="Title" onFunc={onSetNewCardProps} autocomplete="off" name='title' value={newCardProps.title}/>
 
           <FileInput label="Select a picture" onFunc={onSetNewCardFile} name='file' src={filePreview} />

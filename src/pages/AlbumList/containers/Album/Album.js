@@ -10,7 +10,6 @@ import duplicateIcon from '../../../../duplicate.png';
 // import showIcon from '../../../../show.png';
 
 import styled from 'styled-components';
-import { colors } from '../../../../colors.js';
 
 const Wrapper = styled.div`
   height: 360px;
@@ -22,7 +21,7 @@ const Wrapper = styled.div`
 
   cursor: pointer;
 
-  background-color: ${props => props.color};
+  background-color: ${props => props.theme.main};
 
   img {
     width: 100%;
@@ -88,7 +87,7 @@ const Album = ({ album, albumKey }) => {
   const onAlbumClick = event => (event.target.tagName !== "INPUT") && navigate("/CardList");
 
   return (
-    <Wrapper onClick={(event) => onAlbumClick(event)} color={colors.main}>
+    <Wrapper onClick={(event) => onAlbumClick(event)}>
         <AlbumImgContainer>
           <img src={album.img} alt={album.title} />
           <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} />

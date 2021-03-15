@@ -2,19 +2,17 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { openModalImage } from '../../../../slices/modal';
-import { cardsSelector, openCardTemplate, deleteCard, toggleCardVisibility } from '../../../../slices/cards';
+import { cardsSelector, openCardTemplate, deleteCard, duplicateCard, toggleCardSelection } from '../../../../slices/cards';
 
-// import TagBox from "../../parts/TagBox/TagBox";
+import CardTagsBox from "../../parts/CardTagsBox";
 
 import fullscreenIcon from '../../../../fullscreen.png';
 import editIcon from '../../../../edit.png';
 import deleteIcon from '../../../../delete.png';
-import hideIcon from '../../../../hide.png';
-import showIcon from '../../../../show.png';
+import duplicateIcon from '../../../../duplicate.png';
 
 import './Card.scss';
 import styled from 'styled-components';
-import { colors } from '../../../../colors.js';
 
 const CardInner = styled.div`
   position: relative;
@@ -29,7 +27,7 @@ const CardWrapper = styled.div`
   width: 100%;
   max-width: 420px;
   height: 550px;
-  margin: 1rem;
+  margin: 0.7rem;
   padding: 0.5rem;
   background-color: transparent;
 
@@ -39,6 +37,14 @@ const CardWrapper = styled.div`
   &.flipped ${CardInner} {
     transform: rotateY(180deg);
   }
+
+  &.hidden  {
+    opacity: 0.5;
+  }
+
+  &.selected  {
+    background-color: red;
+  }
 `;
 
 const CardFront = styled.div`
@@ -47,7 +53,7 @@ const CardFront = styled.div`
   height: 100%;
   backface-visibility: hidden;
 
-  background-color: #212121;
+  background-color: ${props => props.theme.main};
   border-radius: 6px;
   box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, 0.2);
 
@@ -61,6 +67,7 @@ const CardFront = styled.div`
 
 const CardBack = styled(CardFront)`
   transform: rotateY(180deg);
+  position: relative;
 
   p, h2 {
     margin: 0px;
@@ -108,8 +115,7 @@ const IconInput = styled.input`
 
   ${({ alt }) => {
     switch (alt) {
-      case "Show card":
-      case "Hide card":
+      case "Duplicate card":
         return `
           top: 0;
           left: 0;
@@ -141,33 +147,37 @@ const CardDesc = styled.div`
   justify-content: center;
 `;
 
-const Card = ({card, cardKey, selected}) => {
+const Card = ({card, cardKey}) => {
 
   const {title, shortDesc, longDesc, img, imgFull, tags } = card;
 
   const dispatch = useDispatch();
   // eslint-disable-next-line
-  const { selectingMode } = useSelector(cardsSelector);
+  const { selectingMode, selectedCards } = useSelector(cardsSelector);
 
   const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["edit", cardKey]));
   const onDeleteCard = () => (window.confirm('Are you sure you want to delete this card?')) && dispatch(deleteCard(cardKey));
-  const onToggleCardVisibility = () => dispatch(toggleCardVisibility(cardKey));
+  const onDuplicateCard = () => dispatch(duplicateCard(cardKey));
+  // const onToggleCardVisibility = () => dispatch(toggleCardVisibility(cardKey));
 
   const [isFlipped, toggleFlipped] = useState(false);
-  const onToggleFlipped = event => (event.target.tagName !== "INPUT") && toggleFlipped(!isFlipped)
+  const onCardClick = event => {
+    if (selectingMode) dispatch(toggleCardSelection(cardKey))
+    else (event.target.tagName !== "INPUT") && toggleFlipped(!isFlipped);
+  }
 
   return (
-    <CardWrapper className={`${isFlipped && "flipped"} ${card.hidden && "hidden"}`} onClick={(event) => onToggleFlipped(event)}>
+    <CardWrapper className={`${isFlipped && "flipped"} ${card.hidden && "hidden"} ${(selectedCards.includes(cardKey) && selectingMode) && "selected"}`} onClick={(event) => onCardClick(event)}>
       <CardInner>
-        <CardFront color={colors.main}>
+        <CardFront>
           <CardTitle>
             <h2 className={`${tags.includes("dead") && "char-dead"}`}>{title}</h2>
           </CardTitle>
 
           <CardImgContainer>
             <img className={`${tags.includes("dead") && "char-dead"}`} src={img} alt={title}/>
-            <IconInput type="image" src={card.hidden ? showIcon : hideIcon} alt={card.hidden ? "Show card"  : "Hide card" } onClick={onToggleCardVisibility} />
+            <IconInput type="image" src={duplicateIcon} alt="Duplicate card" onClick={onDuplicateCard} />
             <IconInput type="image" src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
             <IconInput type="image" src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
             <IconInput type="image" src={editIcon} alt="Edit card" onClick={onOpenCardTemplate} />
@@ -179,10 +189,8 @@ const Card = ({card, cardKey, selected}) => {
         </CardFront>
 
         <CardBack>
-          {/* {Object.keys(tags).map((tag) => (
-            <TagBox key={tag} title={tag} value={tags[tag]}/>
-            ))} */}
           <p>{longDesc}</p>
+          <CardTagsBox tags={tags}/>
         </CardBack>
       </CardInner>
     </CardWrapper>

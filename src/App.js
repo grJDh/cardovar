@@ -4,18 +4,31 @@ import { Router } from "@reach/router"
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
 
+import './App.scss';
+
+import {ThemeProvider} from 'styled-components';
+
+const colors = {
+  main: "#212121",
+  mainBack: "#323232",
+  1: "#0d7377",
+  2: "#14ffec"
+};
+
 const App = () => {
   return (
-    <Router>
-      <AlbumList path="/" />
-      <CardList path="CardList" />
-    </Router>
+    <ThemeProvider theme={colors}>
+      <Router className="app">
+        <AlbumList path="/" />
+        <CardList path="CardList" />
+      </Router>
+    </ThemeProvider >
   );
 }
 
 export default App;
 
+// tags viewing
 // code review
-// selecting cards to edit them
 // settings
 // different styles
