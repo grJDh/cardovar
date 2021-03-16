@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { openModalImage } from '../../../../slices/modal';
-import { cardsSelector, openCardTemplate, deleteCard, duplicateCard, toggleCardSelection } from '../../../../slices/cards';
+import { cardsSelector, openCardTemplate, duplicateCard, toggleCardSelection } from '../../../../slices/cards';
 
 import CardTagsBox from "../../parts/CardTagsBox";
 
 import fullscreenIcon from '../../../../fullscreen.png';
 import editIcon from '../../../../edit.png';
-import deleteIcon from '../../../../delete.png';
+// import deleteIcon from '../../../../delete.png';
 import duplicateIcon from '../../../../duplicate.png';
 
 import './Card.scss';
@@ -165,7 +165,7 @@ const Card = ({card, cardKey}) => {
 
   const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["edit", cardKey]));
-  const onDeleteCard = () => (window.confirm('Are you sure you want to delete this card?')) && dispatch(deleteCard(cardKey));
+  // const onDeleteCard = () => (window.confirm('Are you sure you want to delete this card?')) && dispatch(deleteCard(cardKey));
   const onDuplicateCard = () => dispatch(duplicateCard(cardKey));
   // const onToggleCardVisibility = () => dispatch(toggleCardVisibility(cardKey));
 
@@ -176,17 +176,17 @@ const Card = ({card, cardKey}) => {
   }
 
   return (
-    <CardWrapper className={`${isFlipped && "flipped"} ${card.hidden && "hidden"} ${(selectedCards.includes(cardKey) && selectingMode) && "selected"}`} onClick={(event) => onCardClick(event)}>
+    <CardWrapper className={`${isFlipped ? "flipped" : ""} ${card.hidden ? "hidden" : ""} ${(selectedCards.includes(cardKey) && selectingMode) ? "selected" : ""}`} onClick={(event) => onCardClick(event)}>
       <CardInner>
         <CardFront>
           <CardTitle>
-            <h2 className={`${tags.includes("dead") && "char-dead"}`}>{title}</h2>
+            <h2 className={`${tags.includes("dead") ? "char-dead" : ""}`}>{title}</h2>
           </CardTitle>
 
           <CardImgContainer>
-            <img className={`${tags.includes("dead") && "char-dead"}`} src={img} alt={title}/>
+            <img className={`${tags.includes("dead") ? "char-dead" : ""}`} src={img} alt={title}/>
             <IconInput type="image" src={duplicateIcon} alt="Duplicate card" onClick={onDuplicateCard} />
-            <IconInput type="image" src={deleteIcon} alt="Delete card" onClick={onDeleteCard} />
+            {/* <IconInput type="image" src={deleteIcon} alt="Delete card" onClick={onDeleteCard} /> */}
             <IconInput type="image" src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
             <IconInput type="image" src={editIcon} alt="Edit card" onClick={onOpenCardTemplate} />
           </CardImgContainer>

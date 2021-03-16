@@ -34,9 +34,8 @@ const Cards = styled.div`
   flex-wrap: wrap;
 `;
 
-
 const StyledModalImage = styled.div`
-  display: ${props => props.opened ? 'flex': 'none'};
+  display: flex;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -147,9 +146,11 @@ const CardList = () => {
 
         {renderCardList()}
 
-        <StyledModalImage opened={modalImageOpened} onClick={(event) => onCloseModalImage(event)}>
-          <img alt={modalImageAlt} src={modalImageSrc} />
-        </StyledModalImage>
+        {(modalImageOpened) && (
+          <StyledModalImage onClick={(event) => onCloseModalImage(event)}>
+            <img alt={modalImageAlt} src={modalImageSrc} />
+          </StyledModalImage>
+        )}
 
         {(cardTemplateOpened) && <CardTemplate />}
 
