@@ -84,6 +84,22 @@ const CardTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  box-sizing: border-box;
+  padding: 0.6rem;
+  font-size: 1rem;
+`;
+
+const CardDesc = styled.div`
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  padding: 0.5rem;
+  font-size: 0.8rem;
 `;
 
 const CardImgContainer = styled.div`
@@ -137,14 +153,6 @@ const IconInput = styled.input`
         `
     }
   }}
-`;
-
-const CardDesc = styled.div`
-  height: 45px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Card = ({card, cardKey}) => {

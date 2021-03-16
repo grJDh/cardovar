@@ -16,7 +16,7 @@ import styled from 'styled-components';
 
 const sidebarTransitionWidth = 'width 0.5s ease-in-out';
 // const sidebarTransitionHeight = 'height 0.5s ease-in-out';
-// const sidebarTransitionFilters = 'opacity 0.5s ease-in-out';
+const sidebarTransitionFilters = 'opacity 0.5s ease-in-out';
 
 const SideBar = styled.div`
   width: ${props => props.sidebarOpened ? "300px" : "60px"};
@@ -37,6 +37,23 @@ const SideBar = styled.div`
   color: white;
 `;
 
+const SideBarMain = styled.div`
+  opacity: 1;
+  opacity: ${props => props.sidebarOpened ? 1 : 0};
+  transition: ${sidebarTransitionFilters};
+
+  display: flex;
+  flex-direction: column;
+`;
+
+const BurgerButton = styled(Button)`
+  button {
+    width: 60px;
+  }
+
+  margin: 0;
+`;
+
 const CardListSidebar = () => {
   const dispatch = useDispatch();
 
@@ -44,7 +61,7 @@ const CardListSidebar = () => {
   const { showHidden, selectingMode } = useSelector(cardsSelector);
   const { sidebarOpened } = useSelector(filtersSelector);
 
-  const onToggleSidebar = () => dispatch(toggleSidebar())
+  const onToggleSidebar = () => dispatch(toggleSidebar());
   // const onToggleCategoryFilter = category => dispatch(toggleCategoryFilter(category));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["new", ""]));
@@ -65,32 +82,33 @@ const CardListSidebar = () => {
   //   ["desc", "Description"]
   // ].concat(Object.keys(tags).map((tag) => [tag, tag]));
 
-  console.log(sidebarOpened)
-
   return (
     <SideBar sidebarOpened={sidebarOpened}>
 
-      <Button label='Sidebar' onFunc={onToggleSidebar}/>
+      <BurgerButton label='Sidebar' onFunc={onToggleSidebar}/>
+
+      <SideBarMain sidebarOpened={sidebarOpened}>
       
-      <Link to="/">Albums</Link>
+        <Link to="/">Albums</Link>
 
-      {/* {categories.map((category) => (
-        <Checkbox key={category} label={category} onFunc={() => onToggleCategoryFilter(category)} value={categoriesFilterArray.includes(category)} />
-        ))} */}
+        {/* {categories.map((category) => (
+          <Checkbox key={category} label={category} onFunc={() => onToggleCategoryFilter(category)} value={categoriesFilterArray.includes(category)} />
+          ))} */}
 
-      <SearchBox label='Search' onFunc={onChangeSearchField} autocomplete="off"/>
+        <SearchBox label='Search' onFunc={onChangeSearchField} autocomplete="off"/>
 
-      <Dropdown label='' onFunc={onSetSearchIn} options={searchInOptionsArray} value={"title"}/>
+        <Dropdown label='' onFunc={onSetSearchIn} options={searchInOptionsArray} value={"title"}/>
 
-      <Button label='New card' onFunc={onOpenCardTemplate}/>
+        <Button label='New card' onFunc={onOpenCardTemplate}/>
 
-      <Button label='Tags' onFunc={onOpenTagList}/>
+        <Button label='Tags' onFunc={onOpenTagList}/>
 
-      <Button label={(selectingMode) ? 'Turn off selecting mode' : 'Turn on selecting mode'} onFunc={onToggleSelectingMode}/>
+        <Button label={(selectingMode) ? 'Turn off selecting mode' : 'Turn on selecting mode'} onFunc={onToggleSelectingMode}/>
 
-      {/* <Dropdown label='Sort by' onFunc={onSetSorting} options={sortingOptionsArray} value={"titles"}/> */}
+        {/* <Dropdown label='Sort by' onFunc={onSetSorting} options={sortingOptionsArray} value={"titles"}/> */}
 
-      <Button label={(showHidden) ? 'Hide hidden cards' : 'Show hidden cards'} onFunc={onToggleShowHidden}/>
+        <Button label={(showHidden) ? 'Hide hidden cards' : 'Show hidden cards'} onFunc={onToggleShowHidden}/>
+      </SideBarMain>
     </SideBar>
   );
 }

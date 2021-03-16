@@ -59,7 +59,7 @@ const FormPart = styled.div`
 const CardTemplate = () => {
   const dispatch = useDispatch();
 
-  const { cards, cardTemplateOpened, cardTemplateMode, editedCard } = useSelector(cardsSelector);
+  const { cards, cardTemplateMode, editedCard } = useSelector(cardsSelector);
 
   const card = cards[editedCard]
 

@@ -11,6 +11,7 @@ import {ThemeProvider} from 'styled-components';
 const colors = {
   main: "#212121",
   mainBack: "#323232",
+  mainDark: "#151515",
   1: "#0d7377",
   2: "#14ffec"
 };
@@ -22,7 +23,7 @@ const App = () => {
         <AlbumList path="/" />
         <CardList path="CardList" />
       </Router>
-    </ThemeProvider >
+    </ThemeProvider>
   );
 }
 
