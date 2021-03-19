@@ -15,7 +15,6 @@ const StyledButton = styled.button`
   }
 
   &:active {
-    transform: translateY(2px);
     background-color: ${props => props.theme.mainDark};
   }
 `;

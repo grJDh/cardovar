@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 const ButtonList = styled.div`
   position: fixed;
   bottom: 0;
+  left : 75px;
 
   display: flex;
 `;

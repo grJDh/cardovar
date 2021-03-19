@@ -5,7 +5,7 @@ export const initialState = {
 
   tagFilterArray: [],
 
-  searchFilterValue: '',
+  searchFilterValue: "",
 
   sorting: "title",
 
@@ -29,6 +29,9 @@ const filtersSlice = createSlice({
     changeSearchField: (state, { payload }) => {
       state.searchFilterValue = payload;
     },
+    resetSearchField: state => {
+      state.searchFilterValue = "";
+    },
 
     setSorting: (state, { payload }) => {
       state.sorting = payload;
@@ -40,7 +43,7 @@ const filtersSlice = createSlice({
   }
 });
 
-export const { toggleSidebar, toggleTagFilter, changeSearchField, setSorting, setSearchIn } = filtersSlice.actions;
+export const { toggleSidebar, toggleTagFilter, changeSearchField, resetSearchField, setSorting, setSearchIn } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 

@@ -2,14 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "@reach/router"
 
-// import Checkbox from '../../components/CheckBox/CheckBox';
 import SearchBox from '../../../components/SearchBox/SearchBox';
 import Button from '../../../components/Button/Button';
 import ImageButton from '../../../components/ImageButton/ImageButton';
 import Dropdown from '../../../components/Dropdown/Dropdown';
 
-// eslint-disable-next-line
-import { filtersSelector, toggleSidebar, toggleCategoryFilter, changeSearchField, setSorting, setSearchIn } from '../../../slices/filters';
+import { filtersSelector, toggleSidebar, changeSearchField, resetSearchField, setSearchIn } from '../../../slices/filters';
 import { openTagList } from '../../../slices/tags';
 import { cardsSelector, openCardTemplate, toggleShowHidden, toggleSelectingMode } from '../../../slices/cards';
 
@@ -78,11 +76,12 @@ const CardListSidebar = () => {
 
   // const { sidebarOpened } = useSelector(tagsSelector);
   const { showHidden, selectingMode } = useSelector(cardsSelector);
-  const { sidebarOpened } = useSelector(filtersSelector);
+  const { searchFilterValue, sidebarOpened } = useSelector(filtersSelector);
 
   const onToggleSidebar = () => dispatch(toggleSidebar());
   // const onToggleCategoryFilter = category => dispatch(toggleCategoryFilter(category));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
+  const onResetSearchField = () => dispatch(resetSearchField());
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["new", ""]));
   const onOpenTagList = () => dispatch(openTagList());
   // const onSetSorting = event => dispatch(setSorting(event.target.value));
@@ -117,7 +116,7 @@ const CardListSidebar = () => {
         {/* <Dropdown label='Sort by' onFunc={onSetSorting} options={sortingOptionsArray} value={"titles"}/> */}
 
         <Search>
-          <SearchBox label='Search' onFunc={onChangeSearchField} autocomplete="off"/>
+          <SearchBox label='Search' onFunc={onChangeSearchField} onResetFunc={onResetSearchField} value={searchFilterValue} autocomplete="off"/>
 
           <Dropdown label='' onFunc={onSetSearchIn} options={searchInOptionsArray} value={"title"}/>
         </Search>
