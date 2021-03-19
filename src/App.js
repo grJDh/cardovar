@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from "@reach/router"
+import { Router, Redirect } from "@reach/router"
 
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
@@ -22,6 +22,14 @@ const App = () => {
       <Router className="app">
         <AlbumList path="/" />
         <CardList path="CardList" />
+        <CardList path="albums/:albumID" />
+
+        <Redirect
+          from="albums"
+          to="/"
+          noThrow 
+        />
+
       </Router>
     </ThemeProvider>
   );
@@ -29,8 +37,11 @@ const App = () => {
 
 export default App;
 
-// 
+// когда выделяешь чтобы не поворачивалось
+// fix links without "albumToLoad"
+// tag list generation
 // tag list filter
 // better tag list
+// loading animation
 // tooltips
 // code review

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Album from './containers/Album/Album';
 import AlbumTemplate from './containers/AlbumTemplate/AlbumTemplate';
-import AlbumListHeader from './containers/AlbumListHeader/AlbumListHeader';
+// import AlbumListHeader from './containers/AlbumListHeader/AlbumListHeader';
 
 import { albumsSelector, fetchAlbums, openAlbumTemplate } from '../../slices/albums';
 
@@ -27,8 +27,10 @@ const AddAlbumButton = styled.button`
 
   font-size: 120px;
 
+  background-color: ${props => props.theme.main};
+
   &:hover {
-    background-color: grey;
+    background-color: ${props => props.theme.mainDark};
     cursor: pointer;
   }
 `;
@@ -41,7 +43,7 @@ const AlbumList = () => {
   const onAddAlbum = () => dispatch(openAlbumTemplate(["new", ""]));
 
   useEffect(() => {
-    dispatch(fetchAlbums())
+    dispatch(fetchAlbums());
   }, [dispatch]);
 
   const renderAlbumList = () => {
@@ -61,7 +63,7 @@ const AlbumList = () => {
 
   return (
     <Wrapper>
-      <AlbumListHeader />
+      {/* <AlbumListHeader /> */}
       
       {renderAlbumList()}
 

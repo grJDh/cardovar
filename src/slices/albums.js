@@ -18,7 +18,6 @@ export const fetchAlbums = () => {
 export const initialState = {
   albums: {},
   
-  albumToLoad: 0,
   albumsLoading: false,
   albumsHasErrors: false,
 

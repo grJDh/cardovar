@@ -14,14 +14,42 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   height: 360px;
   flex: 1 1 480px;
-
   border: 1px solid black;
-
   position: relative;
-
   cursor: pointer;
+  background-color: transparent;
 
-  background-color: ${props => props.theme.main};
+  &:hover img {
+    scale: 1.1
+  }
+  img {
+    transition: scale 1s;
+  }
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    margin: 0;
+    color: white;
+
+    background-color: rgba(0, 0, 0, 0.3);
+
+    font-size: 3rem;
+  }
+`;
+
+const AlbumImgContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  box-sizing: content-box;
+  overflow:hidden;
 
   img {
     width: 100%;
@@ -29,20 +57,6 @@ const Wrapper = styled.div`
     object-fit: cover;
   }
 
-  h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    margin: 0;
-  }
-`;
-
-const AlbumImgContainer = styled.div`
-  height: 100%;
-  width:100%;
-  position: relative;
 `;
 
 const IconInput = styled.input`
@@ -60,7 +74,7 @@ const IconInput = styled.input`
     switch (alt) {
       case "Delete album":
         return `
-          top: 0;
+          bottom: 0;
           right: 0;
         `
       case "Edit album":
@@ -70,8 +84,8 @@ const IconInput = styled.input`
         `
       default:
         return `
-          bottom: 0;
-          right: 0;
+          top: 0;
+          left: 0;
         `
     }
   }}
@@ -84,18 +98,22 @@ const Album = ({ album, albumKey }) => {
   const onDeleteAlbum = () => window.confirm('Are you sure you want to delete this album?') && dispatch(deleteAlbum(albumKey));
   // const onToggleAlbumVisibility = () => dispatch(toggleAlbumVisibility(albumKey));
   const onDuplicateAlbum = () => dispatch(duplicateAlbum([albumKey]));
-  const onAlbumClick = event => (event.target.tagName !== "INPUT") && navigate("/CardList");
+  const onAlbumClick = event => {
+    if (event.target.tagName !== "INPUT") {
+      navigate("/albums/"+albumKey);
+    }
+  }
 
   return (
     <Wrapper onClick={(event) => onAlbumClick(event)}>
         <AlbumImgContainer>
           <img src={album.img} alt={album.title} />
-          <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} />
-          <IconInput type="image" src={editIcon} alt="Edit album" onClick={onOpenAlbumTemplate} />
-          <IconInput type="image" src={duplicateIcon} alt="Duplicate album" onClick={onDuplicateAlbum} />
+          <h1>{album.title}</h1>
         </AlbumImgContainer>
 
-        <h1>{album.title}</h1>
+        <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} />
+        <IconInput type="image" src={editIcon} alt="Edit album" onClick={onOpenAlbumTemplate} />
+        <IconInput type="image" src={duplicateIcon} alt="Duplicate album" onClick={onDuplicateAlbum} />
     </Wrapper>
   );
 }

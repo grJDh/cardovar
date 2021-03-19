@@ -66,6 +66,7 @@ const CardTemplate = () => {
   const [newCardProps, setNewCardProps] = useState({});
   const [filePreview, setFilePreview] = useState();
   const [newCardFile, setNewCardFile] = useState();
+  const [fileExpiration, toggleFileExpiration] = useState(true);
 
   const onSetNewCardProps = event => setNewCardProps({...newCardProps, [event.target.name]: event.target.value});
   const onSetNewCardHidden = () => setNewCardProps({...newCardProps, hidden: !newCardProps.hidden})
@@ -77,6 +78,7 @@ const CardTemplate = () => {
 
     reader.readAsDataURL(event.target.files[0]);
   };
+  const onToggleFileExpiration = () => toggleFileExpiration(!fileExpiration);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -89,14 +91,21 @@ const CardTemplate = () => {
       }
     }
 
-    const tagsStringToArray = tags => [...new Set(tags.split(","))].map(tag => tag.trim().toLowerCase());
+    const tagsStringToArray = tags => {
+      console.log(tags);
+      const ans = [...new Set(tags.split(","))].map(tag => tag.trim().toLowerCase());
+      console.log(ans)
+      return ans
+    };
 
     if (newCardFile) {
       const formData = new FormData();
       formData.append('image', newCardFile);
 
+      const expiration = () => fileExpiration ? "expiration=60&" : "";
+
       fetch(
-        'https://api.imgbb.com/1/upload?expiration=600&key=ec795ad415158afca4aa146094d5be55',
+        'https://api.imgbb.com/1/upload?' + expiration() + 'key=ec795ad415158afca4aa146094d5be55',
         {
           method: 'POST',
           body: formData,
@@ -136,7 +145,7 @@ const CardTemplate = () => {
         longDesc: "",
         img: "",
         imgFull: "",
-        tags: [],
+        tags: "",
         hidden: false
       });
       setFilePreview("");
@@ -152,6 +161,7 @@ const CardTemplate = () => {
       });
       setFilePreview(card.img);
     }
+    toggleFileExpiration(true);
   }, [card, cardTemplateMode]);
 
   return (
@@ -173,7 +183,9 @@ const CardTemplate = () => {
 
           <TextArea label="Tags" onFunc={onSetNewCardProps} name={"tags"} cols="40" rows="3" value={newCardProps.tags} />
 
-          <Checkbox label={"Hidden"} onFunc={onSetNewCardHidden} value={newCardProps.hidden} />
+          <Checkbox label="Hidden" onFunc={onSetNewCardHidden} value={newCardProps.hidden} />
+
+          <Checkbox label="Expiration?" onFunc={onToggleFileExpiration} value={fileExpiration} />
         </FormPart>
 
         <input className="card-form-submit" type="submit" value="Submit" />

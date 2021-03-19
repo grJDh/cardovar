@@ -1,17 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setFetchedTags } from './tags';
 
-export const fetchCards = () => {
+export const fetchCards = albumID => {
   return async dispatch => {
     dispatch(getCards());
 
     try {
-      const response = await fetch('https://api.npoint.io/6092f6f51e0ff89498be');
+      const urlResponse = await fetch("https://api.npoint.io/990df4a9d4e3b3e82709/" + albumID + "/url");
+      const url = await urlResponse.json();
+
+      const response = await fetch(url);
+      // console.log(response);
       const data = await response.json();
 
       dispatch(getCardsSuccess(data.cards));
       dispatch(setFetchedTags(data.tags));
     } catch (error) {
+      console.log(error);
       dispatch(getCardsFailure());
     }
   }
@@ -42,12 +47,12 @@ const cardsSlice = createSlice({
     },
     getCardsSuccess: (state, { payload }) => {
       state.cards = payload
-      state.cardsLoading = false
-      state.cardsHasErrors = false
+      state.cardsLoading = false;
+      state.cardsHasErrors = false;
     },
     getCardsFailure: state => {
-      state.cardsLoading = false
-      state.cardsHasErrors = true
+      state.cardsLoading = false;
+      state.cardsHasErrors = true;
     },
 
     openCardTemplate: (state, { payload }) => {

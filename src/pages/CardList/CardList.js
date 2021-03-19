@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from "@reach/router"
 
 import CardListSidebar from './containers/CardListSidebar';
 import Card from './containers/Card/Card';
@@ -56,12 +57,12 @@ const StyledModalImage = styled.div`
 
 const CardList = () => {
   const dispatch = useDispatch();
+  const params = useParams();
 
   const { sidebarOpened, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
   const { cards, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened } = useSelector(cardsSelector);
   const { tagListOpened } = useSelector(tagsSelector);
-
 
   // const categoriesFilter = cardCategories => {
   //   for (let category of cardCategories) {
@@ -125,10 +126,10 @@ const CardList = () => {
   //     window.removeEventListener("keydown", event => escListener(event))
   //   }
   // });
-
+  
   useEffect(() => {
-    dispatch(fetchCards())
-  }, [dispatch]);
+    dispatch(fetchCards(params.albumID));
+  }, [dispatch, params.albumID]);
 
   const renderCardList = () => {
     if (cardsLoading) return <p>Loading cards...</p>

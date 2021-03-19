@@ -28,6 +28,7 @@ const ButtonList = styled.div`
 
 const StyledImageButton = styled(ImageButton)`
   width: 3rem;
+  margin: 0.1rem;
 `;
 
 const MassButtonList = () => {
