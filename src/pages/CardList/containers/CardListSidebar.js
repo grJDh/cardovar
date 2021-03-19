@@ -17,6 +17,7 @@ import hideIcon from '../../../hide.png';
 import showIcon from '../../../show.png';
 import selectIcon from '../../../select.png';
 import tagIcon from '../../../tag.png';
+import plusIcon from '../../../plus.png';
 
 import styled from 'styled-components';
 
@@ -34,6 +35,7 @@ const SideBar = styled.div`
 
   position: fixed;
   left: 0;
+  padding: 0.3rem;
 
   display: flex;
   flex-direction: column;
@@ -50,6 +52,9 @@ const SideBarFilters = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 `;
 
 const SideBarButtons = styled.div`
@@ -61,6 +66,11 @@ const BurgerButton = styled(Button)`
   width: ${sidebarClosedWidth};
 
   margin: 0;
+`;
+
+const Search = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardListSidebar = () => {
@@ -96,9 +106,9 @@ const CardListSidebar = () => {
 
       <BurgerButton label='SDBR' onFunc={onToggleSidebar}/>
 
+      <Link to="/">Albums</Link>
+
       <SideBarFilters sidebarOpened={sidebarOpened}>
-      
-        <Link to="/">Albums</Link>
 
         {/* {categories.map((category) => (
           <Checkbox key={category} label={category} onFunc={() => onToggleCategoryFilter(category)} value={categoriesFilterArray.includes(category)} />
@@ -106,14 +116,21 @@ const CardListSidebar = () => {
         
         {/* <Dropdown label='Sort by' onFunc={onSetSorting} options={sortingOptionsArray} value={"titles"}/> */}
 
-        <SearchBox label='Search' onFunc={onChangeSearchField} autocomplete="off"/>
+        <Search>
+          <SearchBox label='Search' onFunc={onChangeSearchField} autocomplete="off"/>
 
-        <Dropdown label='' onFunc={onSetSearchIn} options={searchInOptionsArray} value={"title"}/>
+          <Dropdown label='' onFunc={onSetSearchIn} options={searchInOptionsArray} value={"title"}/>
+        </Search>
       </SideBarFilters>
 
       <SideBarButtons sidebarOpened={sidebarOpened}>
 
-        <Button label='New card' onFunc={onOpenCardTemplate}/>
+        <ImageButton
+          src={plusIcon}
+          label='New card'
+          onFunc={onOpenCardTemplate}
+          props={sidebarOpened}
+        />
 
         <ImageButton
           src={tagIcon}
@@ -124,14 +141,14 @@ const CardListSidebar = () => {
 
         <ImageButton
           src={selectIcon}
-          label={(selectingMode) ? 'Turn off selecting mode' : 'Turn on selecting mode'}
+          label={(selectingMode) ? 'Selection mode: on' : 'Selection mode: off'}
           onFunc={onToggleSelectingMode}
           props={sidebarOpened}
         />
 
         <ImageButton
           src={(showHidden) ? hideIcon : showIcon}
-          label={(showHidden) ? 'Hide hidden cards' : 'Show hidden cards'}
+          label={(showHidden) ? "Don't show hidden cards" : 'Show hidden cards'}
           onFunc={onToggleShowHidden}
           props={sidebarOpened}
         />

@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.button`
+const StyledImageButton = styled.button`
   height: 3rem;
   border: 1px solid black;
   border-radius: 0.25rem;
   background-color: ${props => props.theme.mainBack};
   color: white;
-  margin: 0.3rem;
 
   cursor: pointer;
 
@@ -40,10 +39,10 @@ const Wrapper = styled.button`
 const ImageButton = ({ src, alt, onFunc, name, label, className="", props=false }) => {
 
   return (
-    <Wrapper onClick={onFunc} name={name} className={`${className}`} props={props}>
+    <StyledImageButton onClick={onFunc} name={name} className={`${className}`} props={props}>
       <img src={src} alt={alt} />
       <p>{label}</p>
-    </Wrapper>
+    </StyledImageButton>
   );
 }
 

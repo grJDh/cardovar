@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.button`
+const StyledButton = styled.button`
   height: 3rem;
   border: 1px solid black;
   border-radius: 0.25rem;
   background-color: ${props => props.theme.mainBack};
   color: white;
+  cursor: pointer;
 
   &:hover {
     background-color: ${props => props.theme.main};
@@ -17,18 +18,14 @@ const Wrapper = styled.button`
     transform: translateY(2px);
     background-color: ${props => props.theme.mainDark};
   }
-
-  cursor: pointer;
-
-  margin: 0.3rem;
 `;
 
 const Button = ({ label, onFunc, name, className="" }) => {
 
   return (
-    <Wrapper onClick={onFunc} name={name} className={`${className}`}>
+    <StyledButton onClick={onFunc} name={name} className={`${className}`}>
       {label}
-    </Wrapper>
+    </StyledButton>
   );
 }
 

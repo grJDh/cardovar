@@ -29,7 +29,8 @@ const App = () => {
 
 export default App;
 
-// tags viewing
+// 
+// tag list filter
+// better tag list
+// tooltips
 // code review
-// settings
-// different styles
