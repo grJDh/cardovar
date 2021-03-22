@@ -8,7 +8,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux';
 
-import tagsReducer from './slices/tags';
 import filtersReducer from './slices/filters';
 import modalReducer from './slices/modal';
 import cardsReducer from './slices/cards';
@@ -16,7 +15,6 @@ import albumsReducer from './slices/albums';
 
 
 const rootReducer = combineReducers({
-  tags: tagsReducer,
   filters: filtersReducer,
   modal: modalReducer,
   cards: cardsReducer,

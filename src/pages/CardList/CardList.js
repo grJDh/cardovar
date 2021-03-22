@@ -6,12 +6,12 @@ import CardListSidebar from './containers/CardListSidebar';
 import Card from './containers/Card/Card';
 import CardTemplate from './containers/CardTemplate/CardTemplate';
 import TagList from './containers/TagList/TagList';
+import TagFilters from './containers/TagFilters/TagFilters';
 import MassButtonList from './containers/MassButtonList';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
 import { cardsSelector, fetchCards } from '../../slices/cards';
-import { tagsSelector} from '../../slices/tags';
 
 import "./CardList.scss"
 import styled from 'styled-components';
@@ -59,18 +59,24 @@ const CardList = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const { sidebarOpened, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
+  const { sidebarOpened, tagFilterOpened, tagFilterIncludeArray, tagFilterExcludeArray, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
-  const { cards, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened } = useSelector(cardsSelector);
-  const { tagListOpened } = useSelector(tagsSelector);
+  const { cards, tags, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened, tagListOpened } = useSelector(cardsSelector);
 
-  // const categoriesFilter = cardCategories => {
-  //   for (let category of cardCategories) {
-  //     if (categoriesFilterArray.includes(category)) return true;
-  //   };
+  const tagFilter = cardTags => {
+    // or
 
-  //   return false;
-  // }
+    let flag = false;
+    
+    for (let tag of cardTags) {
+      console.log(tag, tagFilterExcludeArray.includes(tag), tagFilterIncludeArray.includes(tag))
+      if (tagFilterExcludeArray.includes(tag)) return false;
+      if (tagFilterIncludeArray.includes(tag)) flag = true;
+    };
+
+    if (flag) return true
+    else return false;
+  }
 
   const searchFilter = card => {
     const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase())
@@ -86,12 +92,17 @@ const CardList = () => {
     }
   }
 
-  // const isCategoriesFilterEmpty = tagFilterArray.length;
+  // console.log(tags)
+  // console.log(cards)
+
+  const isTagFilterArraysEmpty = tagFilterIncludeArray.length + tagFilterExcludeArray.length;
+
+  console.log(tagFilterIncludeArray, tagFilterExcludeArray)
 
   const filteredCards = Object.keys(cards)
   .filter(key => (!cards[key].hidden || showHidden))
 
-  // .filter(key => (isCategoriesFilterEmpty) ? categoriesFilter(cards[key].categories) : true)
+  .filter(key => (isTagFilterArraysEmpty) ? tagFilter(cards[key].tags) : true)
 
   .filter(key => searchFilter(cards[key]))
 
@@ -156,6 +167,8 @@ const CardList = () => {
         {(cardTemplateOpened) && <CardTemplate />}
 
         {(tagListOpened) && <TagList />}
+
+        {(tagFilterOpened) && <TagFilters />}
 
         {(selectingMode) && <MassButtonList />}
       </Cards>

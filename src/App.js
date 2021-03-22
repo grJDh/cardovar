@@ -37,11 +37,10 @@ const App = () => {
 
 export default App;
 
-// когда выделяешь чтобы не поворачивалось
-// fix links without "albumToLoad"
-// tag list generation
 // tag list filter
 // better tag list
 // loading animation
 // tooltips
+// mobile
+// taglist overflow
 // code review

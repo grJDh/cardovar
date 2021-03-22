@@ -171,8 +171,12 @@ const Card = ({card, cardKey}) => {
 
   const [isFlipped, toggleFlipped] = useState(false);
   const onCardClick = event => {
+    
     if (selectingMode) dispatch(toggleCardSelection(cardKey))
-    else (event.target.tagName !== "INPUT") && toggleFlipped(!isFlipped);
+    else {
+      const selection = window.getSelection();
+      (event.target.tagName !== "INPUT" && selection.type !== "Range") && toggleFlipped(!isFlipped);
+    }
   }
 
   return (

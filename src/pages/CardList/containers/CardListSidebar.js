@@ -7,9 +7,8 @@ import Button from '../../../components/Button/Button';
 import ImageButton from '../../../components/ImageButton/ImageButton';
 import Dropdown from '../../../components/Dropdown/Dropdown';
 
-import { filtersSelector, toggleSidebar, changeSearchField, resetSearchField, setSearchIn } from '../../../slices/filters';
-import { openTagList } from '../../../slices/tags';
-import { cardsSelector, openCardTemplate, toggleShowHidden, toggleSelectingMode } from '../../../slices/cards';
+import { filtersSelector, toggleSidebar, openTagFilters, changeSearchField, resetSearchField, setSearchIn } from '../../../slices/filters';
+import { cardsSelector, openCardTemplate, toggleShowHidden, toggleSelectingMode, openTagList } from '../../../slices/cards';
 
 import hideIcon from '../../../hide.png';
 import showIcon from '../../../show.png';
@@ -84,6 +83,7 @@ const CardListSidebar = () => {
   const onResetSearchField = () => dispatch(resetSearchField());
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["new", ""]));
   const onOpenTagList = () => dispatch(openTagList());
+  const onOpenTagFilters = () => dispatch(openTagFilters());
   // const onSetSorting = event => dispatch(setSorting(event.target.value));
   const onSetSearchIn = event => dispatch(setSearchIn(event.target.value));
   const onToggleShowHidden = () => dispatch(toggleShowHidden());
@@ -135,6 +135,13 @@ const CardListSidebar = () => {
           src={tagIcon}
           label="Tags"
           onFunc={onOpenTagList}
+          props={sidebarOpened}
+        />
+
+        <ImageButton
+          src={tagIcon}
+          label="Tag filters"
+          onFunc={onOpenTagFilters}
           props={sidebarOpened}
         />
 

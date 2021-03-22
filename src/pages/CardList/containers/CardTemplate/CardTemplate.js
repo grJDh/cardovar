@@ -91,12 +91,7 @@ const CardTemplate = () => {
       }
     }
 
-    const tagsStringToArray = tags => {
-      console.log(tags);
-      const ans = [...new Set(tags.split(","))].map(tag => tag.trim().toLowerCase());
-      console.log(ans)
-      return ans
-    };
+    const tagsStringToArray = tags => [...new Set(tags.split(","))].map(tag => tag.trim().toLowerCase());
 
     if (newCardFile) {
       const formData = new FormData();

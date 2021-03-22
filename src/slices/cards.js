@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { setFetchedTags } from './tags';
 
 export const fetchCards = albumID => {
   return async dispatch => {
@@ -23,6 +22,7 @@ export const fetchCards = albumID => {
 }
 
 export const initialState = {
+  //cards
   cards: {},
 
   cardsLoading: false,
@@ -36,12 +36,18 @@ export const initialState = {
   selectedCards: [],
 
   showHidden: false,
+
+  //tags
+  tags: [],
+
+  tagListOpened: false,
 }
 
 const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
+    //cards
     getCards: state => {
       state.cardsLoading = true;
     },
@@ -91,6 +97,8 @@ const cardsSlice = createSlice({
         
         const oldTags = new Set(state.cards[currentCard].tags);
 
+        console.log(payload)
+
         const updatedTags = Object.keys(payload).reduce((arr, tag) => {
           if (oldTags.has(tag)) return [...arr, payload[tag]];
           else return arr;
@@ -114,7 +122,7 @@ const cardsSlice = createSlice({
 
     massAddTagToCard: (state, { payload }) => {
       for (const key of state.selectedCards) {
-        state.cards = {...state.cards, [key]: {...state.cards[key], tags: [...state.cards[key].tags, payload]}};
+        state.cards = {...state.cards, [key]: {...state.cards[key], tags: [...new Set([...state.cards[key].tags, payload])]}};
       }
     },
     massDeleteTagFromCard: (state, { payload }) => {
@@ -133,12 +141,29 @@ const cardsSlice = createSlice({
         state.cards[key] = {...state.cards[key], hidden: !state.cards[key].hidden};
       }
     },
+
+    //tags
+    setFetchedTags: (state, { payload }) => {
+      state.tags = payload;
+    },
+
+    openTagList: (state) => {
+      state.tags = [...new Set(Object.keys(state.cards).reduce((arr, key) => {
+        return [...arr, ...state.cards[key].tags]
+      }, []))];
+      state.tagListOpened = true;
+    },
+    closeTagList: (state) => {
+      state.tagListOpened = false;
+    },
   }
 });
 
 export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsInCards,
                deleteCard, duplicateCard, toggleShowHidden, toggleSelectingMode, toggleCardSelection, massAddTagToCard, massDeleteTagFromCard,
-               massDeleteCard, massToggleCardVisibility } = cardsSlice.actions;
+               massDeleteCard, massToggleCardVisibility,
+               
+               setFetchedTags, openTagList, closeTagList } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   sidebarOpened: false,
 
-  tagFilterArray: [],
+  tagFilterOpened: false,
+  tagFilterIncludeArray: [],
+  tagFilterExcludeArray: [],
 
   searchFilterValue: "",
 
@@ -20,10 +22,16 @@ const filtersSlice = createSlice({
       state.sidebarOpened = !state.sidebarOpened;
     },
 
-    toggleTagFilter: (state, { payload }) => {
-      const id = state.tagFilterArray.indexOf(payload);
-      if (id === -1) state.tagFilterArray = [...state.tagFilterArray, payload]
-      else state.tagFilterArray = state.tagFilterArray.filter(category => category !== payload);
+    openTagFilters: state => {
+      state.tagFilterOpened = true;
+    },
+    closeTagFilters: state => {
+      state.tagFilterOpened = false;
+    },
+
+    updateTagFilterArrays: (state, { payload }) => {
+      state.tagFilterIncludeArray = payload[0];
+      state.tagFilterExcludeArray = payload[1];
     },
 
     changeSearchField: (state, { payload }) => {
@@ -43,7 +51,8 @@ const filtersSlice = createSlice({
   }
 });
 
-export const { toggleSidebar, toggleTagFilter, changeSearchField, resetSearchField, setSorting, setSearchIn } = filtersSlice.actions;
+export const { toggleSidebar, openTagFilters, closeTagFilters, updateTagFilterArrays,
+               changeSearchField, resetSearchField, setSorting, setSearchIn } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 

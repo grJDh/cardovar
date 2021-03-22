@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { tagsSelector, closeTagList } from '../../../../slices/tags';
-import { updateTagsInCards } from '../../../../slices/cards';
+import { cardsSelector, updateTagsInCards, closeTagList } from '../../../../slices/cards';
 
 import TextBox from '../../../../components/TextBox/TextBox';
 import Button from '../../../../components/Button/Button';
@@ -34,9 +33,7 @@ const Form = styled.form`
 `;
 
 const FormPart = styled.div`
-  min-width: 400px;
-  width: 100%;
-  max-width: 420px;
+  width: 400px;
   height: 750px;
 
   background-color: ${props => props.theme.main};
@@ -49,7 +46,7 @@ const FormPart = styled.div`
 
   color: white;
 
-  overflow: auto;
+  overflow: scroll;
 `;
 
 const TagBox = styled.div`
@@ -61,7 +58,7 @@ const TagBox = styled.div`
 const TagList = () => {
   const dispatch = useDispatch();
 
-  const { tags, tagListOpened } = useSelector(tagsSelector);
+  const { tags, tagListOpened } = useSelector(cardsSelector);
 
   const [tagList, setTagList] = useState({});
   const [duplicates, setDuplicates] = useState([]);
@@ -100,10 +97,12 @@ const TagList = () => {
   };
 
   useEffect(() => {
-    setTagList(tags.reduce((obj, key) => {
-      return {...obj, [key]: key}
-    }, {}));
-    setDuplicates([]);
+    if (tagListOpened) {
+      setTagList(tags.reduce((obj, key) => {
+        return {...obj, [key]: key}
+      }, {}));
+      setDuplicates([]);
+    }
   }, [tagListOpened, tags]);
 
   const onClose = event => (event.target.className.includes("wrapper")) ? dispatch(closeTagList()) : "";
@@ -124,9 +123,9 @@ const TagList = () => {
   return (
     <Wrapper onClick={(event) => onClose(event)} className="wrapper">
       <Form onSubmit={onSubmit}>
-        <Button className="tag-form-close" type="button" label={"Close"} onFunc={onCloseTagTemplate}/>
+        <Button type="button" label={"Close"} onFunc={onCloseTagTemplate}/>
 
-        <FormPart className='tag-form'>
+        <FormPart>
           {tags.map((tag) => (
               <TagBox key={tag}>
                 <TextBox className={`${duplicates.includes(tag) && "tag-error"}`} label={tag} onFunc={onSetTagList} autocomplete="off" name={tag} value={tagList[tag]} />
@@ -135,7 +134,7 @@ const TagList = () => {
             ))}
         </FormPart>
 
-        <input className="tag-form-submit" type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
       </Form>
     </Wrapper>
   );
