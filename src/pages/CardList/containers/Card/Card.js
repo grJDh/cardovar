@@ -189,10 +189,10 @@ const Card = ({card, cardKey}) => {
 
           <CardImgContainer>
             <img className={`${tags.includes("dead") ? "char-dead" : ""}`} src={img} alt={title}/>
-            <IconInput type="image" src={duplicateIcon} alt="Duplicate card" onClick={onDuplicateCard} />
+            <IconInput type="image" src={duplicateIcon} alt="Duplicate card" onClick={onDuplicateCard} title="Duplicate card" />
             {/* <IconInput type="image" src={deleteIcon} alt="Delete card" onClick={onDeleteCard} /> */}
-            <IconInput type="image" src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} />
-            <IconInput type="image" src={editIcon} alt="Edit card" onClick={onOpenCardTemplate} />
+            <IconInput type="image" src={fullscreenIcon} alt="Open full" onClick={onOpenModalImage} title="Open full image" />
+            <IconInput type="image" src={editIcon} alt="Edit card" onClick={onOpenCardTemplate} title="Edit card" />
           </CardImgContainer>
         
           <CardDesc>

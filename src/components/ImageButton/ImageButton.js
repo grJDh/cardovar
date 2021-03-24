@@ -39,7 +39,7 @@ const StyledImageButton = styled.button`
 const ImageButton = ({ src, alt, onFunc, name, label, className="", props=false }) => {
 
   return (
-    <StyledImageButton onClick={onFunc} name={name} className={`${className}`} props={props}>
+    <StyledImageButton onClick={onFunc} name={name} className={`${className}`} props={props} title={label}>
       <img src={src} alt={alt} />
       <p>{label}</p>
     </StyledImageButton>

@@ -111,9 +111,9 @@ const Album = ({ album, albumKey }) => {
           <h1>{album.title}</h1>
         </AlbumImgContainer>
 
-        <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} />
-        <IconInput type="image" src={editIcon} alt="Edit album" onClick={onOpenAlbumTemplate} />
-        <IconInput type="image" src={duplicateIcon} alt="Duplicate album" onClick={onDuplicateAlbum} />
+        <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} title="Delete album" />
+        <IconInput type="image" src={editIcon} alt="Edit album" onClick={onOpenAlbumTemplate} title="Edit album" />
+        <IconInput type="image" src={duplicateIcon} alt="Duplicate album" onClick={onDuplicateAlbum} title="Duplicate album" />
     </Wrapper>
   );
 }

@@ -125,6 +125,7 @@ const CardListSidebar = () => {
       <SideBarButtons sidebarOpened={sidebarOpened}>
 
         <ImageButton
+          title="nice"
           src={plusIcon}
           label='New card'
           onFunc={onOpenCardTemplate}

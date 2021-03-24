@@ -82,7 +82,7 @@ const AlbumList = () => {
   }
 
   const renderAlbumList = () => {
-    if (albumsLoading) return loadingAlbumList();
+    if (albumsLoading) return <List>{loadingAlbumList()}</List>
     if (albumsHasErrors) return <p>Unable to display albums.</p>
 
     return (
