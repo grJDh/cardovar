@@ -38,7 +38,6 @@ const App = () => {
 export default App;
 
 // better tag list
-// tooltips
 // mobile
 // taglist overflow
 // code review
