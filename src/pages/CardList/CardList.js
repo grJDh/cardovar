@@ -106,6 +106,7 @@ const CardList = () => {
 
   const { sidebarOpened, tagFilterOpened, tagFilterIncludeArray, tagFilterExcludeArray, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
+  // eslint-disable-next-line
   const { cards, tags, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened, tagListOpened } = useSelector(cardsSelector);
 
   const tagFilter = cardTags => {
@@ -139,8 +140,6 @@ const CardList = () => {
 
   // console.log(tags)
   // console.log(cards)
-
-  console.log(tagFilterIncludeArray, tagFilterExcludeArray)
 
   const filteredCards = Object.keys(cards)
   .filter(key => (!cards[key].hidden || showHidden))
@@ -187,7 +186,7 @@ const CardList = () => {
 
   const loadingCardList = () => {
     return [1,2,3,4,5,6,7,8].map(key => (
-      <SkeletonCard>
+      <SkeletonCard key={key}>
         <SkeletonCardTitle></SkeletonCardTitle>
         <SkeletonCardImg></SkeletonCardImg>
         <SkeletonCardDesc></SkeletonCardDesc>

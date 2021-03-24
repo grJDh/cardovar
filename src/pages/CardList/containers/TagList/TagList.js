@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { cardsSelector, updateTagsInCards, closeTagList } from '../../../../slices/cards';
 
-import TextBox from '../../../../components/TextBox/TextBox';
 import Button from '../../../../components/Button/Button';
 
 import './TagList.scss';
@@ -33,26 +32,39 @@ const Form = styled.form`
 `;
 
 const FormPart = styled.div`
-  width: 400px;
-  height: 750px;
+  width: 75%;
+  height: 550px;
 
   background-color: ${props => props.theme.main};
   border-radius: 6px;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
 
   color: white;
-
-  overflow: scroll;
 `;
 
 const TagBox = styled.div`
+  border: 1px solid black;
+  padding: 5px;
+  margin: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TagBoxButtons = styled.div`
   display: flex;
   align-items: center;
-  width: 90%
+  justify-content: center;
+
+  button {
+    height: 1.5rem;
+  }
 `;
 
 const TagList = () => {
@@ -61,39 +73,34 @@ const TagList = () => {
   const { tags, tagListOpened } = useSelector(cardsSelector);
 
   const [tagList, setTagList] = useState({});
-  const [duplicates, setDuplicates] = useState([]);
 
-  const onSetTagList = event => setTagList({...tagList, [event.target.name]: event.target.value});
+  const onRenameTag = event => {
+    event.preventDefault();
+    const recursivePrompt = () => {
+      const newName = prompt('Enter new name for a tag', tagList[event.target.name]);
+
+      if (Object.values(tagList).includes(newName)) {
+        alert("A tag with this name already exists!");
+        recursivePrompt();
+      }
+
+      else setTagList({...tagList, [event.target.name]: newName});
+    }
+
+    recursivePrompt();
+  }
 
   const deleteTag = tag => {
     const { [tag]: temp2, ...remainingNameTags } = tagList;
     setTagList(remainingNameTags);
   };
 
-  const checkForDuplicates = useCallback(() => {
-    let dupl = [];
-
-    for (let i in tagList) {
-      for (let j in tagList) {
-        if (i !== j && tagList[i].toLowerCase() === tagList[j].toLowerCase()) dupl.push(i);
-      }
-    }
-
-    setDuplicates(dupl);
-  }, [tagList]);
-  
-  useEffect(() => checkForDuplicates(), [checkForDuplicates]);
-
   const onSubmit = e => {
     e.preventDefault();
 
-    if (!duplicates.length) {
-      dispatch(updateTagsInCards(tagList));
-  
-      onCloseTagTemplate();
-    }
+    dispatch(updateTagsInCards(tagList));
 
-    else window.alert("Duplicates in tag names are not allowed!");
+    onCloseTagTemplate();
   };
 
   useEffect(() => {
@@ -101,7 +108,6 @@ const TagList = () => {
       setTagList(tags.reduce((obj, key) => {
         return {...obj, [key]: key}
       }, {}));
-      setDuplicates([]);
     }
   }, [tagListOpened, tags]);
 
@@ -127,11 +133,14 @@ const TagList = () => {
 
         <FormPart>
           {tags.map((tag) => (
-              <TagBox key={tag}>
-                <TextBox className={`${duplicates.includes(tag) && "tag-error"}`} label={tag} onFunc={onSetTagList} autocomplete="off" name={tag} value={tagList[tag]} />
+            <TagBox key={tag}>
+              {tagList[tag]}
+              <TagBoxButtons>
+                <Button type="button" label="🖊️" name={tag} onFunc={onRenameTag} />
                 <Button type="button" label="🗑️" onFunc={() => deleteTag(tag)}/>
-              </TagBox>
-            ))}
+              </TagBoxButtons>
+            </TagBox>
+          ))}
         </FormPart>
 
         <input type="submit" value="Submit" />

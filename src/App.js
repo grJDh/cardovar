@@ -39,5 +39,4 @@ export default App;
 
 // better tag list
 // mobile
-// taglist overflow
 // code review

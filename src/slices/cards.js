@@ -97,8 +97,6 @@ const cardsSlice = createSlice({
         
         const oldTags = new Set(state.cards[currentCard].tags);
 
-        console.log(payload)
-
         const updatedTags = Object.keys(payload).reduce((arr, tag) => {
           if (oldTags.has(tag)) return [...arr, payload[tag]];
           else return arr;
