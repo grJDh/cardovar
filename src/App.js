@@ -37,9 +37,7 @@ const App = () => {
 
 export default App;
 
-// tag list filter
 // better tag list
-// loading animation
 // tooltips
 // mobile
 // taglist overflow

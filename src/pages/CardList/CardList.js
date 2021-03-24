@@ -14,7 +14,7 @@ import { modalSelector, closeModalImage } from '../../slices/modal';
 import { cardsSelector, fetchCards } from '../../slices/cards';
 
 import "./CardList.scss"
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -55,6 +55,51 @@ const StyledModalImage = styled.div`
   }
 `;
 
+const shine = keyframes`
+  from {
+    background-position: -300px;
+  }
+
+  to {
+    background-position: 550px;
+  }
+`;
+
+const SkeletonCard = styled.div`
+  min-width: 300px;
+  width: 100%;
+  max-width: 420px;
+  height: 550px;
+  margin: 0.7rem;
+  padding: 0.5rem;
+  background-color: ${props => props.theme.main};
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+const SkeletonCardImg = styled.div`
+  background-image: linear-gradient(90deg, ${props => props.theme.mainDark} 0px, ${props => props.theme.mainBack} 80px, ${props => props.theme.mainDark} 160px);
+  background-size: 1000px;
+  height: 420px;
+  width: 350px;
+  border-radius: 5px;
+
+  animation: ${shine} 2s infinite linear
+`;
+
+const SkeletonCardTitle = styled(SkeletonCardImg)`
+  height: 35px;
+`;
+
+const SkeletonCardDesc = styled(SkeletonCardTitle)`
+  height: 25px;
+`;
+
 const CardList = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -64,7 +109,7 @@ const CardList = () => {
   const { cards, tags, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened, tagListOpened } = useSelector(cardsSelector);
 
   const tagFilter = cardTags => {
-    // or
+    if (!(tagFilterIncludeArray.length + tagFilterExcludeArray.length)) return true;
 
     let flag = false;
     
@@ -95,14 +140,12 @@ const CardList = () => {
   // console.log(tags)
   // console.log(cards)
 
-  const isTagFilterArraysEmpty = tagFilterIncludeArray.length + tagFilterExcludeArray.length;
-
   console.log(tagFilterIncludeArray, tagFilterExcludeArray)
 
   const filteredCards = Object.keys(cards)
   .filter(key => (!cards[key].hidden || showHidden))
 
-  .filter(key => (isTagFilterArraysEmpty) ? tagFilter(cards[key].tags) : true)
+  .filter(key => tagFilter(cards[key].tags))
 
   .filter(key => searchFilter(cards[key]))
 
@@ -142,10 +185,21 @@ const CardList = () => {
     dispatch(fetchCards(params.albumID));
   }, [dispatch, params.albumID]);
 
+  const loadingCardList = () => {
+    return [1,2,3,4,5,6,7,8].map(key => (
+      <SkeletonCard>
+        <SkeletonCardTitle></SkeletonCardTitle>
+        <SkeletonCardImg></SkeletonCardImg>
+        <SkeletonCardDesc></SkeletonCardDesc>
+      </SkeletonCard>
+      ))
+  }
+
   const renderCardList = () => {
-    if (cardsLoading) return <p>Loading cards...</p>
+    if (cardsLoading) return loadingCardList()
     if (cardsHasErrors) return <p>Unable to display cards.</p>
 
+    
     return filteredCards.map(key => (
       <Card key={key} cardKey={key} card={cards[key]} />
       ))
