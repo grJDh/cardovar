@@ -7,19 +7,16 @@ import { filtersSelector, closeTagFilters, updateTagFilterArrays } from '../../.
 import TagFiltersCheckBox from '../../parts/TagFiltersCheckBox';
 import Button from '../../../../components/Button/Button';
 
-import './TagFilters.scss';
-
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0,0,0,0.8);
 
   justify-content: center;
@@ -33,11 +30,15 @@ const Form = styled.form`
   justify-content: center;
 
   width: 100%;
+  height: 100%;
 `;
 
 const FormPart = styled.div`
   width: 75%;
-  height: 550px;
+  height: 80%;
+  max-height: 550px;
+
+  margin: 15px;
 
   background-color: ${props => props.theme.main};
   border-radius: 6px;
@@ -48,6 +49,9 @@ const FormPart = styled.div`
   flex-wrap: wrap;
 
   color: white;
+
+  box-sizing: border-box;
+  overflow: auto;
 `;
 
 const TagFilters = () => {
@@ -95,7 +99,7 @@ const TagFilters = () => {
     }
   }, [tagFilterOpened, tags, tagFilterIncludeArray, tagFilterExcludeArray]);
 
-  const onClose = event => (event.target.className.includes("wrapper")) ? dispatch(closeTagFilters()) : "";
+  const onClose = event => (event.target.className.includes("form") && window.innerWidth > 1230) && dispatch(closeTagFilters());
   const onCloseTagFilters = () => dispatch(closeTagFilters());
   const escListener = event => {
     if (event.isComposing || event.key === "Escape") {
@@ -111,11 +115,11 @@ const TagFilters = () => {
   });
 
   return (
-    <Wrapper onClick={(event) => onClose(event)} className="wrapper">
-      <Form onSubmit={onSubmit}>
+    <Wrapper onClick={(event) => onClose(event)}>
+      <Form onSubmit={onSubmit} className="form">
         <Button type="button" label={"Close"} onFunc={onCloseTagFilters}/>
 
-        <FormPart className='tag-form'>
+        <FormPart>
           {tags.map((tag) => (
             <TagFiltersCheckBox label={tag} state={newTagFilters[tag]} onFunc={() => onSetTagList(tag)} key={tag}/>
             ))}

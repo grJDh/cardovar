@@ -5,19 +5,16 @@ import { cardsSelector, updateTagsInCards, closeTagList } from '../../../../slic
 
 import Button from '../../../../components/Button/Button';
 
-import './TagList.scss';
-
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0,0,0,0.8);
 
   justify-content: center;
@@ -29,11 +26,17 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  height: 100%;
 `;
 
 const FormPart = styled.div`
   width: 75%;
-  height: 550px;
+  height: 80%;
+  max-height: 550px;
+
+  margin: 15px;
 
   background-color: ${props => props.theme.main};
   border-radius: 6px;
@@ -44,6 +47,9 @@ const FormPart = styled.div`
   flex-wrap: wrap;
 
   color: white;
+
+  box-sizing: border-box;
+  overflow: auto;
 `;
 
 const TagBox = styled.div`
@@ -76,15 +82,17 @@ const TagList = () => {
 
   const onRenameTag = event => {
     event.preventDefault();
+
     const recursivePrompt = () => {
       const newName = prompt('Enter new name for a tag', tagList[event.target.name]);
 
-      if (Object.values(tagList).includes(newName)) {
-        alert("A tag with this name already exists!");
-        recursivePrompt();
+      if (newName) {
+        if (Object.values(tagList).includes(newName)) {
+          alert("A tag with this name already exists!");
+          recursivePrompt();
+        }
+        else setTagList({...tagList, [event.target.name]: newName});
       }
-
-      else setTagList({...tagList, [event.target.name]: newName});
     }
 
     recursivePrompt();
@@ -111,7 +119,7 @@ const TagList = () => {
     }
   }, [tagListOpened, tags]);
 
-  const onClose = event => (event.target.className.includes("wrapper")) ? dispatch(closeTagList()) : "";
+  const onClose = event => (event.target.className.includes("form")) ? dispatch(closeTagList()) : "";
   const onCloseTagTemplate = () => dispatch(closeTagList());
   const escListener = event => {
     if (event.isComposing || event.key === "Escape") {
@@ -127,8 +135,8 @@ const TagList = () => {
   });
 
   return (
-    <Wrapper onClick={(event) => onClose(event)} className="wrapper">
-      <Form onSubmit={onSubmit}>
+    <Wrapper onClick={(event) => onClose(event)}>
+      <Form onSubmit={onSubmit} className="form">
         <Button type="button" label={"Close"} onFunc={onCloseTagTemplate}/>
 
         <FormPart>

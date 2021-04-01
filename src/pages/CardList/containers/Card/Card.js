@@ -52,6 +52,7 @@ const CardFront = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  box-sizing: border-box;
 
   background-color: ${props => props.theme.main};
   border-radius: 6px;
@@ -103,22 +104,29 @@ const CardDesc = styled.div`
 `;
 
 const CardImgContainer = styled.div`
+  height: 100%;
   max-height: 420px;
-  max-width: 350px;
+  width: 100%;
   position: relative;
+  box-sizing: border-box;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   img {
-    width: auto;
+    width: 100%;
     height: auto;
 
-    max-height: 420px;
-    max-width: 350px;
+    max-height: 400px;
+    object-fit: contain;
   }
 `;
 
 const IconInput = styled.input`
   position: absolute;
   width: 35px;
+  margin: 0.5em;
 
   opacity: 0.5;
   transition: 0.5s ease;

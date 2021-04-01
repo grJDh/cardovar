@@ -14,16 +14,17 @@ import hideIcon from '../../../hide.png';
 import showIcon from '../../../show.png';
 import selectIcon from '../../../select.png';
 import tagIcon from '../../../tag.png';
+import filterIcon from '../../../filter.png';
 import plusIcon from '../../../plus.png';
 
 import styled from 'styled-components';
 
 const sidebarClosedWidth = '60px';
 const sidebarTransitionWidth = 'width 0.5s ease-in-out';
-// const sidebarTransitionHeight = 'height 0.5s ease-in-out';
+const sidebarTransitionHeight = 'height 0.5s ease-in-out';
 const sidebarTransitionFilters = 'opacity 0.5s ease-in-out';
 
-const SideBar = styled.div`
+const Sidebar = styled.div`
   width: ${props => props.sidebarOpened ? "300px" : sidebarClosedWidth};
   height: 100%;
   transition: ${sidebarTransitionWidth};
@@ -32,18 +33,30 @@ const SideBar = styled.div`
 
   position: fixed;
   left: 0;
-  padding: 0.3rem;
+  padding: 5px;
 
   display: flex;
   flex-direction: column;
 
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
 
   color: white;
+
+  box-sizing: border-box;
+
+  @media (max-width: ${props => props.theme.tablet}) {
+    ${'' /* display: none; */}
+    width: 100%;
+    height: ${props => props.sidebarOpened ? "auto" : sidebarClosedWidth};
+    transition: ${sidebarTransitionHeight};
+    z-index: 5;
+
+    top: 0;
+  }
 `;
 
-const SideBarFilters = styled.div`
+const SidebarFilters = styled.div`
   opacity: ${props => props.sidebarOpened ? 1 : 0};
   transition: ${sidebarTransitionFilters};
 
@@ -54,15 +67,70 @@ const SideBarFilters = styled.div`
   margin-bottom: 1rem;
 `;
 
-const SideBarButtons = styled.div`
+const SidebarButtons = styled.div`
   display: flex;
   flex-direction: column;
+  ${'' /* padding: 5px; */}
+
+  @media (max-width: ${props => props.theme.tablet}) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    opacity: ${props => props.sidebarOpened ? 1 : 0};
+    transition: ${sidebarTransitionFilters};
+  }
+`;
+
+const BurgerDiv = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  @media (max-width: ${props => props.theme.tablet}) {
+    justify-content: space-between;
+    flex-direction: row;
+  }
 `;
 
 const BurgerButton = styled(Button)`
-  width: ${sidebarClosedWidth};
+  width: 100%;
 
   margin: 0;
+
+  @media (max-width: ${props => props.theme.tablet}) {
+    width: ${sidebarClosedWidth};
+  }
+`;
+
+const TabletImageButton = styled(ImageButton)`
+  display: none;
+  
+  @media (min-width: ${props => props.theme.mobileSmall}) and (max-width: ${props => props.theme.tablet}) {
+    display: flex;
+    margin-left: 3px;
+    margin-right: 3px;
+
+    visibility: ${props => props.props ? "hidden" : "visible"};
+    opacity: ${props => props.props ? 0 : 1};
+    transition: ${sidebarTransitionFilters};
+
+    p {
+      display: none;
+      margin-left: 0;
+    }
+
+    @media (min-width: ${props => props.theme.tabletSmall}) {
+      p {
+        opacity: 1;
+        display: inline;
+        margin-left: 0.3rem;
+      }
+    }
+  }
 `;
 
 const Search = styled.div`
@@ -101,13 +169,50 @@ const CardListSidebar = () => {
   // ].concat(Object.keys(tags).map((tag) => [tag, tag]));
 
   return (
-    <SideBar sidebarOpened={sidebarOpened}>
+    <Sidebar sidebarOpened={sidebarOpened}>
 
-      <BurgerButton label='SDBR' onFunc={onToggleSidebar}/>
+      <BurgerDiv sidebarOpened={sidebarOpened}>
+        <BurgerButton label='SDBR' onFunc={onToggleSidebar}/>
 
-      <Link to="/">Albums</Link>
+        <TabletImageButton
+          src={plusIcon}
+          label='New card'
+          onFunc={onOpenCardTemplate}
+          props={sidebarOpened}
+        />
 
-      <SideBarFilters sidebarOpened={sidebarOpened}>
+        <TabletImageButton
+          src={tagIcon}
+          label="Tags"
+          onFunc={onOpenTagList}
+          props={sidebarOpened}
+        />
+
+        <TabletImageButton
+          src={filterIcon}
+          label="Tag filters"
+          onFunc={onOpenTagFilters}
+          props={sidebarOpened}
+        />
+
+        <TabletImageButton
+          src={selectIcon}
+          label={(selectingMode) ? 'Selection mode: on' : 'Selection mode: off'}
+          onFunc={onToggleSelectingMode}
+          props={sidebarOpened}
+        />
+
+        <TabletImageButton
+          src={(showHidden) ? hideIcon : showIcon}
+          label={(showHidden) ? "Don't show hidden cards" : 'Show hidden cards'}
+          onFunc={onToggleShowHidden}
+          props={sidebarOpened}
+        />
+
+        <Link to="/">Albums</Link>  
+      </BurgerDiv>
+
+      <SidebarFilters sidebarOpened={sidebarOpened}>
 
         {/* {categories.map((category) => (
           <Checkbox key={category} label={category} onFunc={() => onToggleCategoryFilter(category)} value={categoriesFilterArray.includes(category)} />
@@ -120,12 +225,11 @@ const CardListSidebar = () => {
 
           <Dropdown label='' onFunc={onSetSearchIn} options={searchInOptionsArray} value={"title"}/>
         </Search>
-      </SideBarFilters>
+      </SidebarFilters>
 
-      <SideBarButtons sidebarOpened={sidebarOpened}>
+      <SidebarButtons sidebarOpened={sidebarOpened}>
 
         <ImageButton
-          title="nice"
           src={plusIcon}
           label='New card'
           onFunc={onOpenCardTemplate}
@@ -140,7 +244,7 @@ const CardListSidebar = () => {
         />
 
         <ImageButton
-          src={tagIcon}
+          src={filterIcon}
           label="Tag filters"
           onFunc={onOpenTagFilters}
           props={sidebarOpened}
@@ -159,8 +263,8 @@ const CardListSidebar = () => {
           onFunc={onToggleShowHidden}
           props={sidebarOpened}
         />
-      </SideBarButtons>
-    </SideBar>
+      </SidebarButtons>
+    </Sidebar>
   );
 }
 

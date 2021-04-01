@@ -28,17 +28,25 @@ const Cards = styled.div`
   margin-left: ${props => props.sidebarOpened ? "300px" : "60px"};
   transition: margin-left 0.5s ease-in-out;
   width: 100%;
+  background-color: ${props => props.theme.mainBack};
 
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
+
+  @media (max-width: ${props => props.theme.tablet}) {
+    margin-left: 0;
+    ${'' /* transition: margin-top 0.5s ease-in-out; */}
+    margin-top: 60px;
+    ${'' /* margin-top: ${props => props.sidebarOpened ? "300px" : "60px"}; */}
+  }
 `;
 
-const StyledModalImage = styled.div`
+const ModalImage = styled.div`
   display: flex;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;
@@ -110,18 +118,21 @@ const CardList = () => {
   const { cards, tags, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened, tagListOpened } = useSelector(cardsSelector);
 
   const tagFilter = cardTags => {
+    // console.log(tagFilterIncludeArray, tagFilterExcludeArray)
     if (!(tagFilterIncludeArray.length + tagFilterExcludeArray.length)) return true;
 
     let flag = false;
     
     for (let tag of cardTags) {
-      console.log(tag, tagFilterExcludeArray.includes(tag), tagFilterIncludeArray.includes(tag))
+      // console.log(tag, tagFilterExcludeArray.includes(tag), tagFilterIncludeArray.includes(tag))
       if (tagFilterExcludeArray.includes(tag)) return false;
       if (tagFilterIncludeArray.includes(tag)) flag = true;
     };
 
+    if (!tagFilterIncludeArray.length) return true
     if (flag) return true
-    else return false;
+    
+    return false;
   }
 
   const searchFilter = card => {
@@ -206,15 +217,16 @@ const CardList = () => {
  
   return (
     <Wrapper>
-      <Cards sidebarOpened={sidebarOpened}>
         {!(cardsLoading || cardsHasErrors) && <CardListSidebar />}
 
-        {renderCardList()}
+        <Cards sidebarOpened={sidebarOpened}>
+          {renderCardList()}
+        </Cards>
 
         {(modalImageOpened) && (
-          <StyledModalImage onClick={(event) => onCloseModalImage(event)}>
+          <ModalImage onClick={(event) => onCloseModalImage(event)}>
             <img alt={modalImageAlt} src={modalImageSrc} />
-          </StyledModalImage>
+          </ModalImage>
         )}
 
         {(cardTemplateOpened) && <CardTemplate />}
@@ -224,7 +236,6 @@ const CardList = () => {
         {(tagFilterOpened) && <TagFilters />}
 
         {(selectingMode) && <MassButtonList />}
-      </Cards>
     </Wrapper>
   );
 }

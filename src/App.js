@@ -8,6 +8,13 @@ import './App.scss';
 
 import {ThemeProvider} from 'styled-components';
 
+const sizes = {
+  mobileSmall: `410px`,
+  mobile: `420px`,
+  tabletSmall: `820px`,
+  tablet: `1230px`,
+}
+
 const colors = {
   main: "#212121",
   mainBack: "#323232",
@@ -18,7 +25,7 @@ const colors = {
 
 const App = () => {
   return (
-    <ThemeProvider theme={colors}>
+    <ThemeProvider theme={{...colors, ...sizes}}>
       <Router className="app">
         <AlbumList path="/" />
         <CardList path="CardList" />
@@ -37,6 +44,6 @@ const App = () => {
 
 export default App;
 
-// better tag list
 // mobile
+// other albums
 // code review

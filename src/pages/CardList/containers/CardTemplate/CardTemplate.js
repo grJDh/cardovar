@@ -9,8 +9,6 @@ import FileInput from '../../../../components/FileInput/FileInput';
 import Button from '../../../../components/Button/Button';
 import TextArea from '../../../../components/TextArea/TextArea';
 
-import './CardTemplate.scss';
-
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -21,11 +19,14 @@ const Wrapper = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0,0,0,0.8);
 
   justify-content: center;
   align-items: center;
+
+  z-index: 10;
+  padding: 5px;
+  box-sizing: border-box;
 `;
 
 const Form = styled.form`
@@ -37,10 +38,32 @@ const Form = styled.form`
     "card-form-close card-form-close"
     "card-form-front card-form-back"
     "card-form-submit card-form-submit";
+
+  .card-form-close { grid-area: card-form-close; }
+  .card-form-front { grid-area: card-form-front; }
+  .card-form-back { grid-area: card-form-back; }
+  .card-form-submit { grid-area: card-form-submit; }
+
+  overflow: auto;
+  justify-items: center;
+  align-items: center;
+
+  @media (max-width: ${props => props.theme.tabletSmall}) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 1fr 1fr 0.1fr;
+    grid-template-areas:
+      "card-form-close"
+      "card-form-front"
+      "card-form-back"
+      "card-form-submit";
+
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const FormPart = styled.div`
-  min-width: 400px;
+  min-width: 320px;
   width: 100%;
   max-width: 420px;
   height: 550px;
@@ -116,14 +139,12 @@ const CardTemplate = () => {
   };
 
   const onCloseCardTemplate = () => dispatch(closeCardTemplate());
-  const onClose = event => (event.target.className.includes("wrapper")) && dispatch(closeCardTemplate());
-
+  const onClose = event => (event.target.className.includes("wrapper") && window.innerWidth > 1230) && dispatch(closeCardTemplate());
   const escListener = (event) => {
     if (event.isComposing || event.key === "Escape") {
       onCloseCardTemplate();
     }
   };
-
   useEffect(() => {
     window.addEventListener("keydown", event => escListener(event));
   

@@ -34,6 +34,11 @@ const StyledImageButton = styled.button`
     transition: opacity 0.5s ease-in-out;
     margin-left: 0.3rem;
   }
+
+  @media (max-width: ${props => props.theme.tablet}) {
+    flex-grow: 1;
+    flex-basis: 170px;
+  }
 `;
 
 const ImageButton = ({ src, alt, onFunc, name, label, className="", props=false }) => {
