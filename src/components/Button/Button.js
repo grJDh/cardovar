@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   height: 3rem;
+  width: 100%;
+  max-width: 150px;
   border: 1px solid black;
   border-radius: 0.25rem;
   background-color: ${props => props.theme.mainBack};
@@ -19,10 +21,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ label, onFunc, name, className="" }) => {
+const Button = ({ type="button", label, onFunc, name, className="" }) => {
 
   return (
-    <StyledButton onClick={onFunc} name={name} className={`${className}`}>
+    <StyledButton type={type} onClick={onFunc} name={name} className={`${className}`}>
       {label}
     </StyledButton>
   );

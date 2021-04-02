@@ -19,6 +19,9 @@ const Wrapper = styled.div`
 
   justify-content: center;
   align-items: center;
+
+  padding: 5px;
+  box-sizing: border-box;
 `;
 
 const Form = styled.form`
@@ -119,7 +122,7 @@ const TagList = () => {
     }
   }, [tagListOpened, tags]);
 
-  const onClose = event => (event.target.className.includes("form")) ? dispatch(closeTagList()) : "";
+  const onClose = event => (event.target.className.includes("form") && window.innerWidth > 1230) && dispatch(closeTagList());
   const onCloseTagTemplate = () => dispatch(closeTagList());
   const escListener = event => {
     if (event.isComposing || event.key === "Escape") {
@@ -137,21 +140,21 @@ const TagList = () => {
   return (
     <Wrapper onClick={(event) => onClose(event)}>
       <Form onSubmit={onSubmit} className="form">
-        <Button type="button" label={"Close"} onFunc={onCloseTagTemplate}/>
+        <Button label={"Close"} onFunc={onCloseTagTemplate}/>
 
         <FormPart>
           {tags.map((tag) => (
             <TagBox key={tag}>
               {tagList[tag]}
               <TagBoxButtons>
-                <Button type="button" label="🖊️" name={tag} onFunc={onRenameTag} />
-                <Button type="button" label="🗑️" onFunc={() => deleteTag(tag)}/>
+                <Button label="🖊️" name={tag} onFunc={onRenameTag} />
+                <Button label="🗑️" onFunc={() => deleteTag(tag)}/>
               </TagBoxButtons>
             </TagBox>
           ))}
         </FormPart>
 
-        <input type="submit" value="Submit" />
+        <Button className="card-form-submit" type="submit" label="Submit" />
       </Form>
     </Wrapper>
   );

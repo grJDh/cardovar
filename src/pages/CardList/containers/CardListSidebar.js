@@ -98,6 +98,7 @@ const BurgerDiv = styled.div`
 
 const BurgerButton = styled(Button)`
   width: 100%;
+  max-width: none;
 
   margin: 0;
 

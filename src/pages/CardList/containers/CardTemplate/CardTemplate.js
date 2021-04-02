@@ -184,7 +184,7 @@ const CardTemplate = () => {
     <Wrapper onClick={(event) => onClose(event)} className="wrapper">
       <Form onSubmit={onSubmit}>
 
-        <Button className="card-form-close" type="button" label={"Close"} onFunc={onCloseCardTemplate}/>
+        <Button className="card-form-close" label={"Close"} onFunc={onCloseCardTemplate}/>
 
         <FormPart className='card-form-front'>
           <TextBox label="Title" onFunc={onSetNewCardProps} autocomplete="off" name='title' value={newCardProps.title}/>
@@ -204,7 +204,7 @@ const CardTemplate = () => {
           <Checkbox label="Expiration?" onFunc={onToggleFileExpiration} value={fileExpiration} />
         </FormPart>
 
-        <input className="card-form-submit" type="submit" value="Submit" />
+        <Button className="card-form-submit" type="submit" label="Submit" />
       </Form>
     </Wrapper>
   );

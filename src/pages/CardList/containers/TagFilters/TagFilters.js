@@ -21,6 +21,9 @@ const Wrapper = styled.div`
 
   justify-content: center;
   align-items: center;
+
+  padding: 5px;
+  box-sizing: border-box;
 `;
 
 const Form = styled.form`
@@ -117,7 +120,7 @@ const TagFilters = () => {
   return (
     <Wrapper onClick={(event) => onClose(event)}>
       <Form onSubmit={onSubmit} className="form">
-        <Button type="button" label={"Close"} onFunc={onCloseTagFilters}/>
+        <Button label={"Close"} onFunc={onCloseTagFilters}/>
 
         <FormPart>
           {tags.map((tag) => (
@@ -125,7 +128,7 @@ const TagFilters = () => {
             ))}
         </FormPart>
 
-        <input type="submit" value="Save" />
+        <Button className="card-form-submit" type="submit" label="Submit" />
       </Form>
     </Wrapper>
   );
