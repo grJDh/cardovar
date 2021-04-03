@@ -67,7 +67,7 @@ const SkeletonAlbum = styled.div`
 const AlbumList = () => {
   const dispatch = useDispatch();
 
-  const { albums, albumsLoading, albumsHasErrors } = useSelector(albumsSelector);
+  const { albums, albumsLoading, albumsHasErrors, albumTemplateOpened } = useSelector(albumsSelector);
 
   const onAddAlbum = () => dispatch(openAlbumTemplate(["new", ""]));
 
@@ -102,7 +102,7 @@ const AlbumList = () => {
       
       {renderAlbumList()}
 
-      <AlbumTemplate />
+      {(albumTemplateOpened) && <AlbumTemplate />}
     </Wrapper>
   );
 }

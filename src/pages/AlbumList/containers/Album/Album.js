@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { navigate } from "@reach/router"
+import { Link } from "react-router-dom";
 
 import { openAlbumTemplate, deleteAlbum, duplicateAlbum } from '../../../../slices/albums';
 
@@ -98,18 +98,16 @@ const Album = ({ album, albumKey }) => {
   const onDeleteAlbum = () => window.confirm('Are you sure you want to delete this album?') && dispatch(deleteAlbum(albumKey));
   // const onToggleAlbumVisibility = () => dispatch(toggleAlbumVisibility(albumKey));
   const onDuplicateAlbum = () => dispatch(duplicateAlbum([albumKey]));
-  const onAlbumClick = event => {
-    if (event.target.tagName !== "INPUT") {
-      navigate("/albums/"+albumKey);
-    }
-  }
 
   return (
-    <Wrapper onClick={(event) => onAlbumClick(event)}>
-        <AlbumImgContainer>
-          <img src={album.img} alt={album.title} />
-          <h1>{album.title}</h1>
-        </AlbumImgContainer>
+    <Wrapper>
+        <Link to={"/albums/" + albumKey}>
+          <AlbumImgContainer>
+            <img src={album.img} alt={album.title} />
+            <h1>{album.title}</h1>
+          </AlbumImgContainer>
+        </Link>  
+        
 
         <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} title="Delete album" />
         <IconInput type="image" src={editIcon} alt="Edit album" onClick={onOpenAlbumTemplate} title="Edit album" />

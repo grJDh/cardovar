@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.95);
 
   justify-content: center;
   align-items: center;
@@ -154,7 +154,7 @@ const TagList = () => {
           ))}
         </FormPart>
 
-        <Button className="card-form-submit" type="submit" label="Submit" />
+        <Button type="submit" label="Submit" />
       </Form>
     </Wrapper>
   );

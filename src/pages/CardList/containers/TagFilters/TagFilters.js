@@ -12,16 +12,16 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   position: fixed;
-  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.95);
 
   justify-content: center;
   align-items: center;
 
+  z-index: 10;
   padding: 5px;
   box-sizing: border-box;
 `;
@@ -128,7 +128,7 @@ const TagFilters = () => {
             ))}
         </FormPart>
 
-        <Button className="card-form-submit" type="submit" label="Submit" />
+        <Button type="submit" label="Submit" />
       </Form>
     </Wrapper>
   );

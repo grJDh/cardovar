@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "@reach/router"
+import { useParams } from "react-router-dom";
 
 import CardListSidebar from './containers/CardListSidebar';
 import Card from './containers/Card/Card';
@@ -52,7 +52,7 @@ const ModalImage = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0,0,0,0.95);
 
   justify-content: center;
   align-items: center;

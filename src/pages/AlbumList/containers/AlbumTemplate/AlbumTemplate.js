@@ -10,24 +10,77 @@ import Checkbox from '../../../../components/CheckBox/CheckBox';
 import { albumsSelector, closeAlbumTemplate, changeAlbum, addAlbum } from '../../../../slices/albums';
 
 const Wrapper = styled.div`
-  display: ${props => props.opened ? 'flex': 'none'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0,0,0,0.95);
 
-  justify-content: center;
+  z-index: 10;
+  padding: 5px;
+  box-sizing: border-box;
+`;
+
+const Form = styled.form`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.2fr 3fr 0.2fr;
+  gap: 10px 10px;
+  grid-template-areas:
+    "album-form-close"
+    "album-form-part"
+    "album-form-submit";
+
+  .album-form-close { grid-area: album-form-close; }
+  .album-form-part { grid-area: album-form-part; }
+  .album-form-submit { grid-area: album-form-submit; }
+
+  overflow: auto;
+  justify-items: center;
   align-items: center;
+  width: 500px;
+
+  @media (max-width: ${props => props.theme.tabletSmall}) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 3fr 0.2fr;
+    grid-template-areas:
+      "album-form-close"
+      "album-form-part"
+      "album-form-submit";
+
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const FormPart = styled.div`
+  min-width: 300px;
+  width: 100%;
+  max-width: 500px;
+
+  height: 550px;
+
+  background-color: ${props => props.theme.main};
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  color: white;
 `;
 
 const AlbumTemplate = () => {
   const dispatch = useDispatch();
 
-  const { albums, albumTemplateOpened, albumTemplateMode, editedAlbum } = useSelector(albumsSelector);
+  const { albums, albumTemplateMode, editedAlbum } = useSelector(albumsSelector);
 
   const [newAlbumTitle, setNewAlbumTitle] = useState("");
   const [newAlbumHidden, toggleNewAlbumHidden] = useState(false);
@@ -79,14 +132,12 @@ const AlbumTemplate = () => {
   };
 
   const onCloseAlbumTemplate = () => dispatch(closeAlbumTemplate());
-  // const onClose = event => (event.target.className === "card-template opened") ? dispatch(closeCardTemplate()) : "";
-
+  const onClose = event => (event.target.className.includes("wrapper") && window.innerWidth > 1230) && dispatch(closeAlbumTemplate());
   const escListener = (event) => {
     if (event.isComposing || event.key === "Escape") {
       onCloseAlbumTemplate();
     }
   };
-
   useEffect(() => {
     window.addEventListener("keydown", event => escListener(event));
   
@@ -108,21 +159,21 @@ const AlbumTemplate = () => {
   }, [album, albumTemplateMode]);
 
   return (
-    <Wrapper opened={albumTemplateOpened}>
-      <form className='' onSubmit={onSubmit}>
+    <Wrapper onClick={(event) => onClose(event)} className="wrapper">
+      <Form onSubmit={onSubmit}>
 
-        <Button className='' type="button" label={"Close"} onFunc={onCloseAlbumTemplate}/>
+        <Button className="album-form-close" type="button" label={"Close"} onFunc={onCloseAlbumTemplate} />
 
-        <div className=''>
-          <TextBox label="Title" onFunc={onSetNewAlbumTitle} autocomplete="off" value={newAlbumTitle}/>
+        <FormPart className="album-form-part">
+          <TextBox label="Title" onFunc={onSetNewAlbumTitle} autocomplete="off" value={newAlbumTitle} />
 
           <FileInput label="Select a picture" onFunc={onSetNewAlbumFile} name='file' src={filePreview} />
 
           <Checkbox label={"Hide album"} onFunc={onToggleNewAlbumHidden} value={newAlbumHidden} />
-        </div>
+        </FormPart>
 
-        <input className="" type="submit" value="Submit" />
-      </form>
+        <Button className="album-form-submit" type="submit" label="Submit" />
+      </Form>
     </Wrapper>
   );
 }

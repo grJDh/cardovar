@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.95);
 
   justify-content: center;
   align-items: center;
@@ -63,7 +63,7 @@ const Form = styled.form`
 `;
 
 const FormPart = styled.div`
-  min-width: 320px;
+  min-width: 300px;
   width: 100%;
   max-width: 420px;
   height: 550px;
@@ -78,6 +78,22 @@ const FormPart = styled.div`
 
   color: white;
 `;
+
+// const ButtonClose = styled(Button)`
+//   grid-area: card-form-close;
+// `;
+
+// const FormFront = styled(FormPart)`
+//   grid-area: card-form-front;
+// `;
+
+// const FormBack = styled(FormPart)`
+//   grid-area: card-form-back;
+// `;
+
+// const ButtonSubmit = styled(Button)`
+//   grid-area: card-form-submit;
+// `;
 
 const CardTemplate = () => {
   const dispatch = useDispatch();
@@ -184,7 +200,7 @@ const CardTemplate = () => {
     <Wrapper onClick={(event) => onClose(event)} className="wrapper">
       <Form onSubmit={onSubmit}>
 
-        <Button className="card-form-close" label={"Close"} onFunc={onCloseCardTemplate}/>
+        <Button className="card-form-close" label="Close" onFunc={onCloseCardTemplate}/>
 
         <FormPart className='card-form-front'>
           <TextBox label="Title" onFunc={onSetNewCardProps} autocomplete="off" name='title' value={newCardProps.title}/>

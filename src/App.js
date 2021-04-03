@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Redirect } from "@reach/router"
+import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
@@ -26,17 +26,16 @@ const colors = {
 const App = () => {
   return (
     <ThemeProvider theme={{...colors, ...sizes}}>
-      <Router className="app">
-        <AlbumList path="/" />
-        <CardList path="CardList" />
-        <CardList path="albums/:albumID" />
+      <Router basename={process.env.PUBLIC_URL}>
+        <Switch>
+          <Route exact path="/" component={AlbumList} />
+          <Route path="/albums/:albumID" component={CardList} />
+        </Switch>
 
         <Redirect
-          from="albums"
+          from="/albums"
           to="/"
-          noThrow 
         />
-
       </Router>
     </ThemeProvider>
   );
@@ -44,6 +43,7 @@ const App = () => {
 
 export default App;
 
-// mobile
+// router problem (https://grjdh.github.io/campaign-characters/albums/0)
+ 
 // other albums
 // code review

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "@reach/router"
+import { Link } from "react-router-dom"
 
 import SearchBox from '../../../components/SearchBox/SearchBox';
 import Button from '../../../components/Button/Button';
@@ -137,23 +137,22 @@ const TabletImageButton = styled(ImageButton)`
 const Search = styled.div`
   display: flex;
   flex-direction: column;
+
+  visibility: ${props => props.props ? "visible" : "hidden"};
 `;
 
 const CardListSidebar = () => {
   const dispatch = useDispatch();
 
-  // const { sidebarOpened } = useSelector(tagsSelector);
   const { showHidden, selectingMode } = useSelector(cardsSelector);
   const { searchFilterValue, sidebarOpened } = useSelector(filtersSelector);
 
   const onToggleSidebar = () => dispatch(toggleSidebar());
-  // const onToggleCategoryFilter = category => dispatch(toggleCategoryFilter(category));
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
   const onResetSearchField = () => dispatch(resetSearchField());
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["new", ""]));
   const onOpenTagList = () => dispatch(openTagList());
   const onOpenTagFilters = () => dispatch(openTagFilters());
-  // const onSetSorting = event => dispatch(setSorting(event.target.value));
   const onSetSearchIn = event => dispatch(setSearchIn(event.target.value));
   const onToggleShowHidden = () => dispatch(toggleShowHidden());
   const onToggleSelectingMode = () => dispatch(toggleSelectingMode());
@@ -163,11 +162,6 @@ const CardListSidebar = () => {
     ["title", "in titles"],
     ["desc", "in descriptions"],
   ];
-
-  // const sortingOptionsArray = [
-  //   ["title", "Title"],
-  //   ["desc", "Description"]
-  // ].concat(Object.keys(tags).map((tag) => [tag, tag]));
 
   return (
     <Sidebar sidebarOpened={sidebarOpened}>
@@ -215,13 +209,7 @@ const CardListSidebar = () => {
 
       <SidebarFilters sidebarOpened={sidebarOpened}>
 
-        {/* {categories.map((category) => (
-          <Checkbox key={category} label={category} onFunc={() => onToggleCategoryFilter(category)} value={categoriesFilterArray.includes(category)} />
-          ))} */}
-        
-        {/* <Dropdown label='Sort by' onFunc={onSetSorting} options={sortingOptionsArray} value={"titles"}/> */}
-
-        <Search>
+        <Search props={sidebarOpened}>
           <SearchBox label='Search' onFunc={onChangeSearchField} onResetFunc={onResetSearchField} value={searchFilterValue} autocomplete="off"/>
 
           <Dropdown label='' onFunc={onSetSearchIn} options={searchInOptionsArray} value={"title"}/>
