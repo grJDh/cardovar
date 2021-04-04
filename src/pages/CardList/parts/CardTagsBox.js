@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const CardTagsBox = ({tags}) => {
 
-  const tagsString = tags.join(', ')
+  const tagsString = [...tags].sort().join(', ')
 
   return (
     <Wrapper>

@@ -21,6 +21,12 @@ export const fetchCards = albumID => {
   }
 }
 
+export const cleanTagsExported = () => {
+  return dispatch => {
+    dispatch(cleanTags());
+  }
+}
+
 export const initialState = {
   //cards
   cards: {},
@@ -145,13 +151,16 @@ const cardsSlice = createSlice({
       state.tags = payload;
     },
 
-    openTagList: (state) => {
+    cleanTags: state => {
       state.tags = [...new Set(Object.keys(state.cards).reduce((arr, key) => {
         return [...arr, ...state.cards[key].tags]
-      }, []))];
+      }, []))].sort();
+    },
+
+    openTagList: state => {
       state.tagListOpened = true;
     },
-    closeTagList: (state) => {
+    closeTagList: state => {
       state.tagListOpened = false;
     },
   }
@@ -161,7 +170,7 @@ export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, 
                deleteCard, duplicateCard, toggleShowHidden, toggleSelectingMode, toggleCardSelection, massAddTagToCard, massDeleteTagFromCard,
                massDeleteCard, massToggleCardVisibility,
                
-               setFetchedTags, openTagList, closeTagList } = cardsSlice.actions;
+               setFetchedTags, cleanTags, openTagList, closeTagList } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

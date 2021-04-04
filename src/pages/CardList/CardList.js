@@ -118,13 +118,11 @@ const CardList = () => {
   const { cards, tags, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened, tagListOpened } = useSelector(cardsSelector);
 
   const tagFilter = cardTags => {
-    // console.log(tagFilterIncludeArray, tagFilterExcludeArray)
     if (!(tagFilterIncludeArray.length + tagFilterExcludeArray.length)) return true;
 
     let flag = false;
     
     for (let tag of cardTags) {
-      // console.log(tag, tagFilterExcludeArray.includes(tag), tagFilterIncludeArray.includes(tag))
       if (tagFilterExcludeArray.includes(tag)) return false;
       if (tagFilterIncludeArray.includes(tag)) flag = true;
     };
@@ -136,7 +134,7 @@ const CardList = () => {
   }
 
   const searchFilter = card => {
-    const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase())
+    const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase().trim())
 
     switch (searchIn) {
       case "title":
@@ -144,7 +142,6 @@ const CardList = () => {
       case "desc":
         return searching(card.longDesc);
       default:
-        // const searchinTags = Object.keys(card.tags).map(tag => searching(card.tags[tag])).includes(true);
         return (searching(card.title) || searching(card.longDesc)) ? true : false;
     }
   }

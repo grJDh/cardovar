@@ -8,7 +8,7 @@ import ImageButton from '../../../components/ImageButton/ImageButton';
 import Dropdown from '../../../components/Dropdown/Dropdown';
 
 import { filtersSelector, toggleSidebar, openTagFilters, changeSearchField, resetSearchField, setSearchIn } from '../../../slices/filters';
-import { cardsSelector, openCardTemplate, toggleShowHidden, toggleSelectingMode, openTagList } from '../../../slices/cards';
+import { cardsSelector, openCardTemplate, toggleShowHidden, toggleSelectingMode, openTagList, cleanTagsExported } from '../../../slices/cards';
 
 import hideIcon from '../../../hide.png';
 import showIcon from '../../../show.png';
@@ -151,8 +151,14 @@ const CardListSidebar = () => {
   const onChangeSearchField = event => dispatch(changeSearchField(event.target.value));
   const onResetSearchField = () => dispatch(resetSearchField());
   const onOpenCardTemplate = () => dispatch(openCardTemplate(["new", ""]));
-  const onOpenTagList = () => dispatch(openTagList());
-  const onOpenTagFilters = () => dispatch(openTagFilters());
+  const onOpenTagList = () => {
+    dispatch(cleanTagsExported());
+    dispatch(openTagList());
+  }
+  const onOpenTagFilters = () => {
+    dispatch(cleanTagsExported());
+    dispatch(openTagFilters());
+  }
   const onSetSearchIn = event => dispatch(setSearchIn(event.target.value));
   const onToggleShowHidden = () => dispatch(toggleShowHidden());
   const onToggleSelectingMode = () => dispatch(toggleSelectingMode());
@@ -204,7 +210,7 @@ const CardListSidebar = () => {
           props={sidebarOpened}
         />
 
-        <Link to="/">Albums</Link>  
+        <Link to="/">Albums</Link>
       </BurgerDiv>
 
       <SidebarFilters sidebarOpened={sidebarOpened}>

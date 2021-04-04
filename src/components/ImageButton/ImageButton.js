@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledImageButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   height: 3rem;
   border: 1px solid black;
   border-radius: 0.25rem;
@@ -9,10 +13,6 @@ const StyledImageButton = styled.button`
   color: white;
 
   cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &:hover {
     background-color: ${props => props.theme.main};

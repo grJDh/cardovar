@@ -145,11 +145,14 @@ const CardTemplate = () => {
           body: formData,
         }
       )
-      .then((response) => response.json())
-      .then((result) => executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: result.data.medium.url, imgFull: result.data.image.url}}))
+      .then(response => response.json())
+      // .then(result => console.log(result))
+      .then(result => {
+        if (result.data.medium) executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: result.data.medium.url, imgFull: result.data.image.url}})
+        else executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: result.data.image.url, imgFull: result.data.image.url}})
+      })
       .catch((error) => console.error('Uploading error: ', error));
-    }
-    else executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: newCardProps.img, imgFull: newCardProps.imgFull}});
+    } else executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: newCardProps.img, imgFull: newCardProps.imgFull}});
 
     onCloseCardTemplate();
   };
@@ -184,7 +187,7 @@ const CardTemplate = () => {
     } else {
       setNewCardProps({
         title: card.title,
-        shortDesc: card.desc,
+        shortDesc: card.shortDesc,
         longDesc: card.longDesc,
         img: card.img,
         imgFull: card.imgFull,
