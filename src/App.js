@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
@@ -43,8 +43,5 @@ const App = () => {
 }
 
 export default App;
-
-// router problem (https://grjdh.github.io/campaign-characters/albums/0)
  
 // other albums
-// code review
