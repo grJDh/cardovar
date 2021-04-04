@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
@@ -26,16 +26,17 @@ const colors = {
 const App = () => {
   return (
     <ThemeProvider theme={{...colors, ...sizes}}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <Switch>
           <Route exact path="/" component={AlbumList} />
           <Route path="/albums/:albumID" component={CardList} />
         </Switch>
-
+{/* 
         <Redirect
+          exact
           from="/albums"
           to="/"
-        />
+        /> */}
       </Router>
     </ThemeProvider>
   );
