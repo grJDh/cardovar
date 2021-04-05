@@ -72,7 +72,7 @@ const Wrapper = styled.div`
     margin: 0;
     color: white;
 
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
 
     font-size: 3rem;
   }
