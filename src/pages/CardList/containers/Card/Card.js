@@ -69,13 +69,11 @@ const CardFront = styled.div`
 const CardBack = styled(CardFront)`
   transform: rotateY(180deg);
   position: relative;
-
-  p, h2 {
-    margin: 0px;
-  }
+  padding: 1em;
 
   p {
-    font-size: 1.2rem;
+    margin: 0px;
+    font-size: 1.2em;
   }
 `;
 
