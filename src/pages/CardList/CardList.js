@@ -114,8 +114,7 @@ const CardList = () => {
 
   const { sidebarOpened, tagFilterOpened, tagFilterIncludeArray, tagFilterExcludeArray, searchFilterValue, sorting, searchIn } = useSelector(filtersSelector);
   const { modalImageAlt, modalImageSrc, modalImageOpened } = useSelector(modalSelector);
-  // eslint-disable-next-line
-  const { cards, tags, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened, tagListOpened } = useSelector(cardsSelector);
+  const { cards, cardsLoading, cardsHasErrors, showHidden, selectingMode, cardTemplateOpened, tagListOpened } = useSelector(cardsSelector);
 
   const tagFilter = cardTags => {
     if (!(tagFilterIncludeArray.length + tagFilterExcludeArray.length)) return true;
@@ -134,7 +133,7 @@ const CardList = () => {
   }
 
   const searchFilter = card => {
-    const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase().trim())
+    const searching = whereToSearch => whereToSearch.toLowerCase().includes(searchFilterValue.toLowerCase().trim());
 
     switch (searchIn) {
       case "title":
@@ -146,8 +145,7 @@ const CardList = () => {
     }
   }
 
-  // console.log(tags)
-  // console.log(cards)
+  console.log(cards)
 
   const filteredCards = Object.keys(cards)
   .filter(key => (!cards[key].hidden || showHidden))

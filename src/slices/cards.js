@@ -13,7 +13,6 @@ export const fetchCards = albumID => {
       const data = await response.json();
 
       dispatch(getCardsSuccess(data.cards));
-      dispatch(setFetchedTags(data.tags));
     } catch (error) {
       console.log(error);
       dispatch(getCardsFailure());
@@ -147,10 +146,6 @@ const cardsSlice = createSlice({
     },
 
     //tags
-    setFetchedTags: (state, { payload }) => {
-      state.tags = payload;
-    },
-
     cleanTags: state => {
       state.tags = [...new Set(Object.keys(state.cards).reduce((arr, key) => {
         return [...arr, ...state.cards[key].tags]
@@ -170,7 +165,7 @@ export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, 
                deleteCard, duplicateCard, toggleShowHidden, toggleSelectingMode, toggleCardSelection, massAddTagToCard, massDeleteTagFromCard,
                massDeleteCard, massToggleCardVisibility,
                
-               setFetchedTags, cleanTags, openTagList, closeTagList } = cardsSlice.actions;
+              cleanTags, openTagList, closeTagList } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

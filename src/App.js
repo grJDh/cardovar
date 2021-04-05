@@ -44,4 +44,4 @@ const App = () => {
 
 export default App;
  
-// other albums
+// mass image adding
