@@ -29,8 +29,14 @@ const Wrapper = styled.div`
   overflow: hidden;
 
   background-color: transparent;
+
   &:hover {
     background-color: ${props => props.theme.mainDark};
+
+    img {
+      transform: scale(1.1);
+      transition: transform 0.4s ease-in-out;
+    }
   }
 
   a {
@@ -46,9 +52,9 @@ const Wrapper = styled.div`
       width: 100%;
       transition: scale 1s;
       object-fit: cover;
-    }
-    &:hover img {
-      scale: 1.1
+
+      transform: scale(1);
+      transition: transform 0.4s ease-in-out;
     }
   }
 
