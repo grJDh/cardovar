@@ -11,7 +11,7 @@ import duplicateIcon from '../../../../duplicate.png';
 
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper2 = styled.div`
   height: 360px;
   flex: 1 1 480px;
   border: 1px solid black;
@@ -45,18 +45,65 @@ const Wrapper = styled.div`
   }
 `;
 
-const AlbumImgContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  box-sizing: content-box;
-  overflow:hidden;
+const Wrapper = styled.div`
+  height: 360px;
+  flex: 1 1 480px;
+  margin: 0.7rem;
+  position: relative;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, 0.2);
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  background-color: transparent;
+  &:hover {
+    background-color: ${props => props.theme.mainDark};
   }
 
+  a {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      height: 100%;
+      width: 100%;
+      transition: scale 1s;
+      object-fit: cover;
+    }
+    &:hover img {
+      scale: 1.1
+    }
+  }
+
+  h1 {
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    margin: 0;
+    color: white;
+
+    background-color: rgba(0, 0, 0, 0.3);
+
+    font-size: 3rem;
+  }
 `;
 
 const IconInput = styled.input`
@@ -102,12 +149,9 @@ const Album = ({ album, albumKey }) => {
   return (
     <Wrapper>
         <Link to={"/albums/" + albumKey}>
-          <AlbumImgContainer>
-            <img src={album.img} alt={album.title} />
-            <h1>{album.title}</h1>
-          </AlbumImgContainer>
+          <img src={album.img} alt={album.title} />
+          <h1>{album.title}</h1>
         </Link>  
-        
 
         <IconInput type="image" src={deleteIcon} alt="Delete album" onClick={onDeleteAlbum} title="Delete album" />
         <IconInput type="image" src={editIcon} alt="Edit album" onClick={onOpenAlbumTemplate} title="Edit album" />

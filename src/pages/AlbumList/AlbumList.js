@@ -23,16 +23,23 @@ const List = styled.div`
 const AddAlbumButton = styled.button`
   height: 360px;
   flex: 1 1 480px;
+  margin: 0.7rem;
+  background-color: ${props => props.theme.main};
+  border: none;
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px 2px rgba( 0, 0, 0, 0.2);
+  cursor: pointer;
 
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 
   font-size: 120px;
-
-  background-color: ${props => props.theme.main};
+  color: white;
 
   &:hover {
     background-color: ${props => props.theme.mainDark};
-    cursor: pointer;
   }
 `;
 
@@ -50,7 +57,6 @@ const SkeletonAlbum = styled.div`
   height: 360px;
   flex: 1 1 480px;
   margin: 0.7rem;
-  padding: 0.5rem;
   background-image: linear-gradient(90deg, ${props => props.theme.main} 0px, ${props => props.theme.mainBack} 80px, ${props => props.theme.main} 160px);
   background-size: 1000px;
   border-radius: 6px;
