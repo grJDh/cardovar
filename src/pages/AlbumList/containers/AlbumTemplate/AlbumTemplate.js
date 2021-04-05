@@ -123,7 +123,10 @@ const AlbumTemplate = () => {
         }
       )
       .then((response) => response.json())
-      .then((result) => executeAction({title: newAlbumTitle, url: "", img: result.data.medium.url, categories: [], hidden: false}))
+      .then(result => {
+        if (result.data.medium) executeAction({title: newAlbumTitle, url: "", img: result.data.medium.url, categories: [], hidden: false})
+        else executeAction({title: newAlbumTitle, url: "", img: result.data.image.url, categories: [], hidden: false})
+      })
       .catch((error) => console.error('Error: ', error));
     }
     else executeAction({title: newAlbumTitle, url: "", img: filePreview, categories: [], hidden: newAlbumHidden});
