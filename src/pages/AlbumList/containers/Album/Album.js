@@ -11,40 +11,6 @@ import duplicateIcon from '../../../../duplicate.png';
 
 import styled from 'styled-components';
 
-const Wrapper2 = styled.div`
-  height: 360px;
-  flex: 1 1 480px;
-  border: 1px solid black;
-  position: relative;
-  cursor: pointer;
-  background-color: transparent;
-
-  &:hover img {
-    scale: 1.1
-  }
-  img {
-    transition: scale 1s;
-  }
-
-  h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    
-    margin: 0;
-    color: white;
-
-    background-color: rgba(0, 0, 0, 0.3);
-
-    font-size: 3rem;
-  }
-`;
-
 const Wrapper = styled.div`
   height: 360px;
   flex: 1 1 480px;
