@@ -145,7 +145,7 @@ const CardList = () => {
     }
   }
 
-  console.log(cards)
+  // console.log(cards)
 
   const filteredCards = Object.keys(cards)
   .filter(key => (!cards[key].hidden || showHidden))
