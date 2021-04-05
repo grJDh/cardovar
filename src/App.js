@@ -45,3 +45,4 @@ const App = () => {
 export default App;
  
 // mass image adding
+// merging tags
