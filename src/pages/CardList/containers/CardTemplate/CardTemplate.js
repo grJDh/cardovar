@@ -9,6 +9,8 @@ import FileInput from '../../../../components/FileInput/FileInput';
 import Button from '../../../../components/Button/Button';
 import TextArea from '../../../../components/TextArea/TextArea';
 
+import { allowedFileTypes } from '../../../../constants';
+
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -103,19 +105,28 @@ const CardTemplate = () => {
   const card = cards[editedCard]
 
   const [newCardProps, setNewCardProps] = useState({});
-  const [filePreview, setFilePreview] = useState();
   const [newCardFile, setNewCardFile] = useState();
+  const [filePreview, setFilePreview] = useState();
   const [fileExpiration, toggleFileExpiration] = useState(true);
 
   const onSetNewCardProps = event => setNewCardProps({...newCardProps, [event.target.name]: event.target.value});
   const onSetNewCardHidden = () => setNewCardProps({...newCardProps, hidden: !newCardProps.hidden})
   const onSetNewCardFile = event => {
-    setNewCardFile(event.target.files[0]);
+    const file = event.target.files;
+    
+    if (!allowedFileTypes.includes(file[0].type)) {
+      alert("File format must be either png or jpg!");
+      return;
+    }
+
+    console.log(file)
+    
+    setNewCardFile(file[0]);
 
     const reader = new FileReader();
     reader.onload = (e) => setFilePreview(e.target.result);
 
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(file[0]);
   };
   const onToggleFileExpiration = () => toggleFileExpiration(!fileExpiration);
 

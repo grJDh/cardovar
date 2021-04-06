@@ -2,13 +2,19 @@ import React from 'react';
 
 import './FileInput.scss';
 
-const FileInput = ({ label, onFunc, name, src }) => {
+// import styled from 'styled-components';
+
+// const Wrapper = styled.div`
+//   position: relative;
+// `;
+
+const FileInput = ({ onFunc, name, src }) => {
 
   return (
     <div className='fileinput'>
-      <label className='fileinput-label' htmlFor={label}>
-        <input className='visually-hidden' type="file" onChange={onFunc} id={label} name={name}/>
-        <img src={src} alt="Choose pic" />
+      <label className='fileinput-label'>
+        <input className='visually-hidden' type="file" onChange={onFunc} name={name} multiple/>
+        <img src={src} alt="Choose a pic" />
       </label>
     </div>
   );
