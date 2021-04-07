@@ -88,7 +88,8 @@ const cardsSlice = createSlice({
       state.cards = newCards;
     },
     duplicateCard: (state, { payload }) => {
-      state.cards = {...state.cards, [Object.keys(state.cards).length]: state.cards[payload]};
+      const id = Math.random().toString(16).slice(2);
+      state.cards = {...state.cards, [id]: state.cards[payload]};
     },
 
     toggleShowHidden: state => {

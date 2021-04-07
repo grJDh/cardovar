@@ -55,7 +55,8 @@ const albumsSlice = createSlice({
     },
 
     addAlbum: (state, { payload }) => {
-      state.albums = {...state.albums, [Object.keys(state.albums).length]: payload};
+      const id = Math.random().toString(16).slice(2);
+      state.albums = {...state.albums, [id]: payload};
     },
     changeAlbum: (state, { payload }) => {
       state.albums = {...state.albums, [state.editedAlbum]: payload};
@@ -66,7 +67,8 @@ const albumsSlice = createSlice({
       state.albums = newAlbums;
     },
     duplicateAlbum: (state, { payload }) => {
-      state.albums = {...state.albums, [Object.keys(state.albums).length]: state.albums[payload]};
+      const id = Math.random().toString(16).slice(2);
+      state.albums = {...state.albums, [id]: state.albums[payload]};
     },
     toggleAlbumVisibility: (state, { payload }) => {
       state.albums[payload] = {...state.albums[payload], hidden: !state.albums[payload].hidden};
