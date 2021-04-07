@@ -16,9 +16,6 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.95);
@@ -113,18 +110,18 @@ const CardTemplate = () => {
   const onSetNewCardHidden = () => setNewCardProps({...newCardProps, hidden: !newCardProps.hidden})
   const onSetNewCardFile = event => {
     const file = event.target.files;
-    
+
     if (!allowedFileTypes.includes(file[0].type)) {
       alert("File format must be either png or jpg!");
       return;
     }
 
-    console.log(file)
+    // console.log(file)
     
     setNewCardFile(file[0]);
 
     const reader = new FileReader();
-    reader.onload = (e) => setFilePreview(e.target.result);
+    reader.onload = () => setFilePreview(reader.result);
 
     reader.readAsDataURL(file[0]);
   };
