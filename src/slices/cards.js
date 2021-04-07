@@ -76,7 +76,8 @@ const cardsSlice = createSlice({
     },
 
     addCard: (state, { payload }) => {
-      state.cards = {...state.cards, [Object.keys(state.cards).length]: payload};
+      const id = Math.random().toString(16).slice(2);
+      state.cards = {...state.cards, [id]: payload};
     },
     changeCard: (state, { payload }) => {
       state.cards = {...state.cards, [state.editedCard]: payload};
