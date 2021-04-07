@@ -13,7 +13,7 @@ const FileInput = ({ onFunc, name, src }) => {
   return (
     <div className='fileinput'>
       <label className='fileinput-label'>
-        <input className='visually-hidden' type="file" onChange={onFunc} name={name} multiple/>
+        <input className='visually-hidden' type="file" onChange={onFunc} name={name}/>
         <img src={src} alt="Choose a pic" />
       </label>
     </div>
