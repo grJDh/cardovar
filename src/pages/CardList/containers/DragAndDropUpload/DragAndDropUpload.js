@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { startMassImageAdding } from '../../../../slices/cards';
 
 import Button from '../../../../components/Button/Button';
 
@@ -109,6 +112,7 @@ const ImgDiv = styled.div`
 `;
 
 const DragAndDropUpload = () => {
+  const dispatch = useDispatch();
 
   const [imgsArray, setImgsArray] = useState([]);
   const [isDragged, setIsDragged] = useState(false);
@@ -129,7 +133,7 @@ const DragAndDropUpload = () => {
   const onDragOver = e => {
     e.preventDefault();
     e.stopPropagation();
-  }
+  };
   const onDrop = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -163,7 +167,11 @@ const DragAndDropUpload = () => {
       setIsDragged(false);
     });
   };
-  const onRemoveImg = i => setImgsArray([...imgsArray.slice(0, i), ...imgsArray.slice(i+1)])
+  const onRemoveImg = i => setImgsArray([...imgsArray.slice(0, i), ...imgsArray.slice(i+1)]);
+  const onSubmit = () => {
+    dispatch(startMassImageAdding(imgsArray));
+    setImgsArray([]);
+  };
 
   const onCloseDragAndDrop = () => setImgsArray([]);
   const onClose = event => (event.target.className.includes("wrapper")) && setImgsArray([]);
@@ -196,7 +204,7 @@ const DragAndDropUpload = () => {
               </ImgDiv>
             ))}
           </Imgs>
-          <Button onFunc={() => setImgsArray([])} label="Submit" />
+          <Button onFunc={onSubmit} label="Submit" />
         </ImgsList>
       )}
     </Wrapper>
