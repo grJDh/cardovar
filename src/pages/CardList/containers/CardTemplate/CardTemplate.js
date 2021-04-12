@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { cardsSelector, addCard, changeCard, closeCardTemplate } from '../../../../slices/cards';
+import { cardsSelector, addCard, changeCard, closeCardTemplate, removeImgFromMassImgsArray } from '../../../../slices/cards';
 
 import TextBox from '../../../../components/TextBox/TextBox';
 import Checkbox from '../../../../components/CheckBox/CheckBox';
@@ -9,14 +9,13 @@ import FileInput from '../../../../components/FileInput/FileInput';
 import Button from '../../../../components/Button/Button';
 import TextArea from '../../../../components/TextArea/TextArea';
 
+import { allowedFileTypes } from '../../../../constants';
+
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
   position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.95);
@@ -98,24 +97,30 @@ const FormPart = styled.div`
 const CardTemplate = () => {
   const dispatch = useDispatch();
 
-  const { cards, cardTemplateMode, editedCard } = useSelector(cardsSelector);
+  const { cards, cardTemplateMode, editedCard, massImgsArray } = useSelector(cardsSelector);
 
   const card = cards[editedCard]
 
   const [newCardProps, setNewCardProps] = useState({});
-  const [filePreview, setFilePreview] = useState();
   const [newCardFile, setNewCardFile] = useState();
+  const [filePreview, setFilePreview] = useState();
   const [fileExpiration, toggleFileExpiration] = useState(true);
 
   const onSetNewCardProps = event => setNewCardProps({...newCardProps, [event.target.name]: event.target.value});
   const onSetNewCardHidden = () => setNewCardProps({...newCardProps, hidden: !newCardProps.hidden})
   const onSetNewCardFile = event => {
-    setNewCardFile(event.target.files[0]);
+    const file = event.target.files;
+
+    if (!allowedFileTypes.includes(file[0].type)) {
+      alert("File format must be either png or jpg!");
+      return;
+    }
+    
+    setNewCardFile(file[0]);
 
     const reader = new FileReader();
-    reader.onload = (e) => setFilePreview(e.target.result);
-
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(file[0]);
+    reader.onload = () => setFilePreview(reader.result);
   };
   const onToggleFileExpiration = () => toggleFileExpiration(!fileExpiration);
 
@@ -123,10 +128,16 @@ const CardTemplate = () => {
     e.preventDefault();
 
     const executeAction = payload => {
-      if (cardTemplateMode === "edit") {
-        dispatch(changeCard(payload));
-      } else {
-        dispatch(addCard(payload));
+      switch (cardTemplateMode) {
+        case "new":
+          dispatch(addCard(payload));
+          break;
+        case "mass":
+          dispatch(addCard(payload));
+          break;
+        default:
+          dispatch(changeCard(payload));
+          break;
       }
     }
 
@@ -154,7 +165,12 @@ const CardTemplate = () => {
       .catch((error) => console.error('Uploading error: ', error));
     } else executeAction({...{...newCardProps, tags: tagsStringToArray(newCardProps.tags), img: newCardProps.img, imgFull: newCardProps.imgFull}});
 
-    onCloseCardTemplate();
+    if (cardTemplateMode === "mass" && massImgsArray.length > 1) {
+      dispatch(removeImgFromMassImgsArray());
+    }
+    else {
+      onCloseCardTemplate();
+    }
   };
 
   const onCloseCardTemplate = () => dispatch(closeCardTemplate());
@@ -173,31 +189,58 @@ const CardTemplate = () => {
   });
 
   useEffect(() => {
-    if (cardTemplateMode === "new") {
-      setNewCardProps({
-        title: "",
-        shortDesc: "",
-        longDesc: "",
-        img: "",
-        imgFull: "",
-        tags: "",
-        hidden: false
-      });
-      setFilePreview("");
-    } else {
-      setNewCardProps({
-        title: card.title,
-        shortDesc: card.shortDesc,
-        longDesc: card.longDesc,
-        img: card.img,
-        imgFull: card.imgFull,
-        tags: card.tags.join(),
-        hidden: card.hidden
-      });
-      setFilePreview(card.img);
+    const dataURLtoFile = (dataurl, filename) => {
+      var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      while(n--){
+          u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, {type:mime});
     }
+
+    switch (cardTemplateMode) {
+      case "new":
+        setNewCardProps({
+          title: "",
+          shortDesc: "",
+          longDesc: "",
+          img: "",
+          imgFull: "",
+          tags: "",
+          hidden: false
+        });
+        setFilePreview("");
+        break;
+      case "mass":
+        setNewCardProps({
+          title: "",
+          shortDesc: "",
+          longDesc: "",
+          img: "",
+          imgFull: "",
+          tags: "",
+          hidden: false
+        });
+          const fileName = new Date();
+          setNewCardFile(dataURLtoFile(massImgsArray[0], fileName));
+          setFilePreview(massImgsArray[0]);
+        break;
+      default:
+        setNewCardProps({
+          title: card.title,
+          shortDesc: card.shortDesc,
+          longDesc: card.longDesc,
+          img: card.img,
+          imgFull: card.imgFull,
+          tags: card.tags.join(),
+          hidden: card.hidden
+        });
+        setFilePreview(card.img);
+        break;
+    }
+
     toggleFileExpiration(true);
-  }, [card, cardTemplateMode]);
+  }, [card, cardTemplateMode, massImgsArray]);
 
   return (
     <Wrapper onClick={(event) => onClose(event)} className="wrapper">

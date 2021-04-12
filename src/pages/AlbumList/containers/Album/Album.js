@@ -35,7 +35,6 @@ const Wrapper = styled.div`
 
     img {
       transform: scale(1.1);
-      transition: transform 0.4s ease-in-out;
     }
   }
 

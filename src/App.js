@@ -45,4 +45,6 @@ const App = () => {
 export default App;
  
 // mass image adding
-// merging tags
+// tags merging
+// markdown
+// memory leak когда пытаешься дропнуть изображения сразу после загрузки страницы

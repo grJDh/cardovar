@@ -2,20 +2,20 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom"
 
-import SearchBox from '../../../components/SearchBox/SearchBox';
-import Button from '../../../components/Button/Button';
-import ImageButton from '../../../components/ImageButton/ImageButton';
-import Dropdown from '../../../components/Dropdown/Dropdown';
+import SearchBox from '../../../../components/SearchBox/SearchBox';
+import Button from '../../../../components/Button/Button';
+import ImageButton from '../../../../components/ImageButton/ImageButton';
+import Dropdown from '../../../../components/Dropdown/Dropdown';
 
-import { filtersSelector, toggleSidebar, openTagFilters, changeSearchField, resetSearchField, setSearchIn } from '../../../slices/filters';
-import { cardsSelector, openCardTemplate, toggleShowHidden, toggleSelectingMode, openTagList, cleanTagsExported } from '../../../slices/cards';
+import { filtersSelector, toggleSidebar, openTagFilters, changeSearchField, resetSearchField, setSearchIn } from '../../../../slices/filters';
+import { cardsSelector, openCardTemplate, toggleShowHidden, toggleSelectingMode, openTagList, cleanTagsExported } from '../../../../slices/cards';
 
-import hideIcon from '../../../hide.png';
-import showIcon from '../../../show.png';
-import selectIcon from '../../../select.png';
-import tagIcon from '../../../tag.png';
-import filterIcon from '../../../filter.png';
-import plusIcon from '../../../plus.png';
+import hideIcon from '../../../../hide.png';
+import showIcon from '../../../../show.png';
+import selectIcon from '../../../../select.png';
+import tagIcon from '../../../../tag.png';
+import filterIcon from '../../../../filter.png';
+import plusIcon from '../../../../plus.png';
 
 import styled from 'styled-components';
 

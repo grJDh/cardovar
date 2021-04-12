@@ -36,6 +36,7 @@ export const initialState = {
   cardTemplateOpened: false,
   cardTemplateMode: "new",
   editedCard: "",
+  massImgsArray: [],
 
   selectingMode: false,
   selectedCards: [],
@@ -72,11 +73,22 @@ const cardsSlice = createSlice({
       state.editedCard = payload[1];
     },
     closeCardTemplate: state => {
+      state.cardTemplateMode = "new";
       state.cardTemplateOpened = false;
     },
+    startMassImageAdding: (state, { payload }) => {
+      state.cardTemplateOpened = true;
+      state.massImgsArray = payload;
+      state.cardTemplateMode = "mass";
+    },
+    removeImgFromMassImgsArray: state => {
+      state.massImgsArray = [...state.massImgsArray.slice(1)];
+    },
+    
 
     addCard: (state, { payload }) => {
-      state.cards = {...state.cards, [Object.keys(state.cards).length]: payload};
+      const id = Math.random().toString(16).slice(2);
+      state.cards = {...state.cards, [id]: payload};
     },
     changeCard: (state, { payload }) => {
       state.cards = {...state.cards, [state.editedCard]: payload};
@@ -87,7 +99,8 @@ const cardsSlice = createSlice({
       state.cards = newCards;
     },
     duplicateCard: (state, { payload }) => {
-      state.cards = {...state.cards, [Object.keys(state.cards).length]: state.cards[payload]};
+      const id = Math.random().toString(16).slice(2);
+      state.cards = {...state.cards, [id]: state.cards[payload]};
     },
 
     toggleShowHidden: state => {
@@ -161,11 +174,12 @@ const cardsSlice = createSlice({
   }
 });
 
-export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard, openCardTemplate, closeCardTemplate, updateTagsInCards,
-               deleteCard, duplicateCard, toggleShowHidden, toggleSelectingMode, toggleCardSelection, massAddTagToCard, massDeleteTagFromCard,
-               massDeleteCard, massToggleCardVisibility,
+export const { getCards, getCardsSuccess, getCardsFailure, addCard, changeCard,
+               openCardTemplate, closeCardTemplate, startMassImageAdding, removeImgFromMassImgsArray,
+               updateTagsInCards, deleteCard, duplicateCard, toggleShowHidden, toggleSelectingMode, toggleCardSelection, massAddTagToCard,
+               massDeleteTagFromCard, massDeleteCard, massToggleCardVisibility,
                
-              cleanTags, openTagList, closeTagList } = cardsSlice.actions;
+               cleanTags, openTagList, closeTagList } = cardsSlice.actions;
 
 export const cardsSelector = state => state.cards;
 

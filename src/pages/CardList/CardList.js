@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
-import CardListSidebar from './containers/CardListSidebar';
+import CardListSidebar from './containers/CardListSidebar/CardListSidebar';
 import Card from './containers/Card/Card';
 import CardTemplate from './containers/CardTemplate/CardTemplate';
 import TagList from './containers/TagList/TagList';
 import TagFilters from './containers/TagFilters/TagFilters';
-import MassButtonList from './containers/MassButtonList';
+import MassButtonList from './parts/MassButtonList';
+import DragAndDropUpload from './containers/DragAndDropUpload/DragAndDropUpload';
 
 import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
@@ -204,7 +205,6 @@ const CardList = () => {
     if (cardsLoading) return loadingCardList()
     if (cardsHasErrors) return <p>Unable to display cards.</p>
 
-    
     return filteredCards.map(key => (
       <Card key={key} cardKey={key} card={cards[key]} />
       ))
@@ -213,6 +213,8 @@ const CardList = () => {
   return (
     <Wrapper>
         {!(cardsLoading || cardsHasErrors) && <CardListSidebar />}
+
+        <DragAndDropUpload sidebarOpened={sidebarOpened}/>
 
         <Cards sidebarOpened={sidebarOpened}>
           {renderCardList()}

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cardsSelector } from '../../../../slices/cards';
 import { filtersSelector, closeTagFilters, updateTagFilterArrays } from '../../../../slices/filters';
 
-import TagFiltersCheckBox from '../../parts/TagFiltersCheckBox';
+import TagFiltersCheckBox from './TagFiltersCheckBox';
 import Button from '../../../../components/Button/Button';
 
 import styled from 'styled-components';

@@ -29,15 +29,9 @@
 }
 
 .visually-hidden {
-  position: absolute !important;
+  position: absolute;
   height: 1px;
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
-}
-input.visually-hidden:focus + .fileinput-label {
-  outline: thin dotted;
-}
-input.visually-hidden:focus-within + .fileinput-label {
-  outline: thin dotted;
 }

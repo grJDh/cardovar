@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openModalImage } from '../../../../slices/modal';
 import { cardsSelector, openCardTemplate, duplicateCard, toggleCardSelection } from '../../../../slices/cards';
 
-import CardTagsBox from "../../parts/CardTagsBox";
+import CardTagsBox from "./CardTagsBox";
 
 import fullscreenIcon from '../../../../fullscreen.png';
 import editIcon from '../../../../edit.png';
