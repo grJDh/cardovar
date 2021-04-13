@@ -214,7 +214,7 @@ const CardList = () => {
     <Wrapper>
         {!(cardsLoading || cardsHasErrors) && <CardListSidebar />}
 
-        <DragAndDropUpload sidebarOpened={sidebarOpened}/>
+        {(!tagFilterOpened && !tagListOpened && !cardTemplateOpened && !modalImageOpened) && <DragAndDropUpload sidebarOpened={sidebarOpened} />}
 
         <Cards sidebarOpened={sidebarOpened}>
           {renderCardList()}
