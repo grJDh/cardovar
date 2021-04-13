@@ -62,7 +62,7 @@ const Imgs = styled.div`
 
 const StyledImg = styled.img`
   height: 100%;
-  width: 100%;
+  width: auto;
 
   transition: opacity 0.2s ease-in-out;
 `;
@@ -87,7 +87,7 @@ const RemoveImage = styled.div`
 
 const ImgDiv = styled.div`
   height: 100%;
-  max-height: 200px;
+  max-height: 300px;
   width: auto;
 
   position: relative;
@@ -124,15 +124,15 @@ const DragAndDropUpload = () => {
       window.removeEventListener("dragenter", () => setIsDragged(false))
     }
   });
+  const onDragOver = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
   const onDragExit = e => {
     e.preventDefault();
     e.stopPropagation()
 
     setIsDragged(false);
-  };
-  const onDragOver = e => {
-    e.preventDefault();
-    e.stopPropagation();
   };
   const onDrop = e => {
     e.preventDefault();
