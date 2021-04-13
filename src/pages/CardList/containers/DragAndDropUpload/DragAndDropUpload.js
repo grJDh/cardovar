@@ -128,7 +128,7 @@ const DragAndDropUpload = () => {
     e.preventDefault();
     e.stopPropagation();
   };
-  const onDragExit = e => {
+  const onDragLeave = e => {
     e.preventDefault();
     e.stopPropagation()
 
@@ -189,7 +189,7 @@ const DragAndDropUpload = () => {
   });
 
   return (
-    <Wrapper onDragExit={onDragExit} onDragOver={onDragOver} onDrop={onDrop} isDragged={isDragged} imgsArray={imgsArray} onClick={(event) => onClose(event)} className="wrapper">
+    <Wrapper onDragLeave={onDragLeave} onDragOver={onDragOver} onDrop={onDrop} isDragged={isDragged} imgsArray={imgsArray} onClick={(event) => onClose(event)} className="wrapper">
     
       {isDragged && <DragText>drop it here :)</DragText>}
 
