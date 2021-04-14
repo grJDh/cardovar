@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
 
-import './App.scss';
+import './App.css';
 
 import {ThemeProvider} from 'styled-components';
 

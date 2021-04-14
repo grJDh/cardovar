@@ -14,7 +14,6 @@ import { filtersSelector } from '../../slices/filters';
 import { modalSelector, closeModalImage } from '../../slices/modal';
 import { cardsSelector, fetchCards } from '../../slices/cards';
 
-import "./CardList.scss"
 import styled, { keyframes } from 'styled-components';
 
 const Wrapper = styled.div`

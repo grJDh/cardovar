@@ -11,7 +11,6 @@ import editIcon from '../../../../edit.png';
 // import deleteIcon from '../../../../delete.png';
 import duplicateIcon from '../../../../duplicate.png';
 
-import './Card.scss';
 import styled from 'styled-components';
 
 const CardInner = styled.div`
@@ -87,6 +86,10 @@ const CardTitle = styled.div`
   box-sizing: border-box;
   padding: 0.6rem;
   font-size: 1rem;
+
+  h2 {
+    &.char-dead::after
+  }
 `;
 
 const CardDesc = styled.div`
@@ -118,6 +121,16 @@ const CardImgContainer = styled.div`
 
     max-height: 400px;
     object-fit: contain;
+
+    &.char-dead {
+      filter: grayscale(100%);
+      transition: ease 0.2s;
+
+      &:hover {
+        filter: grayscale(0);
+        transition: ease 0.2s;
+      }
+    }
   }
 `;
 

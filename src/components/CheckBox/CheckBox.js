@@ -1,16 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import './CheckBox.scss';
+const StyledCheckbox = styled.div`
+  margin: 10px;
+`;
 
 const Checkbox = ({ label, onFunc, value=false, name }) => {
 
   return (
-    <div className='checkbox'>
+    <StyledCheckbox>
       <label>
         <input type="checkbox" onChange={onFunc} checked={value} name={name} />
         {label}
       </label>
-    </div>
+    </StyledCheckbox>
   );
 }
 
