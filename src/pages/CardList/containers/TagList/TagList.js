@@ -87,7 +87,7 @@ const TagList = () => {
     event.preventDefault();
 
     const recursivePrompt = () => {
-      const newName = prompt('Enter new name for a tag', tagList[event.target.name]);
+      const newName = prompt('Enter new name for a tag', tagList[event.target.name]).trim().toLowerCase();
 
       if (newName) {
         if (Object.values(tagList).includes(newName)) {
