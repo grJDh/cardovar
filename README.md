@@ -1,68 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Cardovar
 
-## Available Scripts
+Cardovar is a small SPA designed to store, show and use *Cards* - special components with an image, text and tags. You can add new cards and edit existing; hide or unhide cards; group cards into albums; filter by tags, add, edit and delete tags (individualy or using selection mode).
 
-In the project directory, you can run:
+#### Please, note, that all changes you make are persist until the page is reloaded - at the moment the app is frontend-only and has no actual server which will store all changes made by you; the current database (in the form of JSON) is stored on a [n:point](https://www.npoint.io/ "n:point") site and all images are uploaded to [imgbb](https://imgbb.com "imgbb") using their respective APIs.
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Table of contents
+* [Card](#usage)
+  * [Front](#pricing-method)
+  * [Back](#distances-source)
+  
+## Card
 
-### `npm test`
+All cards have two sides - **front** and **back**. You can switch between them (turn them) by clicking on any place on the map except *buttons 1-3*.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Front
 
-### `npm run build`
+On the front of the card are the *card title*, *image*, *short description* and *buttons 1-3*:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Duplicate card [1]:** creates an exact copy of the card.
+2. **Edit card [2]:** lets you edit all of the card's information.
+3. **Open full image [3]:** opens a full version of image.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![Card Front](https://i.imgur.com/HGXaGdk.png "Card Front")
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Back
 
-### `npm run eject`
+On the back of the card are the *full description* and *tags*:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![Card Back](https://i.imgur.com/KSPAafs.png "Card Back")
