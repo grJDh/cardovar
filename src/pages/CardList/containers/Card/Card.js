@@ -179,7 +179,6 @@ const Card = ({card, cardKey}) => {
   const {title, shortDesc, longDesc, img, imgFull, tags } = card;
 
   const dispatch = useDispatch();
-  // eslint-disable-next-line
   const { selectingMode, selectedCards } = useSelector(cardsSelector);
 
   const onOpenModalImage = () => dispatch(openModalImage({alt:title, src:imgFull}));
