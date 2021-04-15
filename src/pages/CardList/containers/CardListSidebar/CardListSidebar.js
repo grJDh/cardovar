@@ -178,6 +178,7 @@ const CardListSidebar = () => {
         <TabletImageButton
           src={plusIcon}
           label='New card'
+          alt='New card'
           onFunc={onOpenCardTemplate}
           props={sidebarOpened}
         />
@@ -185,6 +186,7 @@ const CardListSidebar = () => {
         <TabletImageButton
           src={tagIcon}
           label="Tags"
+          alt="Tags"
           onFunc={onOpenTagList}
           props={sidebarOpened}
         />
@@ -192,6 +194,7 @@ const CardListSidebar = () => {
         <TabletImageButton
           src={filterIcon}
           label="Tag filters"
+          alt="Tag filters"
           onFunc={onOpenTagFilters}
           props={sidebarOpened}
         />
@@ -199,6 +202,7 @@ const CardListSidebar = () => {
         <TabletImageButton
           src={selectIcon}
           label={(selectingMode) ? 'Selection mode: on' : 'Selection mode: off'}
+          alt={(selectingMode) ? 'Selection mode: on' : 'Selection mode: off'}
           onFunc={onToggleSelectingMode}
           props={sidebarOpened}
         />
@@ -206,6 +210,7 @@ const CardListSidebar = () => {
         <TabletImageButton
           src={(showHidden) ? hideIcon : showIcon}
           label={(showHidden) ? "Don't show hidden cards" : 'Show hidden cards'}
+          alt={(showHidden) ? "Don't show hidden cards" : 'Show hidden cards'}
           onFunc={onToggleShowHidden}
           props={sidebarOpened}
         />
@@ -227,6 +232,7 @@ const CardListSidebar = () => {
         <ImageButton
           src={plusIcon}
           label='New card'
+          alt='New card'
           onFunc={onOpenCardTemplate}
           props={sidebarOpened}
         />
@@ -234,6 +240,7 @@ const CardListSidebar = () => {
         <ImageButton
           src={tagIcon}
           label="Tags"
+          alt="Tags"
           onFunc={onOpenTagList}
           props={sidebarOpened}
         />
@@ -241,6 +248,7 @@ const CardListSidebar = () => {
         <ImageButton
           src={filterIcon}
           label="Tag filters"
+          alt="Tag filters"
           onFunc={onOpenTagFilters}
           props={sidebarOpened}
         />
@@ -248,6 +256,7 @@ const CardListSidebar = () => {
         <ImageButton
           src={selectIcon}
           label={(selectingMode) ? 'Selection mode: on' : 'Selection mode: off'}
+          alt={(selectingMode) ? 'Selection mode: on' : 'Selection mode: off'}
           onFunc={onToggleSelectingMode}
           props={sidebarOpened}
         />
@@ -255,6 +264,7 @@ const CardListSidebar = () => {
         <ImageButton
           src={(showHidden) ? hideIcon : showIcon}
           label={(showHidden) ? "Don't show hidden cards" : 'Show hidden cards'}
+          alt={(showHidden) ? "Don't show hidden cards" : 'Show hidden cards'}
           onFunc={onToggleShowHidden}
           props={sidebarOpened}
         />

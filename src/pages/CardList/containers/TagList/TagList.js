@@ -147,8 +147,8 @@ const TagList = () => {
             <TagBox key={tag}>
               {tagList[tag]}
               <TagBoxButtons>
-                <Button label="🖊️" name={tag} onFunc={onRenameTag} />
-                <Button label="🗑️" onFunc={() => deleteTag(tag)}/>
+                <Button label="🖊️" name={tag} onFunc={onRenameTag} title="Edit tag name"/>
+                <Button label="🗑️" onFunc={() => deleteTag(tag)} title="Delete tag"/>
               </TagBoxButtons>
             </TagBox>
           ))}

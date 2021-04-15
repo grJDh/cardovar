@@ -21,10 +21,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ type="button", label, onFunc, name, className }) => {
+const Button = ({ type="button", label, onFunc, name, className, title }) => {
 
   return (
-    <StyledButton type={type} onClick={onFunc} name={name} className={className}>
+    <StyledButton type={type} onClick={onFunc} name={name} className={className} title={label}>
       {label}
     </StyledButton>
   );
