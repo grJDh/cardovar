@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CardList from './pages/CardList/CardList';
 import AlbumList from './pages/AlbumList/AlbumList';
 
-import './App.scss';
+import './App.css';
 
 import {ThemeProvider} from 'styled-components';
 
@@ -43,8 +43,7 @@ const App = () => {
 }
 
 export default App;
- 
-// mass image adding
+
 // tags merging
 // markdown
 // memory leak когда пытаешься дропнуть изображения сразу после загрузки страницы
